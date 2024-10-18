@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.font-rubik {
+  font-family: "Rubik";
+}
+
+body {
+  @apply font-rubik;
+}
+
+.max-container {
+  @apply mx-auto max-w-[1440px] mt-5;
+}
+
+.padding-container {
+  @apply px-6 lg:px-20;
+}
+
+.redbg {
+  @apply bg-red-500;
+}
