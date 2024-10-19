@@ -1,6 +1,6 @@
 <?php
 
-class Prestasi extends Controller
+class PrestasiController extends Controller
 {
   public function index()
   {

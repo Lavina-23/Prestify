@@ -4,6 +4,8 @@ class Database
 {
   private $host;
   private $db_name;
+  private $user;
+  private $pass;
 
   private $dbh; //  menyimpan objek PDO yang akan digunakan untuk berinteraksi dengan database.
   private $stmt; // menyimpan pernyataan (statement) SQL yang akan dieksekusi nantinya.
@@ -12,13 +14,13 @@ class Database
   {
     $this->host = env("DB_HOST");
     $this->db_name = env("DB_NAME");
-    $user = null;
-    $pass = null;
+    $this->user = env("DB_USER");
+    $this->pass = env("DB_PASS");
     // dsn (data source name)
-    $dsn = 'sqlsrv:server=' . $this->host . ';database=' . $this->db_name; // menentukan tipe database (sqlsrv untuk SQL Server), alamat server, dan nama database.
+    // $dsn = 'sqlsrv:server=' . $this->host . ';database=' . $this->db_name; // menentukan tipe database (sqlsrv untuk SQL Server), alamat server, dan nama database.
 
     try {
-      $this->dbh = new PDO($dsn, $user, $pass); // membuat objek PDO
+      $this->dbh = new PDO('sqlsrv:server=' . $this->host . ';database=' . $this->db_name, $this->user, $this->pass); // membuat objek PDO
       $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // memastikan bahwa jika terjadi kesalahan pada query SQL, kesalahan akan dilemparkan dalam bentuk exception.
     } catch (PDOException $e) {
       echo "Connection error: " . $e->getMessage();
@@ -33,7 +35,7 @@ class Database
   }
   // prepare() digunakan untuk menyiapkan query SQL sebelum dieksekusi. Manfaat utamanya adalah memungkinkan Anda untuk menggunakan bound parameters, yang membantu mencegah SQL injection. 
 
-  public function bind($param, $value, $type)
+  public function bind($param, $value, $type = null)
   {
     if (is_null($type)) {
       switch (true) {
@@ -45,7 +47,6 @@ class Database
           break;
         case is_null($value):
           $type = PDO::PARAM_NULL;
-          break;
         default:
           $type = PDO::PARAM_STR;
           break;

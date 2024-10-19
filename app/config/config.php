@@ -1,4 +1,5 @@
 <?php
+
 function env($key, $default = null)
 {
   $envPath = __DIR__ . '/../../.env';

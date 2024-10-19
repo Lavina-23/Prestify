@@ -13,13 +13,9 @@ body {
 }
 
 .max-container {
-  @apply mx-auto max-w-[1440px] mt-5;
+  @apply mx-auto max-w-[1440px] lg:mt-10;
 }
 
 .padding-container {
   @apply px-6 lg:px-20;
-}
-
-.redbg {
-  @apply bg-red-500;
 }
