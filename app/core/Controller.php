@@ -19,4 +19,11 @@ class Controller
     $this->view($view);
     $this->view("utils/footer");
   }
+
+  public function renderMahasiswa($view, $data = [])
+  {
+    $this->view("mahasiswa/layout/sidebar");
+    $this->view($view, $data);
+    $this->view("utils/footer");
+  }
 }

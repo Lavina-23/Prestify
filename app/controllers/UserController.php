@@ -21,7 +21,9 @@ class UserController extends Controller
 
       if ($user) {
         $_SESSION['user_id'] = $user['pengguna_id'];
-        header("Location:" . env("BASEURL") . "/mahasiswa/page/index");
+        $_SESSION['nama'] = $user['nama'];
+
+        $this->renderMahasiswa("mahasiswa/page/index", $user);
         exit();
       } else {
         echo "Username dan password salah";
@@ -31,21 +33,10 @@ class UserController extends Controller
     $this->render("login");
   }
 
-  // public function index()
-  // {
-  //   session_start();
-  //   if (!isset($_SESSION['user_id'])) {
-  //     header("Location:" . env("BASEURL") . "/user/login");
-  //     exit();
-  //   }
-  //   $this->render("user/index");
-  // }
-
-  // public function logout()
-  // {
-  //   session_start();
-  //   session_destroy();
-  //   header("Location:" . env("BASEURL") . "/user/login");
-  //   exit();
-  // }
+  public function logout()
+  {
+    session_destroy();
+    header("Location:" . env("BASEURL"));
+    exit();
+  }
 }

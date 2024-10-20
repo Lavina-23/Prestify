@@ -8,4 +8,10 @@ class HomeController extends Controller
     $this->view("home/page/index");
     $this->view("utils/footer");
   }
+
+  public function isLogin()
+  {
+    $status = isset($_SESSION['user_id']);
+    return $status;
+  }
 }

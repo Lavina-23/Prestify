@@ -2,6 +2,7 @@
 
 class User
 {
+  private $table = 'Pengguna.data_pengguna';
   private $db;
 
   public function __construct()
@@ -11,7 +12,7 @@ class User
 
   public function login($username, $password)
   {
-    $query = "SELECT * FROM Pengguna.data_pengguna WHERE nomor_identitas = :username";
+    $query = "SELECT * FROM " . $this->table . " WHERE nomor_identitas = :username";
 
     $this->db->query($query);
     $this->db->bind(":username", $username);
@@ -19,7 +20,7 @@ class User
 
     $user = $this->db->single();
 
-    if ($user && $password === $user['password']) {
+    if ($user && password_verify($password, $user['password'])) {
       return $user;
     }
     return false;
