@@ -15,22 +15,8 @@ class Controller
 
   public function render($view)
   {
-    $this->view("header");
+    $this->view("utils/header");
     $this->view($view);
-    $this->view("footer");
-  }
-
-  public function renderMainView($view)
-  {
-    $this->view("navbar");
-    $this->view($view);
-    $this->view("footer");
-  }
-
-  public function renderView($view, $data = [])
-  {
-    $this->view("sidebar");
-    $this->view($view, $data);
-    $this->view("footer");
+    $this->view("utils/footer");
   }
 }

@@ -30,3 +30,5 @@ INSERT INTO Pengguna.level(level_id,level_name) VALUES('LVL2','Mahasiswa');
 
 INSERT INTO Pengguna.data_pengguna(pengguna_id, level_id, nama, nomor_identitas, password, email) VALUES('P1','LVL1', 'Hartoyo', '177010102005011001', '177010102005011001', 'hartoyo@gmail.com');
 INSERT INTO Pengguna.data_pengguna(pengguna_id, level_id, nama, nomor_identitas, password, email) VALUES('P2','LVL2', 'Lavina', '2365418890', '2365418890', 'lavina@gmail.com');
+
+SELECT * FROM Pengguna.data_pengguna;

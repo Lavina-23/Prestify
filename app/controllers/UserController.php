@@ -11,11 +11,6 @@ class UserController extends Controller
     $this->userModel = new User;
   }
 
-  public function index()
-  {
-    $this->renderView("user/index");
-  }
-
   public function login()
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -26,14 +21,14 @@ class UserController extends Controller
 
       if ($user) {
         $_SESSION['user_id'] = $user['pengguna_id'];
-        header("Location:" . env("BASEURL") . "/mahasiswa/index");
+        header("Location:" . env("BASEURL") . "/mahasiswa/page/index");
         exit();
       } else {
         echo "Username dan password salah";
       }
     }
 
-    $this->render("user/login");
+    $this->render("login");
   }
 
   // public function index()
