@@ -4,7 +4,7 @@ class PrestasiController extends Controller
 {
   public function index()
   {
-    $data['prestasi'] = $this->model('Prestasi')->getAllPrestasi();
+    $data['prestasi'] = $this->model('Prestasi')->getAllData();
     $this->view("mahasiswa/layout/sidebar");
     $this->view("mahasiswa/page/prestasi", $data);
     $this->view("utils/footer");

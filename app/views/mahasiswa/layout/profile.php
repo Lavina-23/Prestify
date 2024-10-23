@@ -1,6 +1,6 @@
 <div class="fixed top-0 right-0 hidden w-auto max-w-sm md:grid p-5 h-screen border-2 border-gray-200">
   <div class="flex flex-col justify-between overflow-y-auto h-auto">
-    <div class="rounded-xl bg-gray-100 p-5 w-72">
+    <div class="rounded-xl bg-gray-50 p-5 w-72">
       <div class="flex justify-end">
         <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm" type="button">
           <span class="sr-only">Open dropdown</span>
@@ -27,9 +27,9 @@
         <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="<?= env("BASEURL") ?>/img/person2.jpg" alt="Bonnie image" />
         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Ahmad Lavina</h5>
         <span class="text-sm text-gray-500 dark:text-gray-400">Sistem Informasi Bisnis</span>
-        <div class="flex mt-4 md:mt-6">
-          <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add friend</a>
-          <a href="#" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Message</a>
+        <div class="flex mt-4 md:mt-6 gap-2">
+          <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-transparent border-2 border-transparent hover:text-gray-900 hover:border-2 hover:border-gray-900">Add friend</a>
+          <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-transparent rounded-lg border-2 border-gray-900">Message</a>
         </div>
       </div>
     </div>

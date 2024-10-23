@@ -27,11 +27,20 @@
         </a>
         <ul class="space-y-2 font-medium">
           <li>
-            <a href="<?= env("BASEURL") ?>/prestasi/index" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-white hover:shadow-sm group mt-8">
+            <a href="<?= env("BASEURL") ?>/mahasiswa/index" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-white hover:shadow-sm group mt-8">
+              <svg class="w-5 h-5 text-gray-900 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                <path fill-rule="evenodd" d="M1.5 9.832v1.793c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875V9.832a3 3 0 0 0-.722-1.952l-3.285-3.832A3 3 0 0 0 16.215 3h-8.43a3 3 0 0 0-2.278 1.048L2.222 7.88A3 3 0 0 0 1.5 9.832ZM7.785 4.5a1.5 1.5 0 0 0-1.139.524L3.881 8.25h3.165a3 3 0 0 1 2.496 1.336l.164.246a1.5 1.5 0 0 0 1.248.668h2.092a1.5 1.5 0 0 0 1.248-.668l.164-.246a3 3 0 0 1 2.496-1.336h3.165l-2.765-3.226a1.5 1.5 0 0 0-1.139-.524h-8.43Z" clip-rule="evenodd" />
+                <path d="M2.813 15c-.725 0-1.313.588-1.313 1.313V18a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-1.688c0-.724-.588-1.312-1.313-1.312h-4.233a3 3 0 0 0-2.496 1.336l-.164.246a1.5 1.5 0 0 1-1.248.668h-2.092a1.5 1.5 0 0 1-1.248-.668l-.164-.246A3 3 0 0 0 7.046 15H2.812Z" />
+              </svg>
+              <span class="ms-3 text-sm-s text-gray-900">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?= env("BASEURL") ?>/prestasi/index" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-white hover:shadow-sm group">
               <svg class="w-5 h-5 text-gray-900 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                 <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
               </svg>
-              <span class="ms-3 text-sm-s text-gray-900">Add Achievement</span>
+              <span class="ms-3 text-sm-s text-gray-900">Prestasi Baru</span>
             </a>
           </li>
           <li>

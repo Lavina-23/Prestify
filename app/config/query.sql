@@ -126,3 +126,4 @@ INSERT INTO dospem (dospem_id, prestasi_id, dosen_id, peran) VALUES
 ('DP1', 'PR1', 'D1', 'Membimbing mahasiswa menghasilkan produk saintifik bereputasi dan mendapat pengakuan tingkat Nasional'),
 ('DP2', 'PR2', 'D2', 'Membimbing mahasiswa menghasilkan produk saintifik bereputasi dan mendapat pengakuan tingkat Nasional');
 
+SELECT * FROM pengguna;

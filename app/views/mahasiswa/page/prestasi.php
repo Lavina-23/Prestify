@@ -23,16 +23,16 @@
               echo date_format($date, "d F Y")  ?>
             </td>
             <td onclick="toggleDetailPrestasi(<?= $i; ?>)" class="flex items-center gap-2 px-6 py-4 cursor-pointer">
-              <button class="font-medium text-yellow-500">Detail
+              <button class="font-medium text-gray-900">Detail
               </button>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="w-3 h-3 text-yellow-500">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="w-3 h-3 text-gray-900">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
               </svg>
             </td>
           </tr>
 
           <!-- dropdown detail -->
-          <tr id="dropdown-<?= $i; ?>" class="hidden bg-gray-100 dark:bg-gray-700">
+          <tr id="dropdown-<?= $i; ?>" class="hidden bg-gray-50 dark:bg-gray-700">
             <td colspan="5" class="px-6 py-4">
               <div class="text-gray-700 dark:text-gray-300">
                 <p><strong>Deskripsi:</strong> <?= $pres['link_kompetisi']; ?></p>

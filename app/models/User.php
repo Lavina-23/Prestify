@@ -1,14 +1,8 @@
 <?php
 
-class User
+class User extends BaseModel
 {
-  private $table = 'pengguna';
-  private $db;
-
-  public function __construct()
-  {
-    $this->db = new Database();
-  }
+  protected $table = 'pengguna';
 
   public function login($username, $password)
   {
