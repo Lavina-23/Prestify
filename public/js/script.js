@@ -1,5 +1,4 @@
-// $(document).ready(function () {
-//   $("#menu-add-prestasi").click(function () {
-//     $("main").load("/prestasi/index");
-//   });
-// });
+// dropdown detail prestasi
+function toggleDetailPrestasi(i) {
+  $(`#dropdown-${i}`).toggleClass("hidden");
+}

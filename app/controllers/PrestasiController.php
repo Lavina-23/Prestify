@@ -7,6 +7,7 @@ class PrestasiController extends Controller
     $data['prestasi'] = $this->model('Prestasi')->getAllPrestasi();
     $this->view("mahasiswa/layout/sidebar");
     $this->view("mahasiswa/page/prestasi", $data);
+    $this->view("utils/footer");
   }
 
   public function addPrestasi() {}
