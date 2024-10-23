@@ -24,6 +24,7 @@ class Controller
   {
     $this->view("mahasiswa/layout/sidebar");
     $this->view($view, $data);
+    $this->view("mahasiswa/layout/profile");
     $this->view("utils/footer");
   }
 }

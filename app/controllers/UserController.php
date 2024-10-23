@@ -4,20 +4,13 @@ require_once '../app/models/User.php';
 
 class UserController extends Controller
 {
-  private $userModel;
-
-  public function __construct()
-  {
-    $this->userModel = new User;
-  }
-
   public function login()
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $username = $_POST['username'];
       $password = $_POST['password'];
 
-      $user = $this->userModel->login($username, $password);
+      $user = $this->model('User')->login($username, $password);
 
       if ($user) {
         $_SESSION['user_id'] = $user['pengguna_id'];

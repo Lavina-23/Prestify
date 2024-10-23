@@ -2,17 +2,17 @@
 
 class User
 {
-  private $table = 'Pengguna.data_pengguna';
+  private $table = 'pengguna';
   private $db;
 
   public function __construct()
   {
-    $this->db = new Database;
+    $this->db = new Database();
   }
 
   public function login($username, $password)
   {
-    $query = "SELECT * FROM " . $this->table . " WHERE nomor_identitas = :username";
+    $query = "SELECT * FROM " . $this->table . " WHERE username = :username";
 
     $this->db->query($query);
     $this->db->bind(":username", $username);
