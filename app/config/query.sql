@@ -24,7 +24,7 @@ CREATE TABLE mahasiswa (
     mahasiswa_id VARCHAR(20) PRIMARY KEY,
     nim VARCHAR(20) NOT NULL,
     prodi VARCHAR(200) NOT NULL,
-	angkatan CHAR(4) NOT NULL,
+		angkatan CHAR(4) NOT NULL,
 );
 
 CREATE TABLE dosen (
@@ -40,6 +40,8 @@ CREATE TABLE kategori_prestasi (
 CREATE TABLE prestasi (
 	prestasi_id VARCHAR(20) PRIMARY KEY,
 	kategori_id VARCHAR(20) NOT NULL,
+	mahasiswa_id VARCHAR(20) NOT NULL,
+	dosen_id VARCHAR(20) NOT NULL,
 	nama_prestasi VARCHAR(100) NOT NULL,
 	tingkat VARCHAR(100) NOT NULL,
 	penyelenggara VARCHAR(100) NOT NULL,
@@ -54,7 +56,9 @@ CREATE TABLE prestasi (
 	file_sertifikat VARCHAR(50) NOT NULL,
 	file_foto_kegiatan VARCHAR(50) NOT NULL,
 	file_poster VARCHAR(50) NOT NULL,
-    FOREIGN KEY (kategori_id) REFERENCES kategori_prestasi(kategori_id)
+  FOREIGN KEY (kategori_id) REFERENCES kategori_prestasi(kategori_id),
+  FOREIGN KEY (mahasiswa_id) REFERENCES mahasiswa(mahasiswa_id),
+  FOREIGN KEY (dosen_id) REFERENCES dosen(dosen_id)
 );
 
 CREATE TABLE peserta (

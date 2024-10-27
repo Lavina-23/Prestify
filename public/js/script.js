@@ -1,4 +1,4 @@
 // dropdown detail prestasi
-function toggleDetailPrestasi(i) {
-  $(`#dropdown-${i}`).toggleClass("hidden");
+function toggleDetailPrestasi() {
+  $(`#dropdown-detail`).toggleClass("hidden");
 }
