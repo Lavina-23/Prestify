@@ -20,7 +20,7 @@ class Controller
     $this->view("utils/footer");
   }
 
-  public function renderMahasiswa($view, $data = [])
+  public function renderDashboard($view, $data = [])
   {
     $this->view("mahasiswa/layout/sidebar");
     $this->view($view, $data);

@@ -11,5 +11,10 @@ class PrestasiController extends Controller
     $this->view("utils/footer");
   }
 
-  public function addPrestasi() {}
+  public function addPrestasi()
+  {
+    $this->view("mahasiswa/layout/sidebar");
+    $this->view("mahasiswa/page/tambahPrestasi");
+    $this->view("utils/footer");
+  }
 }

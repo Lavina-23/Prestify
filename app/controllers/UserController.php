@@ -16,7 +16,7 @@ class UserController extends Controller
         $_SESSION['user_id'] = $user['pengguna_id'];
         $_SESSION['nama'] = $user['nama'];
 
-        $this->renderMahasiswa("mahasiswa/page/index", $user);
+        $this->renderDashboard("mahasiswa/page/index", $user);
         exit();
       } else {
         echo "Username dan password salah";
