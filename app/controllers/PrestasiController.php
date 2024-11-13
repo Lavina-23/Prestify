@@ -29,13 +29,17 @@ class PrestasiController extends Controller
 
   public function searchMahasiswa()
   {
-    $mahasiswa = ["Ahmad", "Budi", "Citra", "Dewi", "Eka"];
-    $input = $_POST['keyword'];
+    if (isset($_POST['searchMhs'])) {
+      $namaMhs = $_POST['searchMhs'];
+      $datas = $this->model('User')->searchData($namaMhs);
 
-    $results = array_filter($mahasiswa, function ($mhs) use ($input) {
-      return stripos($mhs, $input) !== false;
-    });
-
-    echo json_encode(array_values($results));
+      echo '<ul?>';
+      foreach ($datas as $data) {
+        echo '<li onclick="fill(\'' . $data['nama'] . '\')">';
+        echo '<span>' . $data['nama'] . '</span>';
+        echo '</li>';
+      }
+      echo '</ul>';
+    }
   }
 }
