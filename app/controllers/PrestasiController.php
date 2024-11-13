@@ -6,15 +6,36 @@ class PrestasiController extends Controller
   {
     // $data['prestasi'] = $this->model('Prestasi')->getAllData();
     // $data['peserta'] = $this->model('Peserta')->getAllData();
-    $this->view("mahasiswa/layout/sidebar");
+    $this->view("layout/sidebar");
     $this->view("mahasiswa/page/prestasi");
-    $this->view("utils/footer");
+    $this->view("layout/footer");
   }
 
-  public function addPrestasi()
+  public function addDataKompetisi()
   {
-    $this->view("mahasiswa/layout/sidebar");
-    $this->view("mahasiswa/page/tambahPrestasi");
-    $this->view("utils/footer");
+    $this->view("layout/sidebar");
+    $this->view("mahasiswa/components/indikator");
+    $this->view("mahasiswa/components/dataKompetisi");
+    $this->view("layout/footer");
+  }
+
+  public function addDataMahasiswa()
+  {
+    $this->view("layout/sidebar");
+    $this->view("mahasiswa/components/indikator");
+    $this->view("mahasiswa/components/dataMahasiswa");
+    $this->view("layout/footer");
+  }
+
+  public function searchMahasiswa()
+  {
+    $mahasiswa = ["Ahmad", "Budi", "Citra", "Dewi", "Eka"];
+    $input = $_POST['keyword'];
+
+    $results = array_filter($mahasiswa, function ($mhs) use ($input) {
+      return stripos($mhs, $input) !== false;
+    });
+
+    echo json_encode(array_values($results));
   }
 }

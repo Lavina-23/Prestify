@@ -4,9 +4,9 @@ class HomeController extends Controller
 {
   public function index()
   {
-    $this->view("home/layout/navbar");
-    $this->view("home/page/index");
-    $this->view("utils/footer");
+    $this->view("layout/navbar");
+    $this->view("home/index");
+    $this->view("layout/footer");
   }
 
   public function isLogin()

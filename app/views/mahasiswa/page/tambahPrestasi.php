@@ -37,7 +37,7 @@ $tingkat = array("Sekolah", "Kecamatan", "Kab/Kota", "Provinsi", "Nasional", "In
   </ol>
 
   <!-- Form -->
-  <form class="max-w-xl mx-auto mt-10">
+  <form action="<?= env("BASEURL") ?>/mahasiswa/dataKompetisi" class="max-w-xl mx-auto mt-10">
     <span class="text-xs text-gray-500">Step 1</span>
     <h1 class="text-lg font-bold text-gray-900">Data Kompetisi</h1>
     <hr class="mb-5">
@@ -192,7 +192,6 @@ $tingkat = array("Sekolah", "Kecamatan", "Kab/Kota", "Provinsi", "Nasional", "In
       </div>
     </div>
 
-
-    <button type="submit" class="text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Register new account</button>
+    <button type="submit" class="text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
   </form>
 </div>
