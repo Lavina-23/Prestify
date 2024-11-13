@@ -25,7 +25,7 @@
       </div>
       <div class="flex flex-col items-center">
         <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="<?= env("BASEURL") ?>/img/person2.jpg" alt="Bonnie image" />
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Ahmad Lavina</h5>
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"><?= $data['nama'] ?></h5>
         <span class="text-sm text-gray-500 dark:text-gray-400">Sistem Informasi Bisnis</span>
         <div class="flex mt-4 md:mt-6 gap-2">
           <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-transparent border-2 border-transparent hover:text-gray-900 hover:border-2 hover:border-gray-900">Add friend</a>

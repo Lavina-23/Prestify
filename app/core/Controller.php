@@ -15,16 +15,16 @@ class Controller
 
   public function render($view)
   {
-    $this->view("utils/header");
+    $this->view("layout/header");
     $this->view($view);
-    $this->view("utils/footer");
+    $this->view("layout/footer");
   }
 
   public function renderDashboard($view, $data = [])
   {
-    $this->view("mahasiswa/layout/sidebar");
+    $this->view("layout/sidebar");
     $this->view($view, $data);
-    $this->view("mahasiswa/layout/profile");
-    $this->view("utils/footer");
+    $this->view("layout/profile", $data);
+    $this->view("layout/footer");
   }
 }
