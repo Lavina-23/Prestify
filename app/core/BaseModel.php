@@ -34,9 +34,8 @@ abstract class BaseModel
     return $this->db->rowCount();
   }
 
-  public function searchData()
+  public function searchData($keyword)
   {
-    $keyword = $_POST['keyword'];
     $query = "SELECT * FROM " . $this->table . " WHERE nama LIKE :keyword";
 
     $this->db->query($query);

@@ -1,3 +1,30 @@
+function fill(value) {
+  $("#searchMhs").val(value);
+  $("#dropdownMhs").hide();
+}
+
+$(document).ready(function () {
+  $("#searchMhs").keyup(function () {
+    var namaMhs = $("#searchMhs").val();
+
+    if (namaMhs == "") {
+      $("#dropdownMhs").html("");
+    } else {
+      $.ajax({
+        type: "POST",
+        url: "index.php",
+        data: {
+          url: "Prestasi/searchMahasiswa",
+          searchMhs: namaMhs,
+        },
+        success: function (data) {
+          $("#dropdownMhs").html(data).show();
+        },
+      });
+    }
+  });
+});
+
 // dropdown detail prestasi
 function toggleDetailPrestasi() {
   $(`#dropdown-detail`).toggleClass("hidden");

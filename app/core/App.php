@@ -37,13 +37,17 @@ class App
 
   public function parseUrl()
   {
-    if (isset($_GET['url'])) {
-      $url = rtrim($_GET['url'], '/'); // rtrim() -> Remove characters from the right side of a string
-      $url = filter_var($url, FILTER_SANITIZE_URL); // membersihkan URL dari karakter-karakter ilegal yang tidak boleh ada dalam URL. Filter ini memastikan bahwa URL aman dari data berbahaya atau karakter yang tidak diinginkan.
-      $url = explode('/', $url); // dijadikan array
-
-      return $url;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['url'])) {
+      $url = rtrim($_POST['url'], '/'); // rtrim() -> Remove characters from the right side of a string
+    } else if (isset($_GET['url'])) {
+      $url = rtrim($_GET['url'], '/');
+    } else {
+      return [];
     }
-    return [];
+
+    $url = filter_var($url, FILTER_SANITIZE_URL); // membersihkan URL dari karakter-karakter ilegal yang tidak boleh ada dalam URL. Filter ini memastikan bahwa URL aman dari data berbahaya atau karakter yang tidak diinginkan.
+    $url = explode('/', $url); // dijadikan array
+
+    return $url;
   }
 }
