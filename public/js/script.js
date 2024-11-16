@@ -1,8 +1,3 @@
-function fill(value) {
-  $("#searchMhs").val(value);
-  $("#dropdownMhs").hide();
-}
-
 $(document).ready(function () {
   $("#searchMhs").keyup(function () {
     var namaMhs = $("#searchMhs").val();
@@ -23,7 +18,26 @@ $(document).ready(function () {
       });
     }
   });
+
+  $("#btnAddMahasiswa").on("click", function () {
+    let newInputMhs = $(".inputGroup").first().clone();
+
+    newInputMhs.find("input").val("");
+    newInputMhs.find("select").prop("selectedIndex", 0);
+
+    newInputMhs.find(".btnRemove").on("click", function () {
+      $(this).closest(".inputGroup").remove();
+    });
+
+    $("#containerAddMhs").append(newInputMhs);
+  });
 });
+
+// dropdown nama mahasiswa
+function fillNamaMhs(name) {
+  document.getElementById("searchMhs").value = name;
+  document.getElementById("dropdownMhs").classList.add("hidden");
+}
 
 // dropdown detail prestasi
 function toggleDetailPrestasi() {
