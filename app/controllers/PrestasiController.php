@@ -35,7 +35,7 @@ class PrestasiController extends Controller
 
       echo '<ul class="text-sm text-gray-900" aria-labelledby="dropdownDefaultButton">';
       foreach ($datas as $data) {
-        echo '<li onclick="fillNamaMhs(\'' . $data['nama'] . '\')">';
+        echo '<li>';
         echo '<a class="block px-4 py-1 hover:bg-gray-100">' . $data['nama'] . '</a>';
         echo '</li>';
       }

@@ -10,16 +10,16 @@ $peran = array("Ketua", "Anggota", "Personal");
   <div id="containerAddMhs">
     <div class="inputGroup mt-5 flex justify-between gap-4 items-end">
       <!-- input nama mahasiswa -->
-      <div class="grid w-full">
+      <div class="namaMhsField grid w-full">
         <label for="mahasiswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mahasiswa</label>
-        <input type="text" id="searchMhs" name="mahasiswa[]" class="w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
-        <div id="dropdownMhs" class="absolute mt-20 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
+        <input type="text" name="mahasiswa[]" class="searchMhs w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
+        <div class="dropdownMhs absolute mt-20 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
         </div>
       </div>
 
       <!-- dropdown peran -->
       <div class="grid">
-        <label for="tingkat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
+        <label for="peran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
         <select name="peran" id="peran" class="w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
           <?php foreach ($peran as $prn) : ?>
             <option class="hover:bg-red-600"><?= $prn ?></option>
