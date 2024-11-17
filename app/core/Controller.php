@@ -22,6 +22,7 @@ class Controller
 
   public function renderDashboard($view, $data = [])
   {
+    $this->view("layout/header");
     $this->view("layout/sidebar");
     $this->view($view, $data);
     $this->view("layout/profile", $data);

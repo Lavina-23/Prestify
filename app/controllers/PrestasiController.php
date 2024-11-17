@@ -6,6 +6,7 @@ class PrestasiController extends Controller
   {
     // $data['prestasi'] = $this->model('Prestasi')->getAllData();
     // $data['peserta'] = $this->model('Peserta')->getAllData();
+    $this->view("layout/header");
     $this->view("layout/sidebar");
     $this->view("mahasiswa/page/prestasi");
     $this->view("layout/footer");
@@ -13,6 +14,7 @@ class PrestasiController extends Controller
 
   public function addDataKompetisi()
   {
+    $this->view("layout/header");
     $this->view("layout/sidebar");
     $this->view("prestasi/add/indikator");
     $this->view("prestasi/add/dataKompetisi");
@@ -21,6 +23,7 @@ class PrestasiController extends Controller
 
   public function addDataMahasiswa()
   {
+    $this->view("layout/header");
     $this->view("layout/sidebar");
     $this->view("prestasi/add/indikator");
     $this->view("prestasi/add/dataMahasiswa");
@@ -29,6 +32,7 @@ class PrestasiController extends Controller
 
   public function addDataDospem()
   {
+    $this->view("layout/header");
     $this->view("layout/sidebar");
     $this->view("prestasi/add/indikator");
     $this->view("prestasi/add/dataDospem");
