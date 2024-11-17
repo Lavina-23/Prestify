@@ -1,46 +1,53 @@
 $(document).ready(function () {
-  $(document).on("keyup", ".searchMhs", function () {
+  $(document).on("keyup", ".searchNama", function () {
     var input = $(this);
-    var namaMhs = input.val();
-    var dropdown = input.siblings(".dropdownMhs");
+    var nama = input.val();
+    var parent = input.closest(".fieldNama");
+    var dropdown = parent.find(".dropdownNama");
+    var type = parent.data("type");
 
-    if (namaMhs === "") {
+    if (nama === "") {
       dropdown.html("").hide();
     } else {
       $.ajax({
         type: "POST",
         url: "index.php",
         data: {
-          url: "Prestasi/searchMahasiswa",
-          searchMhs: namaMhs,
+          url:
+            type === "mahasiswa"
+              ? "Prestasi/searchMahasiswa"
+              : "Prestasi/searchDospem",
+          searchNama: nama,
         },
         success: function (data) {
+          console.log(data);
           dropdown.html(data).show();
         },
       });
     }
   });
 
-  $(document).on("click", ".dropdownMhs li", function () {
-    var namaMhs = $(this).text();
-    var dropdown = $(this).closest(".dropdownMhs");
-    var input = dropdown.siblings(".searchMhs");
+  $(document).on("click", ".dropdownNama li", function () {
+    var listNama = $(this);
+    var parent = listNama.closest(".fieldNama");
+    var input = parent.find(".searchNama");
+    var dropdown = parent.find(".dropdownNama");
 
-    input.val(namaMhs);
+    input.val(listNama.text());
     dropdown.hide();
   });
 
-  $("#btnAddMahasiswa").on("click", function () {
-    let newInputMhs = $(".inputGroup").first().clone();
+  $("#btnAddInput").on("click", function () {
+    let newInput = $(".inputGroup").first().clone();
 
-    newInputMhs.find("input").val("");
-    newInputMhs.find("select").prop("selectedIndex", 0);
+    newInput.find("input").val("");
+    newInput.find("select").prop("selectedIndex", 0);
 
-    newInputMhs.find(".btnRemove").on("click", function () {
+    newInput.find(".btnRemove").on("click", function () {
       $(this).closest(".inputGroup").remove();
     });
 
-    $("#containerAddMhs").append(newInputMhs);
+    $("#containerMD").append(newInput);
   });
 });
 

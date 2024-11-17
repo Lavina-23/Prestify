@@ -18,9 +18,9 @@ class UserController extends Controller
         $_SESSION['level_id'] = $user['level_id'];
 
         if ($_SESSION['level_id'] == 'LVL2') {
-          $this->renderDashboard("admin/page/index", $user);
+          $this->renderDashboard("admin/index", $user);
         } else if ($_SESSION['level_id'] == 'LVL3') {
-          $this->renderDashboard("mahasiswa/page/index", $user);
+          $this->renderDashboard("mahasiswa/index", $user);
         } else {
           echo "You are not allowed to access this page";
         }

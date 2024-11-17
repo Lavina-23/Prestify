@@ -6,7 +6,7 @@ class AdminController extends Controller
   {
     if (isset($_SESSION['user_id'])) {
       $data['nama'] = $_SESSION['nama'] ?? 'Admin';
-      $this->renderDashboard("admin/page/index", $data);
+      $this->renderDashboard("admin/index", $data);
     } else {
       header("Location:" . env("BASEURL") . "/user/login");
       exit();

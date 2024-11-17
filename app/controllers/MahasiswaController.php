@@ -6,7 +6,7 @@ class MahasiswaController extends Controller
   {
     if (isset($_SESSION['user_id'])) {
       $data['nama'] = $_SESSION['nama'] ?? 'Champion';
-      $this->renderDashboard("mahasiswa/page/index", $data);
+      $this->renderDashboard("mahasiswa/index", $data);
     } else {
       header("Location:" . env("BASEURL") . "/user/login");
       exit();
