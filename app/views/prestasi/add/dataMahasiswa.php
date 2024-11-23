@@ -2,7 +2,7 @@
 $peran = array("Ketua", "Anggota", "Personal");
 ?>
 
-<form action="<?= env("BASEURL") ?>/prestasi/addDataDospem" class="max-w-xl mx-auto">
+<form method="post" action="<?= env("BASEURL") ?>/prestasi/addDataMahasiswa" class="max-w-xl mx-auto">
   <span class="text-xs text-gray-500">Step 2</span>
   <h1 class="text-lg font-bold text-gray-900">Data Mahasiswa</h1>
   <hr>

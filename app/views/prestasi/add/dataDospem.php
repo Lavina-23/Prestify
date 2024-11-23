@@ -2,7 +2,7 @@
 $peran = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik (PA) dan kemahasiswaan (BEM, Maperwa, dan lain-lain)", "Membimbing mahasiswa menghasilkan produk saintifik bereputasi dan mendapat pengakuan tingkat Internasional", "Membimbing mahasiswa menghasilkan produk saintifik bereputasi dan mendapat pengakuan tingkat Nasional", "Membimbing mahasiswa mengikuti kompetisi dibidang akademik dan kemahasiswaan bereputasi dan mencapai juara tingkat Internasional", "Membimbing mahasiswa mengikuti kompetisi dibidang akademik dan kemahasiswaan bereputasi dan mencapai juara tingkat Nasional");
 ?>
 
-<form action="<?= env("BASEURL") ?>/prestasi/addDataDospem" class="max-w-xl mx-auto">
+<form method="post" action="<?= env("BASEURL") ?>/prestasi/addDataPrestasi" class="max-w-xl mx-auto">
   <span class="text-xs text-gray-500">Step 3</span>
   <h1 class="text-lg font-bold text-gray-900">Data Dosen Pembimbing</h1>
   <hr>
