@@ -43,4 +43,15 @@ abstract class BaseModel
 
     return $this->db->resultSet();
   }
+
+  public function generateId($table, $id, $format)
+  {
+    $query = "SELECT TOP 1 " . $id . " FROM " . $table . " ORDER BY " . $id . " DESC";
+    $this->db->query($query);
+    $lastId = $this->db->single();
+
+    $lastId ? $newId = (int)substr($lastId[$id], 3) + 1 : $newId = 1;
+
+    return $format . str_pad($newId, 2, '0', STR_PAD_LEFT);
+  }
 }
