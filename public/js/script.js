@@ -54,17 +54,13 @@ $(document).ready(function () {
 function setKategori(jenis) {
   $("#kategori_id").val(jenis);
 
-  $("button")
+  $("#btnKategori")
     .removeClass("bg-gray-900 text-white")
     .addClass("text-gray-900 bg-transparent");
 
   $(`button[onclick="setKategori('${jenis}')"]`)
     .removeClass("text-gray-900 bg-transparent")
     .addClass("bg-gray-900 text-white");
-}
-
-function setTingkat(tingkat) {
-  console.log(tingkat);
 }
 
 // dropdown detail prestasi

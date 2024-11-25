@@ -12,7 +12,7 @@ $peran = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik (PA) d
       <!-- input nama dospem -->
       <div class="fieldNama grid w-full" data-type="dospem">
         <label for="dospem" class="block mb-2 text-sm font-medium text-gray-900">Dosen</label>
-        <input type="text" name="dospem[]" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
+        <input type="text" name="namaDospem[]" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
         <div class="dropdownNama absolute mt-20 z-10 hidden cursor-pointer bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
         </div>
       </div>
@@ -20,7 +20,7 @@ $peran = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik (PA) d
       <!-- dropdown peran -->
       <div class="grid">
         <label for="peran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
-        <select name="peran" id="peran" class="w-64 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
+        <select name="peranDospem[]" id="peran" class="w-64 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
           <?php foreach ($peran as $prn) : ?>
             <option><?= $prn ?></option>
           <?php endforeach; ?>

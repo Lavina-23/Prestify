@@ -13,10 +13,10 @@ class Controller
     return new $model;
   }
 
-  public function render($view)
+  public function render($view, $data = [])
   {
     $this->view("layout/header");
-    $this->view($view);
+    $this->view($view, $data);
     $this->view("layout/footer");
   }
 

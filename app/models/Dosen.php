@@ -2,5 +2,5 @@
 
 class Dosen extends BaseModel
 {
-  protected $table = 'dosen';
+  protected $table = 'DOSEN';
 }
