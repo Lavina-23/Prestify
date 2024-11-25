@@ -25,7 +25,7 @@
             </a>
           </li>
           <li>
-            <a href="<?= env("BASEURL") ?>/prestasi/formDataKompetisi" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-white hover:shadow-sm group">
+            <a href="<?= env("BASEURL") ?>/prestasi/formAddPrestasi" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-white hover:shadow-sm group">
               <svg class="w-5 h-5 text-gray-900 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                 <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
               </svg>

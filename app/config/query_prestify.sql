@@ -100,6 +100,10 @@ INSERT INTO MAHASISWA (mahasiswa_id, nim, jurusan, prodi, angkatan, pengguna_id)
 ('MHS3', '2100010003', 'Teknik Sipil', 'Teknik Sipil', '2021', 'PGN5'),
 ('MHS4', '2100010004', 'Sistem Informasi Bisnis', 'Teknologi Informasi', '2021', 'PGN6');
 
+SELECT * 
+FROM PENGGUNA p
+RIGHT JOIN MAHASISWA m ON p.pengguna_id = m.pengguna_id;
+
 -- Data Dosen
 INSERT INTO DOSEN (dosen_id, nidn, nama, jurusan) VALUES
 ('DSN1', '123456789', 'Muhammad Sumbul', 'Teknologi Informasi'),
@@ -111,4 +115,3 @@ TRUNCATE TABLE DOSPEM;
 TRUNCATE TABLE MAPRES;
 DELETE FROM PRESTASI;
 
-SELECT * FROM PRESTASI;

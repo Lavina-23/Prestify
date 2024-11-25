@@ -12,30 +12,11 @@ class PrestasiController extends Controller
     $this->view("layout/footer");
   }
 
-  public function formDataKompetisi()
+  public function formAddPrestasi()
   {
     $this->view("layout/header");
     $this->view("layout/sidebar");
-    $this->view("prestasi/add/indikator");
-    $this->view("prestasi/add/dataKompetisi");
-    $this->view("layout/footer");
-  }
-
-  public function formDataMahasiswa()
-  {
-    $this->view("layout/header");
-    $this->view("layout/sidebar");
-    $this->view("prestasi/add/indikator");
-    $this->view("prestasi/add/dataMahasiswa");
-    $this->view("layout/footer");
-  }
-
-  public function formDataDospem()
-  {
-    $this->view("layout/header");
-    $this->view("layout/sidebar");
-    $this->view("prestasi/add/indikator");
-    $this->view("prestasi/add/dataDospem");
+    $this->view("prestasi/addPrestasi");
     $this->view("layout/footer");
   }
 
@@ -43,12 +24,12 @@ class PrestasiController extends Controller
   {
     if (isset($_POST['searchNama'])) {
       $namaMhs = $_POST['searchNama'];
-      $datas = $this->model('User')->searchData($namaMhs);
+      $datas = $this->model('Mahasiswa')->searchNamaMhs($namaMhs);
 
       echo '<ul class="text-sm text-gray-900" aria-labelledby="dropdownDefaultButton">';
       foreach ($datas as $data) {
         echo '<li>';
-        echo '<a class="block px-4 py-1 hover:bg-gray-100">' . $data['nama'] . '</a>';
+        echo '<button type="button" onclick="setNamaMhsId(' . $data["mahasiswa_id"] . ')" data-id="' . $data['mahasiswa_id'] . '" class="w-full text-left block px-4 py-1 hover:bg-gray-100">' . $data['nama'] . '</button>';
         echo '</li>';
       }
       echo '</ul>';
@@ -71,14 +52,85 @@ class PrestasiController extends Controller
     }
   }
 
+  public function addDataPrestasi()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $dataKompetisi = [
+        'kategori_id' => $_POST['kategori_id'] ?? null,
+        'nama_prestasi' => $_POST['nama_prestasi'] ?? null,
+        'tingkat' => $_POST['tingkat'] ?? null,
+        'peringkat' => $_POST['peringkat'] ?? null,
+        'poin' => $_POST['poin'] ?? null,
+        'penyelenggara' => $_POST['penyelenggara'] ?? null,
+        'tempat_kompetisi' => $_POST['tempat_kompetisi'] ?? null,
+        'link_kompetisi' => $_POST['link_kompetisi'] ?? null,
+        'tanggal_mulai' => $_POST['tanggal_mulai'] ?? null,
+        'tanggal_selesai' => $_POST['tanggal_selesai'] ?? null,
+        'jumlah_peserta' => $_POST['jumlah_peserta'] ?? null,
+        'no_surat_tugas' => $_POST['no_surat_tugas'] ?? null,
+        'tanggal_surat' => $_POST['tanggal_surat'] ?? null,
+        'jumlah_pt' => $_POST['jumlah_pt'] ?? null
+      ];
+
+      $dataFiles = $this->uploadFile($_FILES);
+      $presId = $this->model('Prestasi')->addDataKompetisi($dataKompetisi, $dataFiles);
+
+      $dataMapres = [
+        'nama' => $_POST['namaMhs'] ?? [],
+        'peran' => $_POST['peranMhs'] ?? []
+      ];
+
+      for ($i = 0; $i < count($dataMapres['nama']); $i++) {
+        $this->model('Prestasi')->addDataMapres($presId, [
+          'nama' => $dataMapres['nama'][$i],
+          'peran' => $dataMapres['peran'][$i]
+        ]);
+      }
+
+      $dataDospem = [
+        'nama' => $_POST['namaDospem'] ?? [],
+        'peran' =>  $_POST['peranDospem'] ?? []
+      ];
+
+      for ($i = 0; $i < count($dataDospem['nama']); $i++) {
+        $this->model('Prestasi')->addDataDospem($presId, [
+          'nama' => $dataDospem['nama'][$i],
+          'peran' => $dataDospem['peran'][$i]
+        ]);
+      }
+
+      header('Location:' . env('BASEURL') . '/prestasi');
+      exit;
+    }
+  }
+
   public function addDataKompetisi()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $_SESSION['kompetisi'] = $_POST;
+      $_SESSION['files'] = $_FILES;
+      header('Location:' . env('BASEURL') . '/prestasi/formDataMapres');
+      exit;
+    }
+  }
+
+  public function addDataMapres()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $_SESSION['mapres'] = $_POST;
+      header('Location:' . env('BASEURL') . '/prestasi/formDataDospem');
+      exit;
+    }
+  }
+
+  public function uploadFile($dataFiles)
   {
     $files = [];
     $allowedTypes = ['jpg', 'jpeg', 'png', 'pdf', 'docx'];
     $maxSize = 5 * 1_024 * 1_024;
-    $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/Prestify/public/img/';
+    $targetDir = "D:Program/laragon/www/Prestify/public/uploads/";
 
-    foreach ($_FILES as $i => $file) {
+    foreach ($dataFiles as $i => $file) {
       if (!empty($file['name'])) {
         $filename = basename($file['name']);
         $tmpname = $file['tmp_name'];
@@ -101,35 +153,42 @@ class PrestasiController extends Controller
         }
       }
     }
-
-    if ($this->model('Prestasi')->addDataKompetisi($_POST, $files) > 0) {
-      header('Location:' . env('BASEURL') . '/prestasi/formDataMahasiswa');
-      exit;
-    } else {
-      echo "DATA GAGAL DIUPLOAD";
-      exit;
-    }
+    return $files;
   }
+  // public function addDataPres()
+  // {
+  //   $_SESSION['dospem'] = $_POST;
 
-  public function addDataMahasiswa()
-  {
-    $_SESSION['mahasiswa'] = $_POST;
-    header('Location:' . env('BASEURL')) . '/prestasi/formDataDospem';
-    exit;
-  }
+  //   if (!isset($_SESSION['kompetisi'], $_SESSION['mapres'], $_SESSION['dospem'])) {
+  //     echo "Data belum lengkap!";
+  //     exit;
+  //   }
 
-  public function addDataPrestasi()
-  {
-    $_SESSION['dospem'] = $_POST;
+  //   $dataKompetisi = $_SESSION['kompetisi'];
+  //   $dataFiles = $_SESSION['files'];
 
-    $allDatas = array_merge($_SESSION['kompetisi'], $_SESSION['mahasiswa'], $_SESSION['dospem']);
+  //   $result = $this->model('Prestasi')->addDataKompetisi($dataKompetisi, $files);
 
-    if ($this->model('Prestasi')->addDataPrestasi($allDatas, $_FILES) > 0) {
-      unset($_SESSION['kompetisi'], $_SESSION['mahasiswa'], $_SESSION['dospem']);
-      header('Location:' . env('BASEURL') . '/prestasi');
-      exit;
-    } else {
-      echo "DATA GAGAL DIUPLOAD";
-    }
-  }
+  //   if ($result > 0) {
+  //     $presId = $result['prestasi_id'];
+
+  //     $dataMapres = $_SESSION['mapres'];
+  //     foreach ($dataMapres as $i => $mapres) {
+  //       $this->model('Prestasi')->addDataMapres($presId, $mapres);
+  //     }
+
+  //     $dataDospem = $_SESSION['dospem'];
+  //     foreach ($dataDospem as $i => $dospem) {
+  //       $this->model('Prestasi')->addDataDospem($presId, $dospem);
+  //     }
+
+  //     unset($_SESSION['kompetisi'], $_SESSION['mapres'], $_SESSION['dospem']);
+
+  //     header('Location:' . env('BASEURL') . '/prestasi');
+  //     exit;
+  //   } else {
+  //     echo "DATA GAGAL DIUPLOAD";
+  //     exit;
+  //   }
+  // }
 }
