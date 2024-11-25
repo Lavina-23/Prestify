@@ -104,25 +104,6 @@ class PrestasiController extends Controller
     }
   }
 
-  public function addDataKompetisi()
-  {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $_SESSION['kompetisi'] = $_POST;
-      $_SESSION['files'] = $_FILES;
-      header('Location:' . env('BASEURL') . '/prestasi/formDataMapres');
-      exit;
-    }
-  }
-
-  public function addDataMapres()
-  {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $_SESSION['mapres'] = $_POST;
-      header('Location:' . env('BASEURL') . '/prestasi/formDataDospem');
-      exit;
-    }
-  }
-
   public function uploadFile($dataFiles)
   {
     $files = [];
@@ -155,40 +136,4 @@ class PrestasiController extends Controller
     }
     return $files;
   }
-  // public function addDataPres()
-  // {
-  //   $_SESSION['dospem'] = $_POST;
-
-  //   if (!isset($_SESSION['kompetisi'], $_SESSION['mapres'], $_SESSION['dospem'])) {
-  //     echo "Data belum lengkap!";
-  //     exit;
-  //   }
-
-  //   $dataKompetisi = $_SESSION['kompetisi'];
-  //   $dataFiles = $_SESSION['files'];
-
-  //   $result = $this->model('Prestasi')->addDataKompetisi($dataKompetisi, $files);
-
-  //   if ($result > 0) {
-  //     $presId = $result['prestasi_id'];
-
-  //     $dataMapres = $_SESSION['mapres'];
-  //     foreach ($dataMapres as $i => $mapres) {
-  //       $this->model('Prestasi')->addDataMapres($presId, $mapres);
-  //     }
-
-  //     $dataDospem = $_SESSION['dospem'];
-  //     foreach ($dataDospem as $i => $dospem) {
-  //       $this->model('Prestasi')->addDataDospem($presId, $dospem);
-  //     }
-
-  //     unset($_SESSION['kompetisi'], $_SESSION['mapres'], $_SESSION['dospem']);
-
-  //     header('Location:' . env('BASEURL') . '/prestasi');
-  //     exit;
-  //   } else {
-  //     echo "DATA GAGAL DIUPLOAD";
-  //     exit;
-  //   }
-  // }
 }
