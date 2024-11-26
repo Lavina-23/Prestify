@@ -4,11 +4,29 @@ class PrestasiController extends Controller
 {
   public function index()
   {
-    // $data['prestasi'] = $this->model('Prestasi')->getAllData();
-    // $data['peserta'] = $this->model('Peserta')->getAllData();
+    $user = $_SESSION['user_id'];
+    if (!isset($user) || empty($user)) {
+      header("Location:" . env("BASEURL") . "/user/login");
+      exit();
+    }
+
+    $dataPrestasi['kompetisi'] = $this->model('Prestasi')->getDataPrestasi($user)['results'];
+
+    foreach ($dataPrestasi['kompetisi'] as $prestasi) {
+      $presId = $prestasi['prestasi_id'];
+      $dataPrestasi['mapres'] = $this->model('Prestasi')->getDataMapres($presId);
+      $dataPrestasi['dospem'] = $this->model('Prestasi')->getDataDospem($presId);
+    }
+
     $this->view("layout/header");
     $this->view("layout/sidebar");
-    $this->view("prestasi/prestasi");
+
+    if ($this->model('Prestasi')->getDataPrestasi($user)['rowCount'] > 0) {
+      $this->view("prestasi/prestasi", $dataPrestasi);
+    } else {
+      $this->view("prestasi/zero");
+    }
+
     $this->view("layout/footer");
   }
 

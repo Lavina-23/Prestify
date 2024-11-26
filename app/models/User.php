@@ -2,7 +2,7 @@
 
 class User extends BaseModel
 {
-  protected $table = 'pengguna';
+  protected $table = 'PENGGUNA';
 
   public function login($username, $password)
   {

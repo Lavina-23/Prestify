@@ -67,7 +67,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
 
       <!-- Penyelenggara -->
       <div class="my-5">
-        <label for="penyelenggara" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempat Kompetisi</label>
+        <label for="penyelenggara" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penyelenggara</label>
         <input type="penyelenggara" id="penyelenggara" name="penyelenggara" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Dunya" />
       </div>
 
