@@ -27,6 +27,11 @@ $(document).ready(function () {
     }
   });
 
+  $(".btnKategori").click(function () {
+    const jenis = $(this).data("jenis");
+    setKategori(jenis);
+  });
+
   $(document).on("click", ".dropdownNama li", function () {
     var listNama = $(this);
     var parent = listNama.closest(".fieldNama");
@@ -54,11 +59,11 @@ $(document).ready(function () {
 function setKategori(jenis) {
   $("#kategori_id").val(jenis);
 
-  $("#btnKategori")
+  $(".btnKategori")
     .removeClass("bg-gray-900 text-white")
     .addClass("text-gray-900 bg-transparent");
 
-  $(`button[onclick="setKategori('${jenis}')"]`)
+  $(`.btnKategori[data-jenis='${jenis}']`)
     .removeClass("text-gray-900 bg-transparent")
     .addClass("bg-gray-900 text-white");
 }

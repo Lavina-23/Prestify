@@ -2,12 +2,12 @@
 $lampiran = array("Surat Tugas", "Sertifikat", "Foto Kegiatan", "Poster Kompetisi");
 ?>
 
-<div class="grid gap-10">
+<div class="grid gap-10 ml-10">
   <div class="flex items-center mt-5">
-    <h1 class="text-8xl">✨</h1>
+    <h1 class="text-5xl">✨</h1>
     <h1 class="text-5xl font-bold text-gray-900">Semua Prestasimu Ada Disini</h1>
   </div>
-  <div class="w-[1000px] relative overflow-x-auto shadow-md sm:rounded-lg ml-10">
+  <div class="w-[1000px] relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
