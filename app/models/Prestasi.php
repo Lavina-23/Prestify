@@ -4,9 +4,70 @@ class Prestasi extends BaseModel
 {
   protected $table = 'PRESTASI';
 
+  public function getDataPrestasi($user)
+  {
+    $query = "SELECT * FROM 
+              PRESTASI p 
+                LEFT JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
+                LEFT JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
+                LEFT JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
+                LEFT JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
+                WHERE mh.pengguna_id = :user";
+
+    $this->db->query($query);
+    $this->db->bind('user', $user);
+    return [
+      'results' => $this->db->resultSet(),
+      'rowCount' => $this->db->rowCount()
+    ];
+  }
+
+  public function getDataMapres($presId)
+  {
+    $query = "SELECT * FROM MAPRES m INNER JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id INNER JOIN PENGGUNA p ON p.pengguna_id = mh.pengguna_id WHERE m.prestasi_id = :presId";
+
+    $this->db->query($query);
+    $this->db->bind('presId', $presId);
+    return  $this->db->resultSet();
+  }
+
+  public function getDataDospem($presId)
+  {
+    $query = "SELECT * FROM DOSPEM d INNER JOIN DOSEN dsn ON dsn.dosen_id = d.dosen_id WHERE d.prestasi_id = :presId";
+
+    $this->db->query($query);
+    $this->db->bind('presId', $presId);
+    return  $this->db->resultSet();
+  }
+
+  public function getTahunAkademik()
+  {
+    $currentMonth = date('n');
+    $currentYear = date('Y');
+
+    if ($currentMonth >= 8) {
+      $startYear = $currentYear + 1;
+      $endYear = $currentYear;
+      $semester = "Ganjil";
+    } else {
+      $startYear = $currentYear - 1;
+      $endYear = $currentYear;
+      $semester = "Genap";
+    }
+
+    $tahunAkademik = $startYear . '/' . $endYear;
+    return [
+      'tahun_akademik' => $tahunAkademik,
+      'semester' => $semester
+    ];
+  }
+
   public function addDataKompetisi($data, $files)
   {
     $presId = $this->generateId($this->table, 'prestasi_id', 'PRS');
+    $tahunAkademik = $this->getTahunAkademik()['tahun_akademik'];
+    $semester = $this->getTahunAkademik()['semester'];
+    $isVerif = 0;
 
     if ($data['peringkat'] == 1) {
       $poin = 4;
@@ -18,9 +79,7 @@ class Prestasi extends BaseModel
       $poin = 1;
     }
 
-    $query = "INSERT INTO " . $this->table . "(prestasi_id, kategori_id, nama_prestasi, tingkat, peringkat, poin,
-	  penyelenggara, tempat_kompetisi, link_kompetisi, tanggal_mulai, tanggal_selesai, jumlah_peserta,
-	  no_surat_tugas, tanggal_surat, file_surat_tugas, file_sertifikat, file_foto_kegiatan, file_poster, jumlah_pt) VALUES (:prestasi_id, :kategori_id, :nama_prestasi, :tingkat, :peringkat, :poin, :penyelenggara, :tempat_kompetisi, :link_kompetisi, :tanggal_mulai, :tanggal_selesai, :jumlah_peserta, :no_surat_tugas, :tanggal_surat, :file_surat_tugas, :file_sertifikat, :file_foto_kegiatan, :file_poster, :jumlah_pt)";
+    $query = "INSERT INTO " . $this->table . "(prestasi_id, kategori_id, nama_prestasi, tingkat, peringkat, poin, penyelenggara, tempat_kompetisi, link_kompetisi, tanggal_mulai, tanggal_selesai, jumlah_peserta, no_surat_tugas, tanggal_surat, file_surat_tugas, file_sertifikat, file_foto_kegiatan, file_poster, jumlah_pt, tahun_akademik, semester, status_prestasi) VALUES (:prestasi_id, :kategori_id, :nama_prestasi, :tingkat, :peringkat, :poin, :penyelenggara, :tempat_kompetisi, :link_kompetisi, :tanggal_mulai, :tanggal_selesai, :jumlah_peserta, :no_surat_tugas, :tanggal_surat, :file_surat_tugas, :file_sertifikat, :file_foto_kegiatan, :file_poster, :jumlah_pt, :tahun_akademik, :semester, :status_prestasi)";
 
     $this->db->query($query);
     $this->db->bind(':prestasi_id', $presId);
@@ -42,6 +101,9 @@ class Prestasi extends BaseModel
     $this->db->bind(':file_foto_kegiatan', $files['file_foto_kegiatan']);
     $this->db->bind(':file_poster', $files['file_poster']);
     $this->db->bind(':jumlah_pt', $data['jumlah_pt']);
+    $this->db->bind(':tahun_akademik', $tahunAkademik);
+    $this->db->bind(':semester', $semester);
+    $this->db->bind(':status_prestasi', $isVerif);
 
     $this->db->execute();
     if ($this->db->rowCount() > 0) {
