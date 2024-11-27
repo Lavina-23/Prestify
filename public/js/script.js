@@ -69,8 +69,15 @@ function setKategori(jenis) {
 }
 
 // dropdown detail prestasi
-function toggleDetailPrestasi() {
-  $(`#dropdown-detail`).toggleClass("hidden");
+function toggleDetailPrestasi(id) {
+  const currentDetail = $(`#dropdown-detail-${id}`);
+  const isCurrentlyVisible = !currentDetail.hasClass("hidden");
+
+  $('[id^="dropdown-detail-"]').addClass("hidden");
+
+  if (!isCurrentlyVisible) {
+    currentDetail.removeClass("hidden");
+  }
 }
 
 // chart

@@ -63,7 +63,7 @@ foreach ($data['kompetisi'] as $kompetisi) {
             <td class="px-6 py-4 <?= $kompetisi['status_prestasi'] == 1 ? "text-green-600" : "text-red-600" ?>">
               <strong><?= $kompetisi['status_prestasi'] == 1 ? "Sudah Diverifikasi" : "Belum Diverifikasi" ?></strong>
             </td>
-            <td onclick="toggleDetailPrestasi()" class="px-6 py-4">
+            <td onclick="toggleDetailPrestasi('<?= $kompetisi['prestasi_id'] ?>')" class="px-6 py-4">
               <a href="#" class="flex gap-2 items-center font-medium text-gray-900 hover:underline">Detail
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="w-3 h-3 text-gray-900">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -73,20 +73,20 @@ foreach ($data['kompetisi'] as $kompetisi) {
           </tr>
 
           <!-- Detail Prestasi -->
-          <tr id="dropdown-detail" class="hidden bg-gray-50 dark:bg-gray-700">
+          <tr id="dropdown-detail-<?= $kompetisi['prestasi_id'] ?>" class="hidden bg-gray-50 dark:bg-gray-700">
             <td colspan="5" class="px-6 py-4 text-gray-700 dark:text-gray-300">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="grid gap-2">
                   <p><strong>Tingkat: </strong> <?= $kompetisi['tingkat'] ?></p>
                   <p><strong>Link Kompetisi: </strong> <a href="<?= $kompetisi['link_kompetisi'] ?>" target="_blank" class="text-blue-600"><?= $kompetisi['link_kompetisi'] ?></a></p>
-                  <p><strong>Tanggal Mulai: </strong> <?= date("d F Y", strtotime($kompetisi['tanggal_mulai'])) ?></p>
-                  <p><strong>Tanggal Akhir: </strong> <?= date("d F Y", strtotime($kompetisi['tanggal_selesai'])) ?></p>
+                  <p><strong>Tanggal Mulai: </strong> <?= $kompetisi['tanggal_mulai'] ?></p>
+                  <p><strong>Tanggal Akhir: </strong> <?= $kompetisi['tanggal_selesai'] ?></p>
                   <p><strong>Tempat: </strong><?= $kompetisi['tempat_kompetisi'] ?></p>
                   <p><strong>Jumlah Peserta: </strong><?= $kompetisi['jumlah_pt'] ?></p>
                   <p><strong>Surat Tugas: </strong></p>
                   <ul class="pl-5 list-none space-y-1">
                     <li>Nomor: <?= $kompetisi['no_surat_tugas'] ?></li>
-                    <li>Tanggal: <?= date("d F Y", strtotime($kompetisi['tanggal_surat'])) ?></li>
+                    <li>Tanggal: <?= $kompetisi['tanggal_surat'] ?></li>
                   </ul>
                   <p><strong>Lampiran:</strong></p>
                   <ul class="pl-5 list-none space-y-1">
