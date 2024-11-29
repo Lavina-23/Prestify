@@ -5,7 +5,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
 ?>
 
 <!-- Form -->
-<form method="post" action="<?= env("BASEURL") ?>/prestasi/addDataPrestasi" enctype="multipart/form-data" class="mx-auto my-20">
+<form method="POST" action="<?= env('BASEURL') ?>/prestasi/<?= isset($data['prestasi']['prestasi_id']) ? 'updateDataPrestasi' : 'addDataPrestasi' ?>" enctype="multipart/form-data" class="mx-auto my-20">
   <!-- Form Input Data Kompetisi  -->
   <div class="flex gap-5">
     <div>
@@ -55,33 +55,33 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
         <!-- Nama Kompetisi -->
         <div class="grid w-full">
           <label for="nama_prestasi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Kompetisi</label>
-          <input type="text" id="nama_prestasi" name="nama_prestasi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Mendapatkan Ridho Allah" />
+          <input type="text" id="nama_prestasi" name="nama_prestasi" value="<?= $data['prestasi']['nama_prestasi'] ?? null ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Mendapatkan Ridho Allah" />
         </div>
       </div>
 
       <!-- peringkat -->
       <div class="my-5">
         <label for="peringkat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peringkat</label>
-        <input type="number" id="peringkat" name="peringkat" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="1" />
+        <input type="number" id="peringkat" name="peringkat" value="<?= $data['prestasi']['peringkat'] ?? null ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="1" />
       </div>
 
       <!-- Penyelenggara -->
       <div class="my-5">
         <label for="penyelenggara" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penyelenggara</label>
-        <input type="penyelenggara" id="penyelenggara" name="penyelenggara" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Dunya" />
+        <input type="text" id="penyelenggara" name="penyelenggara" value="<?= $data['prestasi']['penyelenggara'] ?? null ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Dunya" />
       </div>
 
       <!-- Tempat Kompetisi -->
       <div class="my-5">
         <label for="tempat_kompetisi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempat Kompetisi</label>
-        <input type="tempat_kompetisi" id="tempat_kompetisi" name="tempat_kompetisi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Dunya" />
+        <input type="text" id="tempat_kompetisi" name="tempat_kompetisi" value="<?= $data['prestasi']['tempat_kompetisi'] ?? null ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Dunya" />
       </div>
 
 
       <!-- Link Kompetisi -->
       <div class="mb-5">
         <label for="link_kompetisi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">URL Kompetisi</label>
-        <input type="text" id="link_kompetisi" name="link_kompetisi" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="www.example.com" />
+        <input type="text" id="link_kompetisi" name="link_kompetisi" value="<?= $data['prestasi']['link_kompetisi'] ?? null ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="www.example.com" />
       </div>
 
       <!-- Tanggal Kompetisi -->
@@ -94,7 +94,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
               </svg>
             </div>
-            <input name="tanggal_mulai" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tanggal Awal">
+            <input name="tanggal_mulai" value="<?= $data['prestasi']['tanggal_mulai'] ?? null ?>" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tanggal Awal">
           </div>
           <span class="mx-2 text-gray-500 dark:text-gray-400">hingga</span>
           <div class="relative w-full">
@@ -103,7 +103,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
               </svg>
             </div>
-            <input name="tanggal_selesai" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tanggal Selesai">
+            <input name="tanggal_selesai" value="<?= $data['prestasi']['tanggal_selesai'] ?? null ?>" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tanggal Selesai">
           </div>
         </div>
       </div>
@@ -112,11 +112,11 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
       <div class="mb-5 flex w-full gap-4">
         <div class="w-full">
           <label for="jumlah_pt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah PT (Berpartisipasi)</label>
-          <input type="number" id="jumlah_pt" name="jumlah_pt" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="123456" />
+          <input type="number" id="jumlah_pt" name="jumlah_pt" value="<?= $data['prestasi']['jumlah_pt'] ?? null ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="123456" />
         </div>
         <div class="w-full">
           <label for="jumlah_peserta" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Peserta</label>
-          <input type="number" id="jumlah_peserta" name="jumlah_peserta" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="123456" />
+          <input type="number" id="jumlah_peserta" name="jumlah_peserta" value="<?= $data['prestasi']['jumlah_peserta'] ?? null ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="123456" />
         </div>
       </div>
 
@@ -124,7 +124,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
       <div class="mb-5 flex w-full gap-4">
         <div class="w-full">
           <label for="no_surat_tugas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No Surat Tugas</label>
-          <input type="text" id="no_surat_tugas" name="no_surat_tugas" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="123/WRI/IX/2045" />
+          <input type="text" id="no_surat_tugas" name="no_surat_tugas" value="<?= $data['prestasi']['no_surat_tugas'] ?? null ?>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="123/WRI/IX/2045" />
         </div>
         <div class="w-full">
           <label for="tanggal_surat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Surat Tugas</label>
@@ -135,7 +135,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
               </svg>
             </div>
-            <input datepicker id="default-datepicker" name="tanggal_surat" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+            <input datepicker id="default-datepicker" name="tanggal_surat" value="<?= $data['prestasi']['tanggal_surat'] ?? null ?>" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
           </div>
         </div>
       </div>
@@ -183,7 +183,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
           <!-- input nama mahasiswa -->
           <div class="fieldNama grid w-full" data-type="mahasiswa">
             <label for="mahasiswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mahasiswa</label>
-            <input type="text" name="namaMhs[]" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
+            <input type="text" id="namaMhs" name="namaMhs[]" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
             <div class="dropdownNama absolute mt-20 z-10 hidden cursor-pointer bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
             </div>
           </div>
@@ -191,7 +191,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
           <!-- dropdown peran -->
           <div class="grid">
             <label for="peran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
-            <select name="peranMhs[]" id="peran" class="w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
+            <select name="peranMhs[]" id="peran" class="peranMhs w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
               <?php foreach ($listPeranMhs as $peran) : ?>
                 <option><?= $peran ?></option>
               <?php endforeach; ?>
@@ -224,7 +224,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
           <!-- input nama dospem -->
           <div class="fieldNama grid w-full" data-type="dospem">
             <label for="dospem" class="block mb-2 text-sm font-medium text-gray-900">Dosen</label>
-            <input type="text" name="namaDospem[]" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
+            <input type="text" id="namaDospem" name="namaDospem[]" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
             <div class="dropdownNama absolute mt-20 z-10 hidden cursor-pointer bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
             </div>
           </div>
@@ -232,7 +232,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
           <!-- dropdown peran -->
           <div class="grid">
             <label for="peran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
-            <select name="peranDospem[]" id="peran" class="w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
+            <select name="peranDospem[]" id="peran" class="peranDospem w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
               <?php foreach ($listPeranDsn as $peran) : ?>
                 <option><?= $peran ?></option>
               <?php endforeach; ?>

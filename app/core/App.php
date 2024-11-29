@@ -10,7 +10,7 @@ class App
   {
     $url = $this->parseUrl();
 
-    // controller
+    // Controller
     if (isset($url[0]) && file_exists('../app/controllers/' . $url[0] . 'Controller.php')) {
       $this->controller = ucfirst($url[0]) . 'Controller';
       unset($url[0]);
@@ -19,35 +19,42 @@ class App
     require_once '../app/controllers/' . $this->controller . '.php';
     $this->controller = new $this->controller;
 
-    // method
-    if (isset($url[1])) {
-      if (method_exists($this->controller, $url[1])) {
-        $this->method = $url[1];
-        unset($url[1]);
-      }
+    // Method
+    if (isset($url[1]) && method_exists($this->controller, $url[1])) {
+      $this->method = $url[1];
+      unset($url[1]);
     }
 
-    // parameter
-    if (!empty($url)) {
-      $this->params = array_values($url);
-    }
+    // Parameters from URL path
+    $pathParams = !empty($url) ? array_values($url) : [];
 
-    call_user_func_array([$this->controller, $this->method], $this->params); // Call a callback with an array of parameters
+    // Merge with query string parameters
+    $queryParams = $_GET; // Semua query string seperti ?action=insert
+    unset($queryParams['url']); // Hapus key 'url' jika ada
+    $this->params = array_merge($pathParams, $queryParams);
+
+    // Call the controller method with parameters
+    call_user_func_array([$this->controller, $this->method], [$this->params]);
   }
 
   public function parseUrl()
   {
+    $url = '';
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['url'])) {
-      $url = rtrim($_POST['url'], '/'); // rtrim() -> Remove characters from the right side of a string
+      $url = rtrim($_POST['url'], '/');
     } else if (isset($_GET['url'])) {
       $url = rtrim($_GET['url'], '/');
-    } else {
-      return [];
     }
 
-    $url = filter_var($url, FILTER_SANITIZE_URL); // membersihkan URL dari karakter-karakter ilegal yang tidak boleh ada dalam URL. Filter ini memastikan bahwa URL aman dari data berbahaya atau karakter yang tidak diinginkan.
-    $url = explode('/', $url); // dijadikan array
+    $urlArray = explode('/', filter_var($url, FILTER_SANITIZE_URL));
 
-    return $url;
+    // Kembalikan array query string
+    foreach ($_GET as $key => $value) {
+      if ($key !== 'url') {
+        $urlArray['params'][$key] = $value;
+      }
+    }
+
+    return $urlArray;
   }
 }

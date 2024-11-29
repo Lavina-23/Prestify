@@ -123,6 +123,7 @@ DELETE FROM MAPRES;
 DELETE FROM DOSPEM;
 
 SELECT * FROM PRESTASI;
+SELECT * FROM MAPRES;
 
 SELECT * FROM 
 PRESTASI p 
@@ -130,3 +131,11 @@ LEFT JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
 LEFT JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
 LEFT JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
 WHERE mh.pengguna_id = 'PGN1';
+
+SELECT * FROM 
+              PRESTASI p 
+                LEFT JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
+                LEFT JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
+                LEFT JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
+                LEFT JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
+                WHERE mh.pengguna_id = 'PGN3';
