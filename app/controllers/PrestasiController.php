@@ -30,11 +30,22 @@ class PrestasiController extends Controller
     $this->view("layout/footer");
   }
 
-  public function formAddPrestasi()
+  public function showFormPrestasi($params = [])
   {
+    $action = $params['action'] ?? null;
+    $presId = $params['prestasi_id'] ?? null;
+
     $this->view("layout/header");
     $this->view("layout/sidebar");
-    $this->view("prestasi/addPrestasi");
+
+    if ($action == 'edit' && isset($presId)) {
+      $data['prestasi'] = $this->model('Prestasi')->getDataById('prestasi_id', $presId);
+
+      $this->view("prestasi/formPrestasi", $data);
+    } else {
+      $this->view("prestasi/formPrestasi");
+    }
+
     $this->view("layout/footer");
   }
 
@@ -153,5 +164,57 @@ class PrestasiController extends Controller
       }
     }
     return $files;
+  }
+
+  public function updateDataPrestasi()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $dataKompetisi = [
+        'kategori_id' => $_POST['kategori_id'] ?? null,
+        'nama_prestasi' => $_POST['nama_prestasi'] ?? null,
+        'tingkat' => $_POST['tingkat'] ?? null,
+        'peringkat' => $_POST['peringkat'] ?? null,
+        'poin' => $_POST['poin'] ?? null,
+        'penyelenggara' => $_POST['penyelenggara'] ?? null,
+        'tempat_kompetisi' => $_POST['tempat_kompetisi'] ?? null,
+        'link_kompetisi' => $_POST['link_kompetisi'] ?? null,
+        'tanggal_mulai' => $_POST['tanggal_mulai'] ?? null,
+        'tanggal_selesai' => $_POST['tanggal_selesai'] ?? null,
+        'jumlah_peserta' => $_POST['jumlah_peserta'] ?? null,
+        'no_surat_tugas' => $_POST['no_surat_tugas'] ?? null,
+        'tanggal_surat' => $_POST['tanggal_surat'] ?? null,
+        'jumlah_pt' => $_POST['jumlah_pt'] ?? null
+      ];
+
+      $dataFiles = $this->uploadFile($_FILES);
+      $presId = $this->model('Prestasi')->addDataKompetisi($dataKompetisi, $dataFiles);
+
+      $dataMapres = [
+        'nama' => $_POST['namaMhs'] ?? [],
+        'peran' => $_POST['peranMhs'] ?? []
+      ];
+
+      for ($i = 0; $i < count($dataMapres['nama']); $i++) {
+        $this->model('Prestasi')->addDataMapres($presId, [
+          'nama' => $dataMapres['nama'][$i],
+          'peran' => $dataMapres['peran'][$i]
+        ]);
+      }
+
+      $dataDospem = [
+        'nama' => $_POST['namaDospem'] ?? [],
+        'peran' =>  $_POST['peranDospem'] ?? []
+      ];
+
+      for ($i = 0; $i < count($dataDospem['nama']); $i++) {
+        $this->model('Prestasi')->addDataDospem($presId, [
+          'nama' => $dataDospem['nama'][$i],
+          'peran' => $dataDospem['peran'][$i]
+        ]);
+      }
+
+      header('Location:' . env('BASEURL') . '/prestasi');
+      exit;
+    }
   }
 }

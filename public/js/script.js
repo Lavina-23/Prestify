@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // dropdown live search nama mhs dan dospem
   $(document).on("keyup", ".searchNama", function () {
     var input = $(this);
     var nama = input.val();
@@ -20,16 +21,10 @@ $(document).ready(function () {
           searchNama: nama,
         },
         success: function (data) {
-          console.log(data);
           dropdown.html(data).show();
         },
       });
     }
-  });
-
-  $(".btnKategori").click(function () {
-    const jenis = $(this).data("jenis");
-    setKategori(jenis);
   });
 
   $(document).on("click", ".dropdownNama li", function () {
@@ -42,6 +37,13 @@ $(document).ready(function () {
     dropdown.hide();
   });
 
+  // handle value kategori prestasi
+  $(".btnKategori").click(function () {
+    const jenis = $(this).data("jenis");
+    setKategori(jenis);
+  });
+
+  // handle tambah input field
   $("#btnAddInput").on("click", function () {
     let newInput = $(".inputGroup").first().clone();
 
@@ -56,6 +58,7 @@ $(document).ready(function () {
   });
 });
 
+// handle style kategori prestasi
 function setKategori(jenis) {
   $("#kategori_id").val(jenis);
 
