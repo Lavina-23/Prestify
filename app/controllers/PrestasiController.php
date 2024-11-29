@@ -166,6 +166,14 @@ class PrestasiController extends Controller
     return $files;
   }
 
+  public function deleteDataPrestasi($presId)
+  {
+    if ($this->model('Prestasi')->deleteData('prestasi_id', $presId) > -1) {
+      header('Location:' . env('BASEURL') . '/prestasi');
+      exit;
+    }
+  }
+
   public function updateDataPrestasi()
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

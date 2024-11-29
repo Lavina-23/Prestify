@@ -23,12 +23,16 @@ abstract class BaseModel
     return $this->db->single();
   }
 
-  public function deleteData($id)
+  public function deleteData($colId, $id)
   {
-    $query = "DELETE FROM " . $this->table . " WHERE id = :id";
+    $query = "DELETE FROM " . $this->table . " WHERE $colId = :id";
     $this->db->query($query);
-    $this->db->bind(':id', $id);
 
+    if (is_array($id)) {
+      $id = $id[0];
+    }
+
+    $this->db->bind(':id', $id);
     $this->db->execute();
 
     return $this->db->rowCount();
