@@ -30,6 +30,28 @@ class PrestasiController extends Controller
     $this->view("layout/footer");
   }
 
+  public function allPrestasi()
+  {
+    $dataPrestasi['kompetisi'] = $this->model('Prestasi')->getAllDataPrestasi()['results'];
+
+    foreach ($dataPrestasi['kompetisi'] as $prestasi) {
+      $presId = $prestasi['prestasi_id'];
+      $dataPrestasi['mapres'] = $this->model('Prestasi')->getDataMapres($presId);
+      $dataPrestasi['dospem'] = $this->model('Prestasi')->getDataDospem($presId);
+    }
+
+    $this->view("layout/header");
+    $this->view("layout/sidebar");
+
+    if ($this->model('Prestasi')->getAllDataPrestasi()['rowCount'] > 0) {
+      $this->view("prestasi/prestasi", $dataPrestasi);
+    } else {
+      $this->view("prestasi/zero");
+    }
+
+    $this->view("layout/footer");
+  }
+
   public function showFormPrestasi($params = [])
   {
     $action = $params['action'] ?? null;
@@ -128,7 +150,7 @@ class PrestasiController extends Controller
         ]);
       }
 
-      header('Location:' . env('BASEURL') . '/prestasi');
+      header('Location:' . getMenu($_SESSION['level_id'], 'menu3')['route']);
       exit;
     }
   }
@@ -222,6 +244,14 @@ class PrestasiController extends Controller
       }
 
       header('Location:' . env('BASEURL') . '/prestasi');
+      exit;
+    }
+  }
+
+  public function isVerif($presId)
+  {
+    if ($this->model('Prestasi')->updateVerif($presId)) {
+      header('Location:' . getMenu($_SESSION['level_id'], 'menu3')['route']);
       exit;
     }
   }
