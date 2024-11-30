@@ -22,6 +22,19 @@ class Prestasi extends BaseModel
     ];
   }
 
+  public function getAllDataPrestasi()
+  {
+    $query = "SELECT * FROM 
+              PRESTASI p 
+                INNER JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id";
+
+    $this->db->query($query);
+    return [
+      'results' => $this->db->resultSet(),
+      'rowCount' => $this->db->rowCount()
+    ];
+  }
+
   public function getDataMapres($presId)
   {
     $query = "SELECT * FROM MAPRES m INNER JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id INNER JOIN PENGGUNA p ON p.pengguna_id = mh.pengguna_id WHERE m.prestasi_id = :presId";
@@ -156,6 +169,17 @@ class Prestasi extends BaseModel
     $this->db->bind(':dosen_id', $dosen_id);
     $this->db->bind(':prestasi_id', $presId);
     $this->db->bind(':peran', $data['peran']);
+
+    $this->db->execute();
+    return $this->db->rowCount();
+  }
+
+  public function updateVerif($id)
+  {
+    $query = "UPDATE " . $this->table . " SET status_prestasi = 1 WHERE prestasi_id = :id";
+
+    $this->db->query($query);
+    $this->db->bind(':id', $id);
 
     $this->db->execute();
     return $this->db->rowCount();
