@@ -128,7 +128,7 @@ foreach ($data['kompetisi'] as $kompetisi) {
                         </svg>
                       </a>
                     <?php endif; ?>
-                    <?php if ($_SESSION['level_id'] == 'LVL2') : ?>
+                    <?php if ($_SESSION['level_id'] == 'LVL2' && $kompetisi['status_prestasi'] == 0) : ?>
                       <a href="<?= env('BASEURL') ?>/prestasi/isVerif/<?= $kompetisi['prestasi_id'] ?>" onclick="return confirm('Yakin ingin memverifikasi data ini?');" class="flex items-center gap-2 w-fit px-5 py-2 rounded-lg bg-green-100 text-green-500">Verifikasi
                       </a>
                     <?php endif; ?>
