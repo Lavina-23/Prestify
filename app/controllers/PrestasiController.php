@@ -14,8 +14,8 @@ class PrestasiController extends Controller
 
     foreach ($dataPrestasi['kompetisi'] as $prestasi) {
       $presId = $prestasi['prestasi_id'];
-      $dataPrestasi['mapres'] = $this->model('Prestasi')->getDataMapres($presId);
-      $dataPrestasi['dospem'] = $this->model('Prestasi')->getDataDospem($presId);
+      $dataPrestasi['mapres'] = $this->model('Mapres')->getDataMapres($presId);
+      $dataPrestasi['dospem'] = $this->model('Dospem')->getDataDospem($presId);
     }
 
     $this->view("layout/header");
@@ -52,17 +52,13 @@ class PrestasiController extends Controller
     $this->view("layout/footer");
   }
 
-  public function showFormPrestasi($params = [])
+  public function showFormPrestasi($presId = null)
   {
-    $action = $params['action'] ?? null;
-    $presId = $params['prestasi_id'] ?? null;
-
     $this->view("layout/header");
     $this->view("layout/sidebar");
 
-    if ($action == 'edit' && isset($presId)) {
+    if (isset($presId)) {
       $data['prestasi'] = $this->model('Prestasi')->getDataById('prestasi_id', $presId);
-
       $this->view("prestasi/formPrestasi", $data);
     } else {
       $this->view("prestasi/formPrestasi");
@@ -132,7 +128,7 @@ class PrestasiController extends Controller
       ];
 
       for ($i = 0; $i < count($dataMapres['nama']); $i++) {
-        $this->model('Prestasi')->addDataMapres($presId, [
+        $this->model('Mapres')->addDataMapres($presId, [
           'nama' => $dataMapres['nama'][$i],
           'peran' => $dataMapres['peran'][$i]
         ]);
@@ -144,7 +140,7 @@ class PrestasiController extends Controller
       ];
 
       for ($i = 0; $i < count($dataDospem['nama']); $i++) {
-        $this->model('Prestasi')->addDataDospem($presId, [
+        $this->model('Dospem')->addDataDospem($presId, [
           'nama' => $dataDospem['nama'][$i],
           'peran' => $dataDospem['peran'][$i]
         ]);
@@ -196,7 +192,7 @@ class PrestasiController extends Controller
     }
   }
 
-  public function updateDataPrestasi()
+  public function updateDataPrestasi($presId)
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $dataKompetisi = [
@@ -217,27 +213,31 @@ class PrestasiController extends Controller
       ];
 
       $dataFiles = $this->uploadFile($_FILES);
-      $presId = $this->model('Prestasi')->addDataKompetisi($dataKompetisi, $dataFiles);
 
+      $allDataKompetisi = array_merge($dataKompetisi, $dataFiles);
+      $this->model('Prestasi')->updateData('PRESTASI', $allDataKompetisi, 'prestasi_id', $presId);
+
+      $this->model('Mapres')->deleteData('prestasi_id', $presId);
       $dataMapres = [
         'nama' => $_POST['namaMhs'] ?? [],
         'peran' => $_POST['peranMhs'] ?? []
       ];
 
       for ($i = 0; $i < count($dataMapres['nama']); $i++) {
-        $this->model('Prestasi')->addDataMapres($presId, [
+        $this->model('Mapres')->addDataMapres($presId, [
           'nama' => $dataMapres['nama'][$i],
           'peran' => $dataMapres['peran'][$i]
         ]);
       }
 
+      $this->model('Dospem')->deleteData('prestasi_id', $presId);
       $dataDospem = [
         'nama' => $_POST['namaDospem'] ?? [],
         'peran' =>  $_POST['peranDospem'] ?? []
       ];
 
       for ($i = 0; $i < count($dataDospem['nama']); $i++) {
-        $this->model('Prestasi')->addDataDospem($presId, [
+        $this->model('Dospem')->addDataDospem($presId, [
           'nama' => $dataDospem['nama'][$i],
           'peran' => $dataDospem['peran'][$i]
         ]);

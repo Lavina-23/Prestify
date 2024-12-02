@@ -5,7 +5,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
 ?>
 
 <!-- Form -->
-<form method="POST" action="<?= env('BASEURL') ?>/prestasi/<?= isset($data['prestasi']['prestasi_id']) ? 'updateDataPrestasi' : 'addDataPrestasi' ?>" enctype="multipart/form-data" class="mx-auto my-20">
+<form method="POST" action="<?= env('BASEURL') ?>/prestasi/<?= isset($data['prestasi']['prestasi_id']) ? 'updateDataPrestasi/' . $data['prestasi']['prestasi_id'] : 'addDataPrestasi' ?>" enctype="multipart/form-data" class="mx-auto my-20">
   <!-- Form Input Data Kompetisi  -->
   <div class="flex gap-5">
     <div>
@@ -52,6 +52,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
           </select>
         </div>
 
+
         <!-- Nama Kompetisi -->
         <div class="grid w-full">
           <label for="nama_prestasi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Kompetisi</label>
@@ -94,7 +95,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
               </svg>
             </div>
-            <input name="tanggal_mulai" value="<?= $data['prestasi']['tanggal_mulai'] ?? null ?>" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tanggal Awal">
+            <input type="text" name="tanggal_mulai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<?= $data['prestasi']['tanggal_mulai'] ??'Tanggal Awal'?>">
           </div>
           <span class="mx-2 text-gray-500 dark:text-gray-400">hingga</span>
           <div class="relative w-full">
@@ -103,7 +104,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
               </svg>
             </div>
-            <input name="tanggal_selesai" value="<?= $data['prestasi']['tanggal_selesai'] ?? null ?>" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tanggal Selesai">
+            <input name="tanggal_selesai" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<?= $data['prestasi']['tanggal_selesai'] ??'Tanggal Selesai'?>">
           </div>
         </div>
       </div>
@@ -135,7 +136,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
               </svg>
             </div>
-            <input datepicker id="default-datepicker" name="tanggal_surat" value="<?= $data['prestasi']['tanggal_surat'] ?? null ?>" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+            <input datepicker id="default-datepicker" name="tanggal_surat" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<?= $data['prestasi']['tanggal_surat'] ??'Select date'?>">
           </div>
         </div>
       </div>
