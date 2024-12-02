@@ -113,3 +113,4 @@ if (
   const chart = new ApexCharts(document.getElementById("area-chart"), options);
   chart.render();
 }
+
