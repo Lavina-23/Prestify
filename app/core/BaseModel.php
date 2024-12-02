@@ -59,19 +59,28 @@ abstract class BaseModel
     return $format . str_pad($newId, 2, '0', STR_PAD_LEFT);
   }
 
-  public function updateData($table, $data, $colId, $valId)
+  public function updateData($table, $data, $colId, $id)
   {
-    $columns = array_keys($data);
-    $setCol = implode(", ", array_map(fn($col) => "$col = :$col", $columns));
+    $fields = [];
+    $bindings = [];
 
-    $query = "UPDATE $table SET $setCol WHERE $colId = :valId";
+    foreach ($data as $key => $value) {
+      if ($value !== null) {
+        $fields[] = "$key = :$key";
+        $bindings[$key] = $value;
+      }
+    }
+
+    $formatFields = implode(", ", $fields);
+
+    $query = "UPDATE " . $table . " SET $formatFields WHERE $colId = :id";
 
     $this->db->query($query);
-    foreach ($data as $key => $value) {
-      $this->db->bind(":$key", $value);
+    foreach ($bindings as $key => $value) {
+      $this->db->bind($key, $value);
     }
-    $this->db->bind(":$valId", $valId);
 
+    $this->db->bind(":id", $id);
     $this->db->execute();
     return $this->db->rowCount();
   }
