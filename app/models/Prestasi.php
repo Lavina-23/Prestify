@@ -8,10 +8,10 @@ class Prestasi extends BaseModel
   {
     $query = "SELECT * FROM 
               PRESTASI p 
-                LEFT JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
-                LEFT JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
-                LEFT JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
-                LEFT JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
+                INNER JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
+                INNER JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
+                INNER JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
+                INNER JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
                 WHERE mh.pengguna_id = :user";
 
     $this->db->query($query);
@@ -118,5 +118,23 @@ class Prestasi extends BaseModel
 
     $this->db->execute();
     return $this->db->rowCount();
+  }
+
+  public function countPrestasiByJurusan()
+  {
+    $query = "SELECT M.jurusan, COUNT(P.prestasi_id) as totalPrestasi
+              FROM PRESTASI P 
+              INNER JOIN MAPRES MP ON MP.prestasi_id = P.prestasi_id
+              INNER JOIN MAHASISWA M ON M.mahasiswa_id = MP.mahasiswa_id
+              WHERE p.status_prestasi = 1
+              GROUP BY M.jurusan";
+
+    $this->db->query($query);
+    return $this->db->resultSet();
+  }
+
+  public function countPrestasiByWeek()
+  {
+    $query = "SELECT COUNT(*) FROM " . $this->table . " WHERE created_at >= DATEADD(DAY, -7, GETDATE())";
   }
 }

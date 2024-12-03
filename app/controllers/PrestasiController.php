@@ -9,13 +9,17 @@ class PrestasiController extends Controller
       header("Location:" . env("BASEURL") . "/user/login");
       exit();
     }
-
     $dataPrestasi['kompetisi'] = $this->model('Prestasi')->getDataPrestasi($user)['results'];
 
-    foreach ($dataPrestasi['kompetisi'] as $prestasi) {
-      $presId = $prestasi['prestasi_id'];
-      $dataPrestasi['mapres'] = $this->model('Mapres')->getDataMapres($presId);
-      $dataPrestasi['dospem'] = $this->model('Dospem')->getDataDospem($presId);
+    $dataPrestasi['mapres'] = [];
+    $dataPrestasi['dospem'] = [];
+
+    foreach ($dataPrestasi['kompetisi'] as $pres) {
+      $prestasiId = $pres['prestasi_id'];
+
+      // Simpan data mapres dan dospem berdasarkan prestasi_id
+      $dataPrestasi['mapres'][$prestasiId] = $this->model('Mapres')->getDataMapres($prestasiId);
+      $dataPrestasi['dospem'][$prestasiId] = $this->model('Dospem')->getDataDospem($prestasiId);
     }
 
     $this->view("layout/header");
@@ -36,8 +40,8 @@ class PrestasiController extends Controller
 
     foreach ($dataPrestasi['kompetisi'] as $prestasi) {
       $presId = $prestasi['prestasi_id'];
-      $dataPrestasi['mapres'] = $this->model('Prestasi')->getDataMapres($presId);
-      $dataPrestasi['dospem'] = $this->model('Prestasi')->getDataDospem($presId);
+      $dataPrestasi['mapres'] = $this->model('Mapres')->getDataMapres($presId);
+      $dataPrestasi['dospem'] = $this->model('Dospem')->getDataDospem($presId);
     }
 
     $this->view("layout/header");
@@ -246,6 +250,12 @@ class PrestasiController extends Controller
       header('Location:' . env('BASEURL') . '/prestasi');
       exit;
     }
+  }
+
+  public function countPrestasi()
+  {
+    $data = $this->model('Prestasi')->countPrestasiByJurusan();
+    echo json_encode($data);
   }
 
   public function isVerif($presId)

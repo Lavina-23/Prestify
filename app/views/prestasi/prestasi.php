@@ -105,13 +105,13 @@ foreach ($data['kompetisi'] as $kompetisi) {
                 <div>
                   <p><strong>Peserta:</strong></p>
                   <ul class="pl-5 list-none space-y-1">
-                    <?php foreach ($data['mapres'] as $mapres) : ?>
+                    <?php foreach ($data['mapres'][$kompetisi['prestasi_id']] as $mapres) : ?>
                       <li><?= $mapres['nim'] . " - " . $mapres['nama'] ?></li>
                     <?php endforeach; ?>
                   </ul>
                   <p class="mt-2"><strong>Pembimbing:</strong></p>
                   <ul class="pl-5 list-none space-y-1">
-                    <?php foreach ($data['dospem'] as $dospem) : ?>
+                    <?php foreach ($data['dospem'][$kompetisi['prestasi_id']] as $dospem) : ?>
                       <li><?= $dospem['nidn'] . " - " . $dospem['nama'] ?></li>
                     <?php endforeach; ?>
                   </ul>
@@ -128,7 +128,7 @@ foreach ($data['kompetisi'] as $kompetisi) {
                         </svg>
                       </a>
                     <?php endif; ?>
-                    <?php if ($_SESSION['level_id'] == 'LVL2' && $kompetisi['status_prestasi'] == 0) : ?>
+                    <?php if (($_SESSION['level_id'] == 'LVL1' || $_SESSION['level_id'] == 'LVL2') && $kompetisi['status_prestasi'] == 0) : ?>
                       <a href="<?= env('BASEURL') ?>/prestasi/isVerif/<?= $kompetisi['prestasi_id'] ?>" onclick="return confirm('Yakin ingin memverifikasi data ini?');" class="flex items-center gap-2 w-fit px-5 py-2 rounded-lg bg-green-100 text-green-500">Verifikasi
                       </a>
                     <?php endif; ?>
