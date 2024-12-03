@@ -123,6 +123,8 @@ DELETE FROM MAPRES;
 DELETE FROM DOSPEM;
 
 SELECT * FROM PRESTASI;
+SELECT * FROM MAPRES;
+SELECT * FROM DOSPEM;
 
 SELECT * FROM 
 PRESTASI p 
@@ -130,3 +132,38 @@ LEFT JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
 LEFT JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
 LEFT JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
 WHERE mh.pengguna_id = 'PGN1';
+
+SELECT * FROM 
+              PRESTASI p 
+                LEFT JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
+                LEFT JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
+                LEFT JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
+                LEFT JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
+                WHERE mh.pengguna_id = 'PGN3';
+go;
+
+CREATE TRIGGER trg_after_delete_prestasi
+ON PRESTASI
+AFTER DELETE
+AS
+BEGIN
+	DELETE FROM MAPRES WHERE prestasi_id IN (SELECT prestasi_id FROM DELETED);
+	DELETE FROM DOSPEM WHERE prestasi_id IN (SELECT prestasi_id FROM DELETED);
+END;
+go
+
+DELETE FROM PRESTASI WHERE prestasi_id = 'PRS01';
+
+ALTER TABLE MAPRES 
+DROP CONSTRAINT FK__MAPRES__prestasi__46E78A0C;
+
+ALTER TABLE MAPRES 
+ADD CONSTRAINT FK__MAPRES__prestasi__46E78A0C 
+FOREIGN KEY (prestasi_id) REFERENCES PRESTASI(prestasi_id) ON DELETE CASCADE;
+
+ALTER TABLE DOSPEM 
+DROP CONSTRAINT FK__DOSPEM__prestasi__4AB81AF0;
+
+ALTER TABLE DOSPEM 
+ADD CONSTRAINT FK__DOSPEM__prestasi__4AB81AF0 
+FOREIGN KEY (prestasi_id) REFERENCES PRESTASI(prestasi_id) ON DELETE CASCADE;

@@ -8,10 +8,10 @@ class Prestasi extends BaseModel
   {
     $query = "SELECT * FROM 
               PRESTASI p 
-                LEFT JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
-                LEFT JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
-                LEFT JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
-                LEFT JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
+                INNER JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
+                INNER JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
+                INNER JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
+                INNER JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
                 WHERE mh.pengguna_id = :user";
 
     $this->db->query($query);
@@ -22,22 +22,17 @@ class Prestasi extends BaseModel
     ];
   }
 
-  public function getDataMapres($presId)
+  public function getAllDataPrestasi()
   {
-    $query = "SELECT * FROM MAPRES m INNER JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id INNER JOIN PENGGUNA p ON p.pengguna_id = mh.pengguna_id WHERE m.prestasi_id = :presId";
+    $query = "SELECT * FROM 
+              PRESTASI p 
+                INNER JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id";
 
     $this->db->query($query);
-    $this->db->bind('presId', $presId);
-    return  $this->db->resultSet();
-  }
-
-  public function getDataDospem($presId)
-  {
-    $query = "SELECT * FROM DOSPEM d INNER JOIN DOSEN dsn ON dsn.dosen_id = d.dosen_id WHERE d.prestasi_id = :presId";
-
-    $this->db->query($query);
-    $this->db->bind('presId', $presId);
-    return  $this->db->resultSet();
+    return [
+      'results' => $this->db->resultSet(),
+      'rowCount' => $this->db->rowCount()
+    ];
   }
 
   public function getTahunAkademik()
@@ -79,6 +74,9 @@ class Prestasi extends BaseModel
       $poin = 1;
     }
 
+    $tanggalMulai = date('m/d/Y', strtotime($data['tanggal_mulai']));
+    $tanggalSelesai = date('m/d/Y', strtotime($data['tanggal_selesai']));
+
     $query = "INSERT INTO " . $this->table . "(prestasi_id, kategori_id, nama_prestasi, tingkat, peringkat, poin, penyelenggara, tempat_kompetisi, link_kompetisi, tanggal_mulai, tanggal_selesai, jumlah_peserta, no_surat_tugas, tanggal_surat, file_surat_tugas, file_sertifikat, file_foto_kegiatan, file_poster, jumlah_pt, tahun_akademik, semester, status_prestasi) VALUES (:prestasi_id, :kategori_id, :nama_prestasi, :tingkat, :peringkat, :poin, :penyelenggara, :tempat_kompetisi, :link_kompetisi, :tanggal_mulai, :tanggal_selesai, :jumlah_peserta, :no_surat_tugas, :tanggal_surat, :file_surat_tugas, :file_sertifikat, :file_foto_kegiatan, :file_poster, :jumlah_pt, :tahun_akademik, :semester, :status_prestasi)";
 
     $this->db->query($query);
@@ -91,8 +89,8 @@ class Prestasi extends BaseModel
     $this->db->bind(':penyelenggara', $data['penyelenggara']);
     $this->db->bind(':tempat_kompetisi', $data['tempat_kompetisi']);
     $this->db->bind(':link_kompetisi', $data['link_kompetisi']);
-    $this->db->bind(':tanggal_mulai', $data['tanggal_mulai']);
-    $this->db->bind(':tanggal_selesai', $data['tanggal_selesai']);
+    $this->db->bind(':tanggal_mulai', $tanggalMulai);
+    $this->db->bind(':tanggal_selesai', $tanggalSelesai);
     $this->db->bind(':jumlah_peserta', $data['jumlah_peserta']);
     $this->db->bind(':no_surat_tugas', $data['no_surat_tugas']);
     $this->db->bind(':tanggal_surat', $data['tanggal_surat']);
@@ -111,53 +109,32 @@ class Prestasi extends BaseModel
     }
   }
 
-  public function getMhsIdByName($nama)
+  public function updateVerif($id)
   {
-    $query = "SELECT m.mahasiswa_id FROM PENGGUNA p INNER JOIN MAHASISWA m ON p.pengguna_id = m.pengguna_id WHERE p.nama = :nama";
+    $query = "UPDATE " . $this->table . " SET status_prestasi = 1 WHERE prestasi_id = :id";
 
     $this->db->query($query);
-    $this->db->bind(':nama', $nama);
-    return $this->db->single()['mahasiswa_id'];
-  }
-
-  public function getDsnIdByName($nama)
-  {
-    $query = "SELECT dosen_id FROM DOSEN WHERE nama = :nama";
-
-    $this->db->query($query);
-    $this->db->bind(':nama', $nama);
-    return $this->db->single()['dosen_id'];
-  }
-
-  public function addDataMapres($presId, $data)
-  {
-    $mapresId = $this->generateId('MAPRES', 'mapres_id', 'MPR');
-    $mahasiswa_id = $this->getMhsIdByName($data['nama']);
-    $query = "INSERT INTO MAPRES(mapres_id, mahasiswa_id, prestasi_id, peran) VALUES (:mapres_id, :mahasiswa_id, :prestasi_id, :peran)";
-
-    $this->db->query($query);
-    $this->db->bind(':mapres_id', $mapresId);
-    $this->db->bind(':mahasiswa_id', $mahasiswa_id);
-    $this->db->bind(':prestasi_id', $presId);
-    $this->db->bind(':peran', $data['peran']);
+    $this->db->bind(':id', $id);
 
     $this->db->execute();
     return $this->db->rowCount();
   }
 
-  public function addDataDospem($presId, $data)
+  public function countPrestasiByJurusan()
   {
-    $dospem_id = $this->generateId('DOSPEM', 'dospem_id', 'DSP');
-    $dosen_id = $this->getDsnIdByName($data['nama']);
-    $query = "INSERT INTO DOSPEM(dospem_id, dosen_id, prestasi_id, peran) VALUES (:dospem_id, :dosen_id, :prestasi_id, :peran)";
+    $query = "SELECT M.jurusan, COUNT(P.prestasi_id) as totalPrestasi
+              FROM PRESTASI P 
+              INNER JOIN MAPRES MP ON MP.prestasi_id = P.prestasi_id
+              INNER JOIN MAHASISWA M ON M.mahasiswa_id = MP.mahasiswa_id
+              WHERE p.status_prestasi = 1
+              GROUP BY M.jurusan";
 
     $this->db->query($query);
-    $this->db->bind(':dospem_id', $dospem_id);
-    $this->db->bind(':dosen_id', $dosen_id);
-    $this->db->bind(':prestasi_id', $presId);
-    $this->db->bind(':peran', $data['peran']);
+    return $this->db->resultSet();
+  }
 
-    $this->db->execute();
-    return $this->db->rowCount();
+  public function countPrestasiByWeek()
+  {
+    $query = "SELECT COUNT(*) FROM " . $this->table . " WHERE created_at >= DATEADD(DAY, -7, GETDATE())";
   }
 }
