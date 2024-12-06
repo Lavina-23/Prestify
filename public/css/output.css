@@ -787,6 +787,10 @@ video {
   margin-left: 0.75rem;
 }
 
+.ml-6{
+  margin-left: 1.5rem;
+}
+
 .ml-64{
   margin-left: 16rem;
 }
@@ -1326,6 +1330,10 @@ video {
 
 .items-center{
   align-items: center;
+}
+
+.items-stretch{
+  align-items: stretch;
 }
 
 .justify-start{
@@ -2134,6 +2142,11 @@ video {
 .px-6{
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.px-8{
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .py-0{
