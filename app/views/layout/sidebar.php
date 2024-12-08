@@ -9,7 +9,7 @@
     <div class="flex flex-col justify-between h-full px-3 py-4 overflow-y-auto bg-white border-2 border-gray-100">
       <div>
         <a href="<?= env("BASEURL") ?>" class="flex items-center justify-center space-x-3 rtl:space-x-reverse">
-          <img src="<?= env("BASEURL") ?>/img/logo.png" class="h-12" alt="Flowbite Logo">
+          <img src="<?= env("BASEURL") ?>../public/img/logo.png" class="h-12" alt="Flowbite Logo">
         </a>
         <ul class="space-y-2 font-medium">
           <li>

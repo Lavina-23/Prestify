@@ -45,7 +45,7 @@
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <!-- Logo -->
       <a href="<?= env("BASEURL") ?>" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="<?= env("BASEURL") ?>/img/logo.png" class="h-12" alt="Prestify Logo">
+        <img src="<?= env("BASEURL") ?>../public/img/logo.png" class="h-12" alt="Prestify Logo">
       </a>
 
       <!-- Tombol Login / Dashboard -->
@@ -73,11 +73,11 @@
             <a href="<?= env("BASEURL") ?>" class="nav-link <?= $activePage === 'home' ? 'active' : '' ?>">Home</a>
           </li>
           <li>
-            <a href="#leaderboard" class="nav-link <?= $activePage === 'leaderboard' ? 'active' : '' ?>">Leaderboard</a>
+            <a href="#competition" class="nav-link <?= $activePage === 'competition' ? 'active' : '' ?>">Competition</a>
           </li>
           <li>
-            <a href="#about" class="nav-link <?= $activePage === 'about' ? 'active' : '' ?>">About</a>
-          </li>
+    <a href="#leaderboard" class="nav-link hover:text-gray-300">Leaderboard</a>
+  </li>
           <li>
             <a href="#contact" class="nav-link <?= $activePage === 'contact' ? 'active' : '' ?>">Contact</a>
           </li>

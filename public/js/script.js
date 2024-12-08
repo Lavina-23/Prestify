@@ -274,5 +274,18 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         chart.render();
       }
+      document.addEventListener("DOMContentLoaded", () => {
+        // Event listener untuk tombol dengan kelas .btnKategori
+        document.querySelectorAll(".btnKategori").forEach((button) => {
+          button.addEventListener("click", () => {
+            console.log("Tombol diklik!");
+            const jenis = button.dataset.jenis;
+            setKategori(jenis);
+          });
+        });
+      });
+      
     });
 });
+
+
