@@ -32,6 +32,9 @@ foreach ($data['kompetisi'] as $kompetisi) {
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="px-6 py-3">
+            ID
+          </th>
+          <th scope="col" class="px-6 py-3">
             Nama Kompetisi
           </th>
           <th scope="col" class="px-6 py-3">
@@ -49,8 +52,14 @@ foreach ($data['kompetisi'] as $kompetisi) {
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($data['kompetisi'] as $kompetisi) : ?>
+        <?php foreach ($data['kompetisi'] as $kompetisi) :
+          // var_dump($kompetisi);
+          // exit;
+        ?>
           <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
+            <td class="px-6 py-4">
+              <?= $kompetisi['prestasi_id'] ?>
+            </td>
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
               <?= $kompetisi['nama_prestasi'] ?>
             </th>
@@ -74,7 +83,7 @@ foreach ($data['kompetisi'] as $kompetisi) {
 
           <!-- Detail Prestasi -->
           <tr id="dropdown-detail-<?= $kompetisi['prestasi_id'] ?>" class="hidden bg-gray-50 dark:bg-gray-700">
-            <td colspan="5" class="px-6 py-4 text-gray-700 dark:text-gray-300">
+            <td colspan="6" class="px-6 py-4 text-gray-700 dark:text-gray-300">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="grid gap-2">
                   <p><strong>Tingkat: </strong> <?= $kompetisi['tingkat'] ?></p>
@@ -91,11 +100,11 @@ foreach ($data['kompetisi'] as $kompetisi) {
                   <p><strong>Lampiran:</strong></p>
                   <ul class="pl-5 list-none space-y-1">
                     <?php foreach ($lampiran as $lamp) : ?>
-                      <li class="flex gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-green-600">
-                          <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
-                        </svg>
-                        <a href="<?= $lamp['link'] ?>" target="_blank">
+                      <li>
+                        <a href="<?= $lamp['link'] ?>" target="_blank" class="flex items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-blue-600">
+                            <path fill-rule="evenodd" d="M15.75 2.25H21a.75.75 0 0 1 .75.75v5.25a.75.75 0 0 1-1.5 0V4.81L8.03 17.03a.75.75 0 0 1-1.06-1.06L19.19 3.75h-3.44a.75.75 0 0 1 0-1.5Zm-10.5 4.5a1.5 1.5 0 0 0-1.5 1.5v10.5a1.5 1.5 0 0 0 1.5 1.5h10.5a1.5 1.5 0 0 0 1.5-1.5V10.5a.75.75 0 0 1 1.5 0v8.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V8.25a3 3 0 0 1 3-3h8.25a.75.75 0 0 1 0 1.5H5.25Z" clip-rule="evenodd" />
+                          </svg>
                           <?= $lamp['judul'] ?>
                         </a>
                       </li>

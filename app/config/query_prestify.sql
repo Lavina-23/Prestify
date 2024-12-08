@@ -60,7 +60,9 @@ CREATE TABLE PRESTASI (
 
 ALTER TABLE PRESTASI ADD tahun_akademik VARCHAR(20), semester VARCHAR(50);
 ALTER TABLE PRESTASI ADD status_prestasi VARCHAR(50);
-ALTER TABLE PRESTASI ALTER COLUMN status_prestasi BIT;
+ALTER TABLE PRESTASI ADD created_at DATETIME;
+ALTER TABLE Prestasi
+ADD CONSTRAINT DF_created_at DEFAULT GETDATE() FOR created_at;
 
 CREATE TABLE MAPRES (
     mapres_id VARCHAR(50) PRIMARY KEY,
@@ -122,9 +124,6 @@ DELETE FROM PRESTASI;
 DELETE FROM MAPRES;
 DELETE FROM DOSPEM;
 
-SELECT * FROM PRESTASI;
-SELECT * FROM MAPRES;
-SELECT * FROM DOSPEM;
 
 SELECT * FROM 
 PRESTASI p 
@@ -167,3 +166,23 @@ DROP CONSTRAINT FK__DOSPEM__prestasi__4AB81AF0;
 ALTER TABLE DOSPEM 
 ADD CONSTRAINT FK__DOSPEM__prestasi__4AB81AF0 
 FOREIGN KEY (prestasi_id) REFERENCES PRESTASI(prestasi_id) ON DELETE CASCADE;
+
+SELECT * FROM MAPRES m INNER JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id INNER JOIN PENGGUNA p ON p.pengguna_id = mh.pengguna_id WHERE m.prestasi_id = 'PRS03';
+
+SELECT * FROM 
+              PRESTASI p 
+                INNER JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
+                INNER JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
+                INNER JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
+                INNER JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
+                WHERE mh.pengguna_id = 'PGN6';
+
+				SELECT * FROM 
+              PRESTASI p 
+                INNER JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
+
+UPDATE MAPRES SET mahasiswa_id = 'MHS2' WHERE mapres_id = 'MPR13';
+
+SELECT * FROM PRESTASI;
+SELECT * FROM MAPRES;
+SELECT * FROM DOSPEM;

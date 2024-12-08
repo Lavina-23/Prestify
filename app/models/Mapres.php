@@ -37,4 +37,18 @@ class Mapres extends BaseModel
     $this->db->execute();
     return $this->db->rowCount();
   }
+
+  public function updateDataMapres($data)
+  {
+    $mhsId = $this->getMhsIdByName($data['nama']);
+    $query = "UPDATE MAPRES SET mahasiswa_id = :mhsId, peran = :peranMhs WHERE mapres_id = :mapresId";
+
+    $this->db->query($query);
+    $this->db->bind(":mhsId", $mhsId);
+    $this->db->bind(':mapresId', $data['mapres_id']);
+    $this->db->bind(':peranMhs', $data['peran']);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
 }
