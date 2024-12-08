@@ -251,7 +251,7 @@ class PrestasiController extends Controller
       ];
 
       for ($i = 0; $i < count($dataDospem['nama']); $i++) {
-        if (!empty($dataDospem['dospem_id'])) {
+        if (!empty($dataDospem['dospem_id'][$i])) {
           $this->model('Dospem')->updateDataDospem([
             'dospem_id' => $dataDospem['dospem_id'][$i],
             'nama' => $dataDospem['nama'][$i],
@@ -259,7 +259,6 @@ class PrestasiController extends Controller
           ]);
         } else {
           $this->model('Dospem')->addDataDospem($presId, [
-            'dospem_id' => $dataDospem['dospem_id'][$i],
             'nama' => $dataDospem['nama'][$i],
             'peran' => $dataDospem['peran'][$i]
           ]);

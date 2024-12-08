@@ -47,9 +47,13 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
           <label for="tingkat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tingkat</label>
           <select name="tingkat" id="tingkat" class="w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
             <?php foreach ($tingkat as $ting) : ?>
-              <option value="<?= $ting ?>" <?= ($ting == $data['prestasi']['tingkat']) ? 'selected' : '' ?>><?= $ting ?></option>
+              <option value="<?= $ting ?>"
+                <?= (isset($data['prestasi']['tingkat']) && $ting == $data['prestasi']['tingkat']) ? 'selected' : '' ?>>
+                <?= $ting ?>
+              </option>
             <?php endforeach; ?>
           </select>
+
         </div>
 
         <!-- Nama Kompetisi -->
@@ -239,7 +243,6 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
     </div>
   </div>
 
-
   <!-- Form Input Data Dospem -->
   <div class="flex gap-5 mt-5">
     <div>
@@ -256,7 +259,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
               <!-- input nama dospem -->
               <div class="fieldNama grid w-full" data-type="dospem">
                 <label for="dospem" class="block mb-2 text-sm font-medium text-gray-900">Dosen</label>
-                <input type="hidden" name="dospemId" value="<?= $dospem['dospem_id'] ?>">
+                <input type="hidden" id="dospemId<?= $i ?>" name="dospemId[]" value="<?= $dospem['dospem_id'] ?>">
                 <input type="text" id="namaDospem<?= $i ?>" name="namaDospem[]" value="<?= $dospem['nama'] ?>" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
                 <div class="dropdownNama absolute mt-20 z-10 hidden cursor-pointer bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
                 </div>
@@ -267,7 +270,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
                 <label for="peran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
                 <select name="peranDospem[]" id="peran" class="peranDospem w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
                   <?php foreach ($listPeranDsn as $peran) : ?>
-                    <option value="<?= $dospem['peran'] ?>" <?= ($dospem['peran'] == $peran) ? 'selected' : '' ?>><?= $peran ?></option>
+                    <option value="<?= $peran ?>" <?= ($peran == $dospem['peran']) ? 'selected' : '' ?>><?= $peran ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
