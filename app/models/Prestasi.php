@@ -137,4 +137,13 @@ class Prestasi extends BaseModel
   {
     $query = "SELECT COUNT(*) FROM " . $this->table . " WHERE created_at >= DATEADD(DAY, -7, GETDATE())";
   }
+
+  public function getReport()
+  {
+    $query = "SELECT * FROM " . $this->table . " ORDER BY prestasi_id DESC";
+
+    $this->db->query($query);
+    $this->db->execute();
+    return $this->db->resultSet();
+  }
 }

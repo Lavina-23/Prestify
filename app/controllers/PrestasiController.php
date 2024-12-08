@@ -1,5 +1,7 @@
 <?php
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 class PrestasiController extends Controller
 {
   public function index()
@@ -280,6 +282,86 @@ class PrestasiController extends Controller
   {
     if ($this->model('Prestasi')->updateVerif($presId)) {
       header('Location:' . getMenu($_SESSION['level_id'], 'menu3')['route']);
+      exit;
+    }
+  }
+
+  public function exportReport()
+  {
+    require_once '../vendor/autoload.php';
+
+    $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+
+    if (isset($_POST['export'])) {
+      $file = new Spreadsheet();
+      $activeSheet = $file->getActiveSheet();
+
+      $reportDatas['kompetisi'] = $this->model('Prestasi')->getAllDataPrestasi()['results'];
+
+      foreach ($reportDatas['kompetisi'] as &$prestasi) {
+        $presId = $prestasi['prestasi_id'];
+        $prestasi['mapres'] = $this->model('Mapres')->getDataMapres($presId);
+        $prestasi['dospem'] = $this->model('Dospem')->getDataDospem($presId);
+      }
+
+      if (empty($reportDatas['kompetisi'])) {
+        die('No data to export.');
+      }
+
+      $activeSheet->setCellValue('A1', 'ID');
+      $activeSheet->setCellValue('B1', 'Nama Prestasi');
+      $activeSheet->setCellValue('C1', 'Kategori');
+      $activeSheet->setCellValue('D1', 'Tingkat');
+      $activeSheet->setCellValue('E1', 'Juara');
+      $activeSheet->setCellValue('F1', 'Penyelenggara');
+      $activeSheet->setCellValue('G1', 'Tempat');
+      $activeSheet->setCellValue('H1', 'Mahasiswa');
+      $activeSheet->setCellValue('I1', 'Dosen Pembimbing');
+
+      $row = 2;
+      foreach ($reportDatas['kompetisi'] as $prestasi) {
+        $activeSheet->setCellValue('A' . $row, $prestasi['prestasi_id']);
+        $activeSheet->setCellValue('B' . $row, $prestasi['nama_prestasi']);
+        $activeSheet->setCellValue('C' . $row, $prestasi['nama_kategori']);
+        $activeSheet->setCellValue('D' . $row, $prestasi['tingkat']);
+        $activeSheet->setCellValue('E' . $row, $prestasi['peringkat']);
+        $activeSheet->setCellValue('F' . $row, $prestasi['penyelenggara']);
+        $activeSheet->setCellValue('G' . $row, $prestasi['tempat_kompetisi']);
+
+        $activeSheet->setCellValue('H' . $row, "- " . implode("\n- ", array_column($prestasi['mapres'], 'nama')));
+        $activeSheet->getStyle('H' . $row)->getAlignment()->setWrapText(true);
+
+        $activeSheet->setCellValue('I' . $row, "- " . implode("\n- ", array_column($prestasi['dospem'], 'nama')));
+        $activeSheet->getStyle('I' . $row)->getAlignment()->setWrapText(true);
+        $row++;
+      }
+
+      $activeSheet->getColumnDimension('A')->setAutoSize(true);
+      $activeSheet->getColumnDimension('B')->setAutoSize(true);
+      $activeSheet->getColumnDimension('C')->setAutoSize(true);
+      $activeSheet->getColumnDimension('D')->setAutoSize(true);
+      $activeSheet->getColumnDimension('E')->setAutoSize(true);
+      $activeSheet->getColumnDimension('F')->setAutoSize(true);
+      $activeSheet->getColumnDimension('G')->setAutoSize(true);
+      $activeSheet->getColumnDimension('H')->setAutoSize(true);
+      $activeSheet->getColumnDimension('I')->setAutoSize(true);
+
+      $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($file, 'Xls');
+      $fileName = 'laporan_prestasi_' . time() . '.xls';
+
+      try {
+        $writer->save($fileName);
+      } catch (\Exception $e) {
+        die('Error writing file: ' . $e->getMessage());
+      }
+
+      header('Content-Type: application/vnd.ms-excel');
+      header('Content-Transfer-Encoding: Binary');
+      header('Cache-Control: max-age=0');
+      header("Content-disposition: attachment; filename=\"" . $fileName . "\"");
+
+      readfile($fileName);
+      unlink($fileName);
       exit;
     }
   }
