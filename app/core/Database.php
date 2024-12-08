@@ -37,6 +37,8 @@ class Database
 
   public function bind($param, $value, $type = null)
   {
+    // var_dump($param, $value, $type);
+    // exit;
     if (is_null($type)) {
       switch (true) {
         case is_int($value):
@@ -47,6 +49,7 @@ class Database
           break;
         case is_null($value):
           $type = PDO::PARAM_NULL;
+          break;
         default:
           $type = PDO::PARAM_STR;
           break;

@@ -17,10 +17,12 @@ class UserController extends Controller
         $_SESSION['nama'] = $user['nama'];
         $_SESSION['level_id'] = $user['level_id'];
 
-        if ($_SESSION['level_id'] == 'LVL2') {
-          $this->renderDashboard("admin/page/index", $user);
+        if ($_SESSION['level_id'] == 'LVL1') {
+          header("Location: " . env('BASEURL') . "/superadmin/index");
+        } else if ($_SESSION['level_id'] == 'LVL2') {
+          header("Location: " . env('BASEURL') . "/admin/index");
         } else if ($_SESSION['level_id'] == 'LVL3') {
-          $this->renderDashboard("mahasiswa/page/index", $user);
+          header("Location: " . env('BASEURL') . "/mahasiswa/index");
         } else {
           echo "You are not allowed to access this page";
         }
@@ -33,6 +35,7 @@ class UserController extends Controller
 
     $this->render("login");
   }
+
 
   public function logout()
   {
