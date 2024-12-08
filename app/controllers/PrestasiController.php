@@ -17,7 +17,6 @@ class PrestasiController extends Controller
     foreach ($dataPrestasi['kompetisi'] as $pres) {
       $prestasiId = $pres['prestasi_id'];
 
-      // Simpan data mapres dan dospem berdasarkan prestasi_id
       $dataPrestasi['mapres'][$prestasiId] = $this->model('Mapres')->getDataMapres($prestasiId);
       $dataPrestasi['dospem'][$prestasiId] = $this->model('Dospem')->getDataDospem($prestasiId);
     }
@@ -63,6 +62,9 @@ class PrestasiController extends Controller
 
     if (isset($presId)) {
       $data['prestasi'] = $this->model('Prestasi')->getDataById('prestasi_id', $presId);
+      $data['mapres'] = $this->model('Mapres')->getDataMapres($presId);
+      $data['dospem'] = $this->model('Dospem')->getDataDospem($presId);
+
       $this->view("prestasi/formPrestasi", $data);
     } else {
       $this->view("prestasi/formPrestasi");
@@ -79,8 +81,8 @@ class PrestasiController extends Controller
 
       echo '<ul class="text-sm text-gray-900" aria-labelledby="dropdownDefaultButton">';
       foreach ($datas as $data) {
-        echo '<li>';
-        echo '<button type="button" onclick="setNamaMhsId(' . $data["mahasiswa_id"] . ')" data-id="' . $data['mahasiswa_id'] . '" class="w-full text-left block px-4 py-1 hover:bg-gray-100">' . $data['nama'] . '</button>';
+        echo '<li class="dropdown-item">';
+        echo '<a class="block px-4 py-1 hover:bg-gray-100 cursor-pointer">' . htmlspecialchars($data['nama'], ENT_QUOTES, 'UTF-8') . '</a>';
         echo '</li>';
       }
       echo '</ul>';
@@ -221,30 +223,47 @@ class PrestasiController extends Controller
       $allDataKompetisi = array_merge($dataKompetisi, $dataFiles);
       $this->model('Prestasi')->updateData('PRESTASI', $allDataKompetisi, 'prestasi_id', $presId);
 
-      $this->model('Mapres')->deleteData('prestasi_id', $presId);
       $dataMapres = [
+        'mapres_id' => $_POST['mapresId'] ?? [],
         'nama' => $_POST['namaMhs'] ?? [],
         'peran' => $_POST['peranMhs'] ?? []
       ];
 
       for ($i = 0; $i < count($dataMapres['nama']); $i++) {
-        $this->model('Mapres')->addDataMapres($presId, [
-          'nama' => $dataMapres['nama'][$i],
-          'peran' => $dataMapres['peran'][$i]
-        ]);
+        if (!empty($dataMapres['mapres_id'][$i])) {
+          $this->model('Mapres')->updateDataMapres([
+            'mapres_id' => $dataMapres['mapres_id'][$i],
+            'nama' => $dataMapres['nama'][$i],
+            'peran' => $dataMapres['peran'][$i]
+          ]);
+        } else {
+          $this->model('Mapres')->addDataMapres($presId, [
+            'nama' => $dataMapres['nama'][$i],
+            'peran' => $dataMapres['peran'][$i]
+          ]);
+        }
       }
 
-      $this->model('Dospem')->deleteData('prestasi_id', $presId);
       $dataDospem = [
+        'dospem_id' => $_POST['dospemId'],
         'nama' => $_POST['namaDospem'] ?? [],
         'peran' =>  $_POST['peranDospem'] ?? []
       ];
 
       for ($i = 0; $i < count($dataDospem['nama']); $i++) {
-        $this->model('Dospem')->addDataDospem($presId, [
-          'nama' => $dataDospem['nama'][$i],
-          'peran' => $dataDospem['peran'][$i]
-        ]);
+        if (!empty($dataDospem['dospem_id'])) {
+          $this->model('Dospem')->updateDataDospem([
+            'dospem_id' => $dataDospem['dospem_id'][$i],
+            'nama' => $dataDospem['nama'][$i],
+            'peran' => $dataDospem['peran'][$i]
+          ]);
+        } else {
+          $this->model('Dospem')->addDataDospem($presId, [
+            'dospem_id' => $dataDospem['dospem_id'][$i],
+            'nama' => $dataDospem['nama'][$i],
+            'peran' => $dataDospem['peran'][$i]
+          ]);
+        }
       }
 
       header('Location:' . env('BASEURL') . '/prestasi');

@@ -47,11 +47,10 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
           <label for="tingkat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tingkat</label>
           <select name="tingkat" id="tingkat" class="w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
             <?php foreach ($tingkat as $ting) : ?>
-              <option value="<?= $ting ?>"><?= $ting ?></option>
+              <option value="<?= $ting ?>" <?= ($ting == $data['prestasi']['tingkat']) ? 'selected' : '' ?>><?= $ting ?></option>
             <?php endforeach; ?>
           </select>
         </div>
-
 
         <!-- Nama Kompetisi -->
         <div class="grid w-full">
@@ -95,7 +94,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
               </svg>
             </div>
-            <input type="text" name="tanggal_mulai" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<?= $data['prestasi']['tanggal_mulai'] ??'Tanggal Awal'?>">
+            <input type="text" name="tanggal_mulai" value="<?= isset($data['prestasi']['tanggal_mulai']) ? date('m/d/Y', strtotime($data['prestasi']['tanggal_mulai'])) : 'Tanggal Mulai' ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder='Tanggal Awal'>
           </div>
           <span class="mx-2 text-gray-500 dark:text-gray-400">hingga</span>
           <div class="relative w-full">
@@ -104,7 +103,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
               </svg>
             </div>
-            <input name="tanggal_selesai" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<?= $data['prestasi']['tanggal_selesai'] ??'Tanggal Selesai'?>">
+            <input type="text" name="tanggal_selesai" value="<?= isset($data['prestasi']['tanggal_selesai']) ? date('m/d/Y', strtotime($data['prestasi']['tanggal_selesai'])) : 'Tanggal Selesai' ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder='Tanggal Selesai'>
           </div>
         </div>
       </div>
@@ -136,7 +135,7 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
               </svg>
             </div>
-            <input datepicker id="default-datepicker" name="tanggal_surat" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<?= $data['prestasi']['tanggal_surat'] ??'Select date'?>">
+            <input datepicker id="default-datepicker" name="tanggal_surat" type="text" value="<?= isset($data['prestasi']['tanggal_Surat']) ? date('m/d/Y', strtotime($data['prestasi']['tanggal_Surat'])) : 'Tanggal Surat' ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
           </div>
         </div>
       </div>
@@ -179,37 +178,67 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
     </div>
 
     <div class="w-full">
-      <div id="containerMD">
-        <div class="inputGroup mt-5 flex justify-between gap-4 items-end">
-          <!-- input nama mahasiswa -->
-          <div class="fieldNama grid w-full" data-type="mahasiswa">
-            <label for="mahasiswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mahasiswa</label>
-            <input type="text" id="namaMhs" name="namaMhs[]" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
-            <div class="dropdownNama absolute mt-20 z-10 hidden cursor-pointer bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
+      <div id="containerMapres">
+        <?php if (!empty($data['mapres'])) : ?>
+          <?php foreach ($data['mapres'] as $i => $mapres) : ?>
+            <div class="inputGroup mt-5 flex justify-between gap-4 items-end">
+              <!-- input nama mahasiswa -->
+              <div class="fieldNama grid w-full" data-type="mahasiswa">
+                <label for="mahasiswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mahasiswa</label>
+                <input type="hidden" id="mapresId<?= $i ?>" name="mapresId[]" value="<?= $mapres['mapres_id'] ?>">
+                <input type="text" id="namaMhs<?= $i ?>" name="namaMhs[]" value="<?= $mapres['nama'] ?>" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
+                <div class="dropdownNama absolute mt-20 z-10 hidden cursor-pointer bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
+                </div>
+              </div>
+
+              <div class="grid">
+                <label for="peran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
+                <select name="peranMhs[]" id="peran" class="peranMhs w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
+                  <?php foreach ($listPeranMhs as $peran) : ?>
+                    <option value="<?= $peran ?>" <?= ($peran == $mapres['peran']) ? 'selected' : '' ?>><?= $peran ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+
+              <!-- button remove input field -->
+              <div>
+                <button type="button" class="btnRemove text-xl focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-3.5 py-1.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">×</button>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        <?php else : ?>
+          <div class="inputGroup mt-5 flex justify-between gap-4 items-end">
+            <!-- input nama mahasiswa -->
+            <div class="fieldNama grid w-full" data-type="mahasiswa">
+              <label for="mahasiswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mahasiswa</label>
+              <input type="text" name="namaMhs[]" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
+              <div class="dropdownNama absolute mt-20 z-10 hidden cursor-pointer bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
+              </div>
+            </div>
+
+            <!-- dropdown peran -->
+            <div class="grid">
+              <label for="peran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
+              <select name="peranMhs[]" id="peran" class="peranMhs w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
+                <?php foreach ($listPeranMhs as $peran) : ?>
+                  <option><?= $peran ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+
+            <!-- button remove input field -->
+            <div>
+              <button type="button" class="btnRemove text-xl focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-3.5 py-1.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">×</button>
             </div>
           </div>
-
-          <!-- dropdown peran -->
-          <div class="grid">
-            <label for="peran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
-            <select name="peranMhs[]" id="peran" class="peranMhs w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
-              <?php foreach ($listPeranMhs as $peran) : ?>
-                <option><?= $peran ?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-
-          <!-- button remove input field -->
-          <div>
-            <button type="button" class="btnRemove text-xl focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-3.5 py-1.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">×</button>
-          </div>
-        </div>
+        <?php endif; ?>
       </div>
 
       <!-- button tambah mahasiswa -->
-      <button id="btnAddInput" type="button" class="mt-5 text-sm focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-3.5 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">+ Tambah Mahasiswa</button>
+      <button type="button" data-target="containerMapres" class="btnAddInput mt-3 text-sm focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-3.5 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">+ Tambah Mahasiswa</button>
     </div>
   </div>
+
 
   <!-- Form Input Data Dospem -->
   <div class="flex gap-5 mt-5">
@@ -220,35 +249,68 @@ $listPeranDsn = array("Melakukan pembinaan kegiatan mahasiswa di bidang akademik
     </div>
 
     <div class="w-full">
-      <div id="containerMD">
-        <div class="inputGroup mt-5 flex justify-between gap-4 items-end">
-          <!-- input nama dospem -->
-          <div class="fieldNama grid w-full" data-type="dospem">
-            <label for="dospem" class="block mb-2 text-sm font-medium text-gray-900">Dosen</label>
-            <input type="text" id="namaDospem" name="namaDospem[]" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
-            <div class="dropdownNama absolute mt-20 z-10 hidden cursor-pointer bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
+      <div id="containerDospem">
+        <?php if (!empty($data['dospem'])) : ?>
+          <?php foreach ($data['dospem'] as $i => $dospem) : ?>
+            <div class="inputGroup mt-5 flex justify-between gap-4 items-end">
+              <!-- input nama dospem -->
+              <div class="fieldNama grid w-full" data-type="dospem">
+                <label for="dospem" class="block mb-2 text-sm font-medium text-gray-900">Dosen</label>
+                <input type="hidden" name="dospemId" value="<?= $dospem['dospem_id'] ?>">
+                <input type="text" id="namaDospem<?= $i ?>" name="namaDospem[]" value="<?= $dospem['nama'] ?>" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
+                <div class="dropdownNama absolute mt-20 z-10 hidden cursor-pointer bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
+                </div>
+              </div>
+
+              <!-- dropdown peran -->
+              <div class="grid">
+                <label for="peran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
+                <select name="peranDospem[]" id="peran" class="peranDospem w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
+                  <?php foreach ($listPeranDsn as $peran) : ?>
+                    <option value="<?= $dospem['peran'] ?>" <?= ($dospem['peran'] == $peran) ? 'selected' : '' ?>><?= $peran ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+
+              <!-- button remove input field -->
+              <div>
+                <button type="button" class="btnRemove text-xl focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-3.5 py-1.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">×</button>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        <?php else : ?>
+          <div class="inputGroup mt-5 flex justify-between gap-4 items-end">
+            <!-- input nama dospem -->
+            <div class="fieldNama grid w-full" data-type="dospem">
+              <label for="dospem" class="block mb-2 text-sm font-medium text-gray-900">Dosen</label>
+              <input type="text" id="namaDospem" name="namaDospem[]" class="searchNama w-full text-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
+              <div class="dropdownNama absolute mt-20 z-10 hidden cursor-pointer bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
+              </div>
+            </div>
+
+            <!-- dropdown peran -->
+            <div class="grid">
+              <label for="peran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
+              <select name="peranDospem[]" id="peran" class="peranDospem w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
+                <?php foreach ($listPeranDsn as $peran) : ?>
+                  <option><?= $peran ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+
+            <!-- button remove input field -->
+            <div>
+              <button type="button" class="btnRemove text-xl focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-3.5 py-1.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">×</button>
             </div>
           </div>
-
-          <!-- dropdown peran -->
-          <div class="grid">
-            <label for="peran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Peran</label>
-            <select name="peranDospem[]" id="peran" class="peranDospem w-44 text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center justify-between focus:ring-0 focus:ring-transparent">
-              <?php foreach ($listPeranDsn as $peran) : ?>
-                <option><?= $peran ?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-
-          <!-- button remove input field -->
-          <div>
-            <button type="button" class="btnRemove text-xl focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-3.5 py-1.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">×</button>
-          </div>
-        </div>
+        <?php endif; ?>
       </div>
-      <button id="btnAddInput" type="button" class="mt-5 text-sm focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-3.5 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">+ Tambah Dosen</button>
+
+      <!-- button tambah dospem -->
+      <button type="button" data-target="containerDospem" class="btnAddInput mt-3 text-sm focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-3.5 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">+ Tambah Dospem</button>
     </div>
   </div>
+
 
   <div class="w-full flex justify-end mt-10">
     <button type="submit" class="text-white bg-gray-900 hover:bg-gray-800 font-medium rounded-lg text-md w-32 px-3.5 py-1.5 text-center">Save</button>

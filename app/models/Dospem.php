@@ -37,4 +37,17 @@ class Dospem extends BaseModel
     $this->db->execute();
     return $this->db->rowCount();
   }
+
+  public function updateDataDospem($data)
+  {
+    $dosenId = $this->getDsnIdByName($data['nama']);
+    $query = "UPDATE DOSPEM SET dosen_id = :dosenId WHERE dospem_id = :dospemId";
+
+    $this->db->query($query);
+    $this->db->bind(":dosenId", $dosenId);
+    $this->db->bind(':dospemId', $data['dospem_id']);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
 }

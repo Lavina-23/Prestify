@@ -6,6 +6,7 @@ class MahasiswaController extends Controller
   {
     if (isset($_SESSION['user_id']) && $_SESSION['level_id'] == 'LVL3') {
       $data['nama'] = $_SESSION['nama'] ?? 'Champion';
+      // $data['statistik'] = $this->model('Prestasi')->;
       $this->renderDashboard("mahasiswa/index", $data);
     } else {
       header("Location:" . env("BASEURL") . "/user/login");

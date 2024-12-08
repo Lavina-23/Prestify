@@ -30,22 +30,19 @@ $(document).ready(function () {
   $(document).on("click", ".dropdownNama li", function () {
     var listNama = $(this);
     var parent = listNama.closest(".fieldNama");
-    var input = parent.find(".searchNama");
-    var dropdown = parent.find(".dropdownNama");
+    var input = parent.find("input.searchNama");
 
-    input.val(listNama.text());
-    dropdown.hide();
-  });
-
-  // handle value kategori prestasi
-  $(".btnKategori").click(function () {
-    const jenis = $(this).data("jenis");
-    setKategori(jenis);
+    input.val(listNama.text().trim());
+    parent.find(".dropdownNama").hide();
   });
 
   // handle tambah input field
-  $("#btnAddInput").on("click", function () {
-    let newInput = $(".inputGroup").first().clone();
+  $(".btnAddInput").on("click", function () {
+    let containerId = $(this).data("target");
+    let newInput = $("#" + containerId)
+      .find(".inputGroup")
+      .last()
+      .clone();
 
     newInput.find("input").val("");
     newInput.find("select").prop("selectedIndex", 0);
@@ -54,7 +51,14 @@ $(document).ready(function () {
       $(this).closest(".inputGroup").remove();
     });
 
-    $("#containerMD").append(newInput);
+    newInput.show();
+    $("#" + containerId).append(newInput);
+  });
+
+  // handle value kategori prestasi
+  $(".btnKategori").click(function () {
+    const jenis = $(this).data("jenis");
+    setKategori(jenis);
   });
 });
 
