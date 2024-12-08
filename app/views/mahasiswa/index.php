@@ -1,14 +1,14 @@
 <div class="grid h-full md:h-screen w-full p-10" style="max-width: 844px">
   <div class="grid md:flex items-center justify-between h-24">
     <div>
-      <h1 class="text-5xl font-bold text-gray-900">Halo <?= $data['nama'] ?> !</h1>
+      <h1 class="text-4xl lg:text-5xl font-bold text-gray-900">Halo <?= $data['nama'] ?> !</h1>
       <p class="text-sm font-normal text-gray-500 mt-1">Sudahkah Anda sholat ?</p>
     </div>
   </div>
 
   <hr class="my-5">
 
-  <div class="flex gap-2 w-full">
+  <div class="flex flex-col lg:flex-row gap-2 w-full">
     <a href="#"
       class="flex gap-4 items-center w-full p-4 bg-white rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
       <div class="bg-blue-100 rounded-full p-3">
