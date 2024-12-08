@@ -1,4 +1,4 @@
-<div class="fixed top-0 right-0 hidden w-auto max-w-sm md:grid p-5 h-screen border-2 border-gray-200">
+<div class="fixed top-0 right-0 hidden w-auto bg-white xl:w-1 lg:grid p-5 h-screen border-2 border-gray-200">
   <div class="flex flex-col justify-between overflow-y-auto h-auto">
     <div class="rounded-xl bg-gray-50 p-5 w-72">
       <div class="flex justify-end">

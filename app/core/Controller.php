@@ -13,15 +13,16 @@ class Controller
     return new $model;
   }
 
-  public function render($view)
+  public function render($view, $data = [])
   {
     $this->view("layout/header");
-    $this->view($view);
+    $this->view($view, $data);
     $this->view("layout/footer");
   }
 
   public function renderDashboard($view, $data = [])
   {
+    $this->view("layout/header");
     $this->view("layout/sidebar");
     $this->view($view, $data);
     $this->view("layout/profile", $data);

@@ -4,6 +4,7 @@ class HomeController extends Controller
 {
   public function index()
   {
+    $this->view("layout/header");
     $this->view("layout/navbar");
     $this->view("home/index");
     $this->view("layout/footer");
