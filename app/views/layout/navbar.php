@@ -56,7 +56,7 @@
           </a>
         <?php else: ?>
           <a href="<?php echo env("BASEURL") ?>/user/login">
-            <button class="text-white bg-gray-900 font-medium rounded-lg text-sm px-6 py-2 text-center border-2 border-transparent hover:bg-white hover:text-gray-900 hover:border-2 hover:border-gray-900">Login</button>
+            <button class="text-white bg-gray-900 font-medium rounded-lg text-sm px-6 py-2 text-center border-2 border-transparent hover:bg-white hover:text-gray-900 hover:border-2 hover:border-gray-900">Get started</button>
           </a>
         <?php endif; ?>
         <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">

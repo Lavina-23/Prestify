@@ -1,30 +1,4 @@
 <section class="max-container">
-
-  <head>
-    <style>
-      .nav-link {
-        font-size: 18px;
-        color: black;
-        text-decoration: none;
-        font-weight: bold;
-        padding: 10px;
-        transition: color 0.3s ease;
-      }
-
-      /* Gaya tombol saat aktif */
-      .nav-link.active {
-        color: yellow;
-        /* Warna aktif */
-      }
-
-      /* Efek hover */
-      .nav-link:hover {
-        color: gray;
-      }
-    </style>
-  </head>
-
-
   <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16">
     <div class="flex flex-col justify-center gap-4">
       <h1 class="text-4xl font-rubik font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Welcome Champion!</h1>
@@ -50,77 +24,31 @@
 <!-- Bagian leaderboard -->
 <div id="leaderboard" class="min-h-screen flex justify-center items-center p-6">
   <div class="w-full max-w-6xl">
-    <!-- Navigation Tabs -->
-    <div class="flex justify-center space-x-6 p-6"></div>
-
     <!-- Top Leaderboard Section -->
-    <div class="flex gap-6 items-center justify-center p-6 bg-white rounded-xl shadow-lg">
-      <!-- Second Place (Silver) -->
-      <div class="w-fit h-fit grid gap-5 justify-items-center p-10 bg-purple-100 rounded-lg shadow-md">
-        <div class="text-lg font-bold bg-purple-400 text-white py-1 px-2 rounded-md">2nd Place</div> <!-- Keterangan peringkat -->
-        <img class="rounded-t-lg w-32" src="<?= env('BASEURL') ?>/img/person2.png" alt="" />
-        <div class="grid justify-items-center">
-          <h5 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">Muhammad Hasan</h5>
-          <h1 class="font-bold text-3xl text-purple-400">8 Kejuaraan</h1>
-        </div>
-      </div>
+    <div class="flex gap-16 items-center justify-center p-10 bg-white rounded-xl shadow-lg">
+      <?php
+      $ranks = ['2nd Place', '1st Place', '3rd Place'];
+      $colors = ['purple', 'yellow', 'emerald'];
+      $imageUrls = ['/img/person2.png', '/img/person1.png', '/img/person4.png'];
+      ?>
 
-      <!-- First Place (Gold) -->
-      <div class="w-fit h-fit grid gap-5 justify-items-center p-10 bg-yellow-100 rounded-lg shadow-md">
-        <div class="text-lg font-bold bg-yellow-400 text-white py-1 px-2 rounded-md">1st Place</div> <!-- Keterangan peringkat -->
-        <img class="rounded-t-lg w-52" src="<?= env('BASEURL') ?>/img/person1.png" alt="" />
-        <div class="grid justify-items-center">
-          <h5 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">Lavina</h5>
-          <h1 class="font-bold text-4xl text-yellow-400">10 Kejuaraan</h1>
+      <?php foreach ($data['leaderboard'] as $i => $mapres):
+      ?>
+        <div class="max-w-fit h-fit grid gap-5 justify-items-center p-10 bg-<?= $colors[$i] ?>-100 rounded-lg shadow-xl">
+          <div class="text-lg font-bold text-<?= $colors[$i] ?>-100 bg-<?= $colors[$i] ?>-400 text-white py-1 px-2 rounded-md">
+            <?= $ranks[$i] ?>
+          </div>
+          <img class="rounded-t-lg w-<?= $i % 2 == 0 ? '32' : '52' ?>" src="<?= env('BASEURL') . $imageUrls[$i] ?>" alt="" />
+          <div class="grid justify-items-center">
+            <h5 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white"><?= $mapres['nama_mahasiswa'] ?></h5>
+            <h1 class="font-bold text-<?= $i % 2 == 0 ? '3xl' : '4xl' ?> text-<?= $colors[$i] ?>-400"><?= $mapres['jumlah_prestasi'] ?> Kejuaraan</h1>
+          </div>
         </div>
-      </div>
-
-      <!-- Third Place (Bronze) -->
-      <div class="w-fit h-fit grid gap-5 justify-items-center p-10 bg-emerald-100 rounded-lg shadow-md">
-        <div class="text-lg font-bold bg-emerald-400 text-white py-1 px-2 rounded-md">3rd Place</div> <!-- Keterangan peringkat -->
-        <img class="rounded-t-lg w-32" src="<?= env('BASEURL') ?>/img/person4.png" alt="" />
-        <div class="grid justify-items-center">
-          <h5 class="text-lg font-semibold tracking-tight text-gray-900">Muhammad Husein</h5>
-          <h1 class="font-bold text-3xl text-emerald-400">5 Kejuaraan</h1>
-        </div>
-      </div>
+      <?php endforeach; ?>
     </div>
-
-    <!-- Lower Leaderboard Section
-    <div class="bg-white rounded-lg shadow-lg p-6 mt-6">
-      <table class="w-full text-left border-collapse">
-        <thead class="text-gray-500 border-b border-gray-300">
-          <tr>
-            <th class="py-2 px-4">Place</th>
-            <th class="px-4">Username</th>
-            <th class="px-4">Points</th>
-            <th class="px-4">Prize</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="hover:bg-gray-100">
-            <td class="py-2 px-4">4</td>
-            <td>Protesian</td>
-            <td>156</td>
-            <td>750</td>
-          </tr>
-          <tr class="hover:bg-gray-100">
-            <td class="py-2 px-4">5</td>
-            <td>NovaCrush</td>
-            <td>145</td>
-            <td>500</td>
-          </tr>
-          <tr class="hover:bg-gray-100">
-            <td class="py-2 px-4">6</td>
-            <td>AsteroidHunter</td>
-            <td>130</td>
-            <td>250</td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
   </div>
 </div>
+
 
 <section id="competition" class="min-h-screen bg-gradient-to-br from-black-300 via-black-400 to-black-500 p-8">
   <div class="max-w-7xl mx-auto">

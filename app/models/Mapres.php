@@ -51,4 +51,13 @@ class Mapres extends BaseModel
 
     return $this->db->rowCount();
   }
+
+  public function getTopThreeMapres()
+  {
+    $query = "SELECT TOP 3 PG.nama AS nama_mahasiswa, COUNT(MP.prestasi_id) AS jumlah_prestasi, SUM(P.poin) AS total_poin FROM MAPRES MP JOIN MAHASISWA M ON M.mahasiswa_id = MP.mahasiswa_id JOIN PENGGUNA PG ON PG.pengguna_id = M.pengguna_id JOIN PRESTASI P ON P.prestasi_id = MP.prestasi_id GROUP BY PG.nama ORDER BY total_poin DESC";
+
+    $this->db->query($query);
+    $this->db->execute();
+    return $this->db->resultSet();
+  }
 }
