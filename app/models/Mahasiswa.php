@@ -13,4 +13,6 @@ class Mahasiswa extends BaseModel
 
     return $this->db->resultSet();
   }
+
+  public function findMahassiwaData($nama){}
 }
