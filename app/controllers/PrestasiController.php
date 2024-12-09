@@ -334,7 +334,7 @@ class PrestasiController extends Controller
       $activeSheet->setCellValue('I1', 'Dosen Pembimbing');
 
       $row = 2;
-      foreach ($reportDatas['kompetisi'] as $prestasi) {
+      foreach ($reportDatas['kompetisi'] as &$prestasi) {
         $activeSheet->setCellValue('A' . $row, $prestasi['prestasi_id']);
         $activeSheet->setCellValue('B' . $row, $prestasi['nama_prestasi']);
         $activeSheet->setCellValue('C' . $row, $prestasi['nama_kategori']);
@@ -345,7 +345,6 @@ class PrestasiController extends Controller
 
         $activeSheet->setCellValue('H' . $row, "- " . implode("\n- ", array_column($prestasi['mapres'], 'nama')));
         $activeSheet->getStyle('H' . $row)->getAlignment()->setWrapText(true);
-
         $activeSheet->setCellValue('I' . $row, "- " . implode("\n- ", array_column($prestasi['dospem'], 'nama')));
         $activeSheet->getStyle('I' . $row)->getAlignment()->setWrapText(true);
         $row++;
