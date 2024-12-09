@@ -282,7 +282,8 @@ class PrestasiController extends Controller
 
   public function isVerif($presId)
   {
-    if ($this->model('Prestasi')->updateVerif($presId)) {
+    $status = $_POST['status'];
+    if ($this->model('Prestasi')->updateVerif($presId, $status)) {
       header('Location:' . getMenu($_SESSION['level_id'], 'menu3')['route']);
       exit;
     }

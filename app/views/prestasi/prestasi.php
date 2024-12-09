@@ -52,10 +52,7 @@ foreach ($data['kompetisi'] as $kompetisi) {
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($data['kompetisi'] as $kompetisi) :
-          // var_dump($kompetisi);
-          // exit;
-        ?>
+        <?php foreach ($data['kompetisi'] as $kompetisi) : ?>
           <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
             <td class="px-6 py-4">
               <?= $kompetisi['prestasi_id'] ?>
@@ -69,8 +66,12 @@ foreach ($data['kompetisi'] as $kompetisi) {
             <td class="px-6 py-4">
               <?= $kompetisi['nama_kategori'] ?>
             </td>
-            <td class="px-6 py-4 <?= $kompetisi['status_prestasi'] == 1 ? "text-green-600" : "text-red-600" ?>">
-              <strong><?= $kompetisi['status_prestasi'] == 1 ? "Sudah Diverifikasi" : "Belum Diverifikasi" ?></strong>
+            <?php
+            $status['colors'] = $kompetisi['status_prestasi'] == 1 ? "text-green-600" : ($kompetisi['status_prestasi'] == 2 ? "text-red-600" : "text-yellow-600");
+            $status['label'] = $kompetisi['status_prestasi'] == 1 ? "Sudah Diverifikasi" : ($kompetisi['status_prestasi'] == 2 ? "Ditolak" : "Pending");
+            ?>
+            <td class="px-6 py-4 <?= $status['colors'] ?>">
+              <strong><?= $status['label'] ?></strong>
             </td>
             <td onclick="toggleDetailPrestasi('<?= $kompetisi['prestasi_id'] ?>')" class="px-6 py-4">
               <a href="#" class="flex gap-2 items-center font-medium text-gray-900 hover:underline">Detail
@@ -138,8 +139,12 @@ foreach ($data['kompetisi'] as $kompetisi) {
                       </a>
                     <?php endif; ?>
                     <?php if (($_SESSION['level_id'] == 'LVL1' || $_SESSION['level_id'] == 'LVL2') && $kompetisi['status_prestasi'] == 0) : ?>
-                      <a href="<?= env('BASEURL') ?>/prestasi/isVerif/<?= $kompetisi['prestasi_id'] ?>" onclick="return confirm('Yakin ingin memverifikasi data ini?');" class="flex items-center gap-2 w-fit px-5 py-2 rounded-lg bg-green-100 text-green-500">Verifikasi
-                      </a>
+                      <form action="<?= env('BASEURL') ?>/prestasi/isVerif/<?= $kompetisi['prestasi_id'] ?>" method="POST" class="flex gap-5">
+                        <button type="submit" name="status" value="2" onclick="return confirm('Yakin ingin menolak data ini?');" class="flex items-center gap-2 w-fit px-5 py-2 rounded-lg bg-red-100 text-red-500">Tolak
+                        </button>
+                        <button type="submit" name="status" value="1" onclick="return confirm('Yakin ingin memverifikasi data ini?');" class="flex items-center gap-2 w-fit px-5 py-2 rounded-lg bg-green-100 text-green-500">Verifikasi
+                        </button>
+                      </form>
                     <?php endif; ?>
                   </div>
                 </div>

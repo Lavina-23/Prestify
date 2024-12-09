@@ -109,12 +109,13 @@ class Prestasi extends BaseModel
     }
   }
 
-  public function updateVerif($id)
+  public function updateVerif($id, $status)
   {
-    $query = "UPDATE " . $this->table . " SET status_prestasi = 1 WHERE prestasi_id = :id";
+    $query = "UPDATE " . $this->table . " SET status_prestasi = :status WHERE prestasi_id = :id";
 
     $this->db->query($query);
     $this->db->bind(':id', $id);
+    $this->db->bind(':status', $status);
 
     $this->db->execute();
     return $this->db->rowCount();
