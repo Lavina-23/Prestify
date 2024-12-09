@@ -1,90 +1,284 @@
-<div class="grid h-full md:h-screen w-full p-10 pr-96">
-  <div class="grid md:flex items-center justify-between h-24">
+index
+
+<section class="max-container">
+  <head>
+    <style>
+      .nav-link {
+        font-size: 18px;
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px;
+        transition: color 0.3s ease;
+      }
+
+      /* Gaya tombol saat aktif */
+      .nav-link.active {
+        color: yellow; /* Warna aktif */
+      }
+
+      /* Efek hover */
+      .nav-link:hover {
+        color: gray;
+      }
+
+      /* Menambahkan keterangan di atas avatar */
+      .leaderboard-rank {
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16">
+    <div class="flex flex-col justify-center gap-4">
+      <h1 class="text-4xl font-rubik font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Sistem Prestasi Mahasiswa</h1>
+      <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Segala Prestasi mu ada disini!</p>
+      <div class="flex -space-x-4 rtl:space-x-reverse">
+        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= env("BASEURL") ?>../public/img/person1.png" alt="Person 1">
+        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= env("BASEURL") ?>../public/img/person2.png" alt="Person 2">
+        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="<?= env("BASEURL") ?>../public/img/person3.png" alt="Person 3">
+      </div>
+      <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0">
+        <a href="#" class="inline-flex justify-center items-center py-2 px-5 text-base font-medium text-center border-2 border-transparent text-white rounded-lg bg-gray-900 hover:text-gray-900 hover:border-2 hover:border-gray-900 hover:bg-white focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-900">
+          Get started → 
+        </a>
+      </div>
+    </div>
     <div>
-      <h1 class="text-5xl font-bold text-gray-900">Halo <?= $data['nama'] ?> !</h1>
-      <p class="text-sm font-normal text-gray-500 mt-1">Sudahkah Anda sholat ?</p>
+      <img src="<?= env("BASEURL") ?>../public/img/home.png" alt="Home Hero" class="w-full">
     </div>
   </div>
+</section>
+<section id="competition" class="min-h-screen bg-gradient-to-br from-black-300 via-black-400 to-black-500 p-8">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-4xl text-center font-extrabold text-Black">Terkini Lomba-Lomba</h2>
+    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kategori Lomba - Prestify</title>
+    <link rel="stylesheet" href="./css/indexStyle.css">
+</head>
+<body>
+    <h1>Saatnya Tunjukkan Potensimu!</h1>
+    <p>Pilih kategori lomba!</p>
 
-  <div class="w-full mt-5 bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-    <div class="flex justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
-      <div class="flex items-center">
-        <div class="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center me-3">
-          <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 19">
-            <path d="M14.5 0A3.987 3.987 0 0 0 11 2.1a4.977 4.977 0 0 1 3.9 5.858A3.989 3.989 0 0 0 14.5 0ZM9 13h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z" />
-            <path d="M5 19h10v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2ZM5 7a5.008 5.008 0 0 1 4-4.9 3.988 3.988 0 1 0-3.9 5.859A4.974 4.974 0 0 1 5 7Zm5 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm5-1h-.424a5.016 5.016 0 0 1-1.942 2.232A6.007 6.007 0 0 1 17 17h2a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5ZM5.424 9H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h2a6.007 6.007 0 0 1 4.366-5.768A5.016 5.016 0 0 1 5.424 9Z" />
-          </svg>
+    <div class="category-buttons">
+        <button class="category-button" onclick="showCompetitions('uiux')">UI/UX</button>
+        <button class="category-button" onclick="showCompetitions('smartcity')">Smart City</button>
+        <button class="category-button" onclick="showCompetitions('businessplan')">Business Plan</button>
+        <button class="category-button" onclick="showCompetitions('innovationapp')">Innovation Application</button>
+    </div>
+
+    <div class="competition-list" id="competition-list">
+        <h2>Daftar Lomba</h2>
+        <ul id="competition-items">
+            <li>Pilih kategori untuk melihat daftar lomba.</li>
+        </ul>
+    </div>
+
+    <div class="competition-details" id="competition-details"></div>
+
+    <script src="./js/indexJS.js"></script>
+</body>
+</html>
+
+
+<!-- Bagian leaderboard -->
+<div id="leaderboard" class="min-h-screen bg-gradient-to-br from-black-300 via-black-400 to-black-500 flex justify-center items-center p-6">
+  <div class="w-full max-w-6xl">
+    <!-- Navigation Tabs -->
+    <div class="flex justify-center space-x-6 p-6"></div>
+
+    <!-- Top Leaderboard Section -->
+    <div class="grid grid-cols-3 gap-6 items-center p-6 bg-white rounded-lg shadow-lg">
+      <!-- Second Place (Silver) -->
+      <div class="bg-gradient-to-br from-gray-300 via-gray-400 to-gray-500 rounded-lg p-6 text-center shadow-md flex flex-col items-center justify-start border border-gray-600">
+        <div class="leaderboard-rank">2nd Place</div> <!-- Keterangan peringkat -->
+        <div class="w-20 h-20 mx-auto mb-4">
+          <img src="<?= env("BASEURL") ?>../public/img/person3.png" alt="Avatar 2" class="rounded-full border-4 border-gray-400" />
         </div>
-        <div>
-          <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1">3.4k</h5>
-          <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Leads generated per week</p>
-        </div>
+        <h2 class="text-2xl font-bold text-gray-800">Skulldugger</h2>
+        <p class="text-black font-medium mt-2">Earn 500 points</p>
+        <p class="mt-2 text-sm text-gray-600">Prize: 5,000</p>
       </div>
-      <div>
-        <span class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md dark:bg-green-900 dark:text-green-300">
-          <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
-          </svg>
-          42.5%
-        </span>
+
+      <!-- First Place (Gold) -->
+      <div class="bg-gradient-to-br from-[#FFD700] via-[#FFC300] to-[#FFB700] rounded-lg p-8 text-center shadow-lg border border-[#FFA500] flex flex-col items-center justify-center">
+        <div class="leaderboard-rank">1st Place</div> <!-- Keterangan peringkat -->
+        <div class="w-28 h-28 mb-4">
+          <img src="<?= env("BASEURL") ?>../public/img/person2.png" alt="Avatar 1" class="rounded-full border-4 border-yellow-600" />
+        </div>
+        <h2 class="text-4xl font-extrabold text-gray-800">Klaxon</h2>
+        <p class="text-yellow-600 font-bold mt-2 text-lg">Earn 1,500 points</p>
+        <p class="mt-2 text-sm text-gray-600 font-semibold">Prize: 10,000</p>
+        <p class="mt-2 text-sm text-gray-500">00d 00h 43m 51s</p>
+      </div>
+
+      <!-- Third Place (Bronze) -->
+      <div class="bg-gradient-to-br from-[#8C4A2B] via-[#A65E2D] to-[#D69A6D] rounded-lg p-6 text-center shadow-md flex flex-col items-center justify-start border border-[#7C4D2A]">
+        <div class="leaderboard-rank">3rd Place</div> <!-- Keterangan peringkat -->
+        <div class="w-16 h-16 mx-auto mb-4">
+          <img src="<?= env("BASEURL") ?>../public/img/person1.png" alt="Avatar 3" class="rounded-full border-4 border-white-600" />
+        </div>
+        <h2 class="text-xl font-semibold text-gray-800">Ultralex</h2>
+        <p class="text-amber-600 font-medium mt-2">Earn 250 points</p>
+        <p class="mt-2 text-sm text-gray-600">Prize: 2,500</p>
       </div>
     </div>
 
-    <div class="grid grid-cols-2">
-      <dl class="flex items-center">
-        <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">Money spent:</dt>
-        <dd class="text-gray-900 text-sm dark:text-white font-semibold">$3,232</dd>
-      </dl>
-      <dl class="flex items-center justify-end">
-        <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal me-1">Conversion rate:</dt>
-        <dd class="text-gray-900 text-sm dark:text-white font-semibold">1.2%</dd>
-      </dl>
+    <!-- Lower Leaderboard Section -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mt-6">
+      <table class="w-full text-left border-collapse">
+        <thead class="text-gray-500 border-b border-gray-300">
+          <tr>
+            <th class="py-2 px-4">Place</th>
+            <th class="px-4">Username</th>
+            <th class="px-4">Points</th>
+            <th class="px-4">Prize</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hover:bg-gray-100">
+            <td class="py-2 px-4">4</td>
+            <td>Protesian</td>
+            <td>156</td>
+            <td>750</td>
+          </tr>
+          <tr class="hover:bg-gray-100">
+            <td class="py-2 px-4">5</td>
+            <td>NovaCrush</td>
+            <td>145</td>
+            <td>500</td>
+          </tr>
+          <tr class="hover:bg-gray-100">
+            <td class="py-2 px-4">6</td>
+            <td>AsteroidHunter</td>
+            <td>130</td>
+            <td>250</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- File: contact-profile-polinema.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Profile POLINEMA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-800 text-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex justify-between items-center py-3">
+        <div class="text-xl font-bold">POLINEMA</div>
+        <ul class="flex space-x-6">
+          <li>
+            <a href="#contact" class="nav-link hover:text-gray-300">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Container Utama -->
+  <div id="contact" class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+    <!-- Bagian Header -->
+    <div class="flex items-center justify-center">
+      <img src="../public/img/Logo-Polinema.png" 
+           alt="Logo POLINEMA" 
+           class="w-28 h-28 object-cover rounded-full border-4 border-blue-500">
+    </div>
+    <h1 class="text-center text-3xl font-semibold text-blue-800 mt-4">Politeknik Negeri Malang</h1>
+    <p class="text-center text-gray-600 mt-2">Teknologi, Integritas, dan Kreativitas</p>
+
+    <!-- Informasi Kontak -->
+    <div class="mt-6">
+      <h2 class="text-xl font-semibold text-gray-700 mb-4">Kontak Kami</h2>
+      <ul class="space-y-3 text-gray-600">
+        <li class="flex items-center">
+          <span class="w-6 h-6 inline-block mr-2 text-blue-500">
+            📍
+          </span>
+          <span>
+            Jl. Soekarno Hatta No. 9, Malang, Jawa Timur, Indonesia
+          </span>
+        </li>
+        <li class="flex items-center">
+          <span class="w-6 h-6 inline-block mr-2 text-blue-500">
+            ☎
+          </span>
+          <span>
+            (0341) 404424, 404425
+          </span>
+        </li>
+        <li class="flex items-center">
+          <span class="w-6 h-6 inline-block mr-2 text-blue-500">
+            ✉
+          </span>
+          <span>
+            info@polinema.ac.id
+          </span>
+        </li>
+        <li class="flex items-center">
+          <span class="w-6 h-6 inline-block mr-2 text-blue-500">
+            🌐
+          </span>
+          <a href="https://www.polinema.ac.id" 
+             class="text-blue-600 hover:underline">
+            www.polinema.ac.id
+          </a>
+        </li>
+      </ul>
     </div>
 
-    <div id="column-chart"></div>
-    <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
-      <div class="flex justify-between items-center pt-5">
-        <!-- Button -->
-        <button
-          id="dropdownDefaultButton"
-          data-dropdown-toggle="lastDaysdropdown"
-          data-dropdown-placement="bottom"
-          class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
-          type="button">
-          Last 7 days
-          <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+    <!-- Media Sosial -->
+    <div class="mt-6">
+      <h2 class="text-xl font-semibold text-gray-700 mb-4">Ikuti Kami</h2>
+      <div class="flex space-x-6 justify-center">
+        <!-- Facebook -->
+        <a href="https://facebook.com/polinema" 
+           target="_blank" 
+           class="text-blue-700 hover:text-blue-900">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 12a10 10 0 10-11.625 9.875v-6.996h-2.5v-2.879h2.5V9.399c0-2.475 1.49-3.847 3.735-3.847 1.083 0 2.217.193 2.217.193v2.438h-1.248c-1.23 0-1.615.766-1.615 1.55v1.86h2.75l-.44 2.879h-2.31V21.875A10 10 0 0022 12z" />
           </svg>
-        </button>
-        <!-- Dropdown menu -->
-        <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 7 days</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 30 days</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 90 days</a>
-            </li>
-          </ul>
-        </div>
-        <a
-          href="#"
-          class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
-          Leads Report
-          <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+        </a>
+        <!-- Instagram -->
+        <a href="https://instagram.com/polinema" 
+           target="_blank" 
+           class="text-pink-600 hover:text-pink-800">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.75 2a5.75 5.75 0 00-5.75 5.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm7.25-2.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5z" />
+          </svg>
+        </a>
+        <!-- YouTube -->
+        <a href="https://youtube.com/polinema" 
+           target="_blank" 
+           class="text-red-600 hover:text-red-800">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.615 3.183A2.958 2.958 0 0119.823 3H4.177a2.958 2.958 0 01-.208.183C3.401 3.465 3 4.186 3 5.166v13.668c0 .98.401 1.701.969 1.983.147.074.318.133.508.183a2.958 2.958 0 011.73 0c.19-.05.361-.109.508-.183C20.599 20.535 21 19.814 21 18.834V5.166c0-.98-.401-1.701-.969-1.983zm-9.615 4.93l5.917 3.887-5.917 3.887V8.113z" />
           </svg>
         </a>
       </div>
     </div>
   </div>
-</div>
+
+</body>
+</html>
