@@ -11,6 +11,7 @@ class PrestasiController extends Controller
       header("Location:" . env("BASEURL") . "/user/login");
       exit();
     }
+
     $dataPrestasi['kompetisi'] = $this->model('Prestasi')->getDataPrestasi($user)['results'];
 
     $dataPrestasi['mapres'] = [];
@@ -41,9 +42,10 @@ class PrestasiController extends Controller
 
     foreach ($dataPrestasi['kompetisi'] as $prestasi) {
       $presId = $prestasi['prestasi_id'];
-      $dataPrestasi['mapres'] = $this->model('Mapres')->getDataMapres($presId);
-      $dataPrestasi['dospem'] = $this->model('Dospem')->getDataDospem($presId);
+      $dataPrestasi['mapres'][$presId] = $this->model('Mapres')->getDataMapres($presId);
+      $dataPrestasi['dospem'][$presId] = $this->model('Dospem')->getDataDospem($presId);
     }
+
 
     $this->view("layout/header");
     $this->view("layout/sidebar");
