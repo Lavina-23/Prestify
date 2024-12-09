@@ -280,6 +280,12 @@ class PrestasiController extends Controller
     echo json_encode($data);
   }
 
+  public function countPrestasiMapres()
+  {
+    $data = $this->model('Prestasi')->countPrestasiByJurusan();
+    echo json_encode($data);
+  }
+
   public function isVerif($presId)
   {
     $status = $_POST['status'];

@@ -134,9 +134,9 @@ class Prestasi extends BaseModel
     return $this->db->resultSet();
   }
 
-  public function countPrestasiByWeek()
+  public function countPrestasiMapres()
   {
-    $query = "SELECT COUNT(*) FROM " . $this->table . " WHERE created_at >= DATEADD(DAY, -7, GETDATE())";
+    $query = "SELECT COUNT(*) FROM " . $this->table . " WHERE ";
   }
 
   public function getReport()

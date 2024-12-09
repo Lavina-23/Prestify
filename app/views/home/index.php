@@ -32,19 +32,26 @@
       $imageUrls = ['/img/person2.png', '/img/person1.png', '/img/person4.png'];
       ?>
 
-      <?php foreach ($data['leaderboard'] as $i => $mapres):
-      ?>
-        <div class="max-w-fit h-fit grid gap-5 justify-items-center p-10 bg-<?= $colors[$i] ?>-100 rounded-lg shadow-xl">
-          <div class="text-lg font-bold text-<?= $colors[$i] ?>-100 bg-<?= $colors[$i] ?>-400 text-white py-1 px-2 rounded-md">
-            <?= $ranks[$i] ?>
+      <?php if (!empty($data['leaderboard'])) : ?>
+        <?php foreach ($data['leaderboard'] as $i => $mapres):
+        ?>
+          <div class="max-w-fit h-fit grid gap-5 justify-items-center p-10 bg-<?= $colors[$i] ?>-100 rounded-lg shadow-xl">
+            <div class="text-lg font-bold text-<?= $colors[$i] ?>-100 bg-<?= $colors[$i] ?>-400 text-white py-1 px-2 rounded-md">
+              <?= $ranks[$i] ?>
+            </div>
+            <img class="rounded-t-lg w-<?= $i % 2 == 0 ? '32' : '52' ?>" src="<?= env('BASEURL') . $imageUrls[$i] ?>" alt="" />
+            <div class="grid justify-items-center">
+              <h5 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white"><?= $mapres['nama_mahasiswa'] ?></h5>
+              <h1 class="font-bold text-<?= $i % 2 == 0 ? '3xl' : '4xl' ?> text-<?= $colors[$i] ?>-400"><?= $mapres['jumlah_prestasi'] ?> Kejuaraan</h1>
+            </div>
           </div>
-          <img class="rounded-t-lg w-<?= $i % 2 == 0 ? '32' : '52' ?>" src="<?= env('BASEURL') . $imageUrls[$i] ?>" alt="" />
-          <div class="grid justify-items-center">
-            <h5 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white"><?= $mapres['nama_mahasiswa'] ?></h5>
-            <h1 class="font-bold text-<?= $i % 2 == 0 ? '3xl' : '4xl' ?> text-<?= $colors[$i] ?>-400"><?= $mapres['jumlah_prestasi'] ?> Kejuaraan</h1>
-          </div>
+        <?php endforeach; ?>
+      <?php else : ?>
+        <div class="grid gap-5 justify-items-center">
+          <img src="<?= env('BASEURL') ?>/img/question.png" alt="question-mark">
+          <h1 class="font-bold text-2xl">Wah belum ada yang jadi juara nih..</h1>
         </div>
-      <?php endforeach; ?>
+      <?php endif; ?>
     </div>
   </div>
 </div>
