@@ -1,5 +1,5 @@
-<section class="max-container">
-  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16">
+<section>
+  <div class="px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16">
     <div class="flex flex-col justify-center gap-4">
       <h1 class="text-4xl font-rubik font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-5xl dark:text-white">Welcome Champion!</h1>
       <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Celebrate greatness with Prestify! Together, we inspire, achieve, and shine brighter with every milestone.</p>
