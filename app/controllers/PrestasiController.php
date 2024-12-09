@@ -282,7 +282,13 @@ class PrestasiController extends Controller
 
   public function countPrestasiMapres()
   {
-    $data = $this->model('Prestasi')->countPrestasiByJurusan();
+    $userId = $_SESSION['user_id'];
+    if (!isset($userId) || empty($userId)) {
+      header("Location:" . env("BASEURL") . "/user/login");
+      exit();
+    }
+
+    $data = $this->model('Prestasi')->countPrestasiMapres($userId);
     echo json_encode($data);
   }
 

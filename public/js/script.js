@@ -87,98 +87,17 @@ function toggleDetailPrestasi(id) {
   }
 }
 
-// chart
-const options = {
-  chart: {
-    height: "100%",
-    maxWidth: "100%",
-    type: "area",
-    fontFamily: "Inter, sans-serif",
-    dropShadow: {
-      enabled: false,
-    },
-    toolbar: {
-      show: false,
-    },
-  },
-  tooltip: {
-    enabled: true,
-    x: {
-      show: false,
-    },
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      opacityFrom: 0.55,
-      opacityTo: 0,
-      shade: "#1C64F2",
-      gradientToColors: ["#1C64F2"],
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    width: 6,
-  },
-  grid: {
-    show: false,
-    strokeDashArray: 4,
-    padding: {
-      left: 2,
-      right: 2,
-      top: 0,
-    },
-  },
-  series: [
-    {
-      name: "New users",
-      data: [6500, 6418, 6456, 6526, 6356, 6456],
-      color: "#1A56DB",
-    },
-  ],
-  xaxis: {
-    categories: [
-      "01 February",
-      "02 February",
-      "03 February",
-      "04 February",
-      "05 February",
-      "06 February",
-      "07 February",
-    ],
-    labels: {
-      show: false,
-    },
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-  },
-  yaxis: {
-    show: false,
-  },
-};
-
-if (
-  document.getElementById("area-chart") &&
-  typeof ApexCharts !== "undefined"
-) {
-  const chart = new ApexCharts(document.getElementById("area-chart"), options);
-  chart.render();
-}
-
+// chart mahasiswa
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://localhost/Prestify/public/prestasi/countPrestasi")
+  fetch("http://localhost/Prestify/public/prestasi/countPrestasiMapres")
     .then((response) => response.json())
     .then((data) => {
-      const chartData = data.map((i) => ({
-        x: i.jurusan,
-        y: parseInt(i.totalPrestasi),
-      }));
+      const chartData = Array(12).fill(0);
+
+      data.forEach((item) => {
+        const indexBulan = parseInt(item.bulanPrestasi) - 1;
+        chartData[indexBulan] = parseInt(item.totalPrestasi);
+      });
 
       const options = {
         chart: {
@@ -225,33 +144,41 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         series: [
           {
-            name: "New users",
+            name: "Jumlah Prestasi",
             data: chartData,
             color: "#1A56DB",
           },
         ],
         xaxis: {
           categories: [
-            "01 February",
-            "02 February",
-            "03 February",
-            "04 February",
-            "05 February",
-            "06 February",
-            "07 February",
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember",
           ],
           labels: {
-            show: false,
+            show: true,
           },
           axisBorder: {
-            show: false,
+            show: true,
           },
           axisTicks: {
-            show: false,
+            show: true,
           },
         },
         yaxis: {
-          show: false,
+          show: true,
+          labels: {
+            formatter: (value) => parseInt(value),
+          },
         },
       };
 
@@ -268,6 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// chart admin - super
 document.addEventListener("DOMContentLoaded", () => {
   fetch("http://localhost/Prestify/public/prestasi/countPrestasi")
     .then((response) => response.json())

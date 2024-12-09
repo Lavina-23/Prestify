@@ -134,9 +134,25 @@ class Prestasi extends BaseModel
     return $this->db->resultSet();
   }
 
-  public function countPrestasiMapres()
+  public function countPrestasiMapres($userId)
   {
-    $query = "SELECT COUNT(*) FROM " . $this->table . " WHERE ";
+    $query = "SELECT COUNT(*) AS totalPrestasi, MONTH(P.created_at) AS bulanPrestasi FROM " . $this->table . " P INNER JOIN MAPRES M ON M.prestasi_id = P.prestasi_id INNER JOIN MAHASISWA MS ON MS.mahasiswa_id = M.mahasiswa_id WHERE MS.pengguna_id = :userId GROUP BY MONTH(P.created_at) ORDER BY MONTH(P.created_at)";
+
+    $this->db->query($query);
+    $this->db->bind("userId", $userId);
+    return $this->db->resultSet();
+  }
+
+  public function countPrestasiBySmt($userId)
+  {
+    $currentSmt = $this->getTahunAkademik()['tahun_akademik'];
+
+    $query = "SELECT COUNT(*) AS totalPrestasi FROM " . $this->table . " P INNER JOIN MAPRES M ON M.prestasi_id = P.prestasi_id INNER JOIN MAHASISWA MS ON MS.mahasiswa_id = M.mahasiswa_id WHERE MS.pengguna_id = :userId AND P.tahun_akademik = :currentSmt";
+
+    $this->db->query($query);
+    $this->db->bind("userId", $userId);
+    $this->db->bind("currentSmt", $currentSmt);
+    return $this->db->single();
   }
 
   public function getReport()
