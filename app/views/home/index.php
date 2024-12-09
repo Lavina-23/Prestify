@@ -64,125 +64,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kategori Lomba - Prestify</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #F4F4F4;
-            color: #1C1C1C;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 48px;
-            font-weight: bold;
-        }
-
-        p {
-            font-size: 18px;
-            color: #6C757D;
-            margin-bottom: 30px;
-        }
-
-        .category-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-
-        .category-button {
-            padding: 15px 30px;
-            background-color: #1C1C1C;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .category-button:hover {
-            background-color: #FFB800;
-        }
-
-        .competition-list {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            max-width: 700px;
-            margin: 0 auto;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .competition-list h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .competition-list ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .competition-list li {
-            background-color: #F4F4F4;
-            padding: 15px;
-            margin-bottom: 10px;
-            border: 1px solid #E0E0E0;
-            border-radius: 5px;
-            font-size: 16px;
-            text-align: left;
-            cursor: pointer;
-        }
-
-        .competition-details {
-            margin-top: 20px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 20px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 900px;
-            margin: 20px auto;
-            text-align: left;
-        }
-
-        .competition-details img {
-            max-width: 300px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .competition-caption {
-            flex: 1;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .competition-caption h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .competition-details {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .competition-caption {
-                text-align: justify;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./css/indexStyle.css">
 </head>
 <body>
     <h1>Saatnya Tunjukkan Potensimu!</h1>
@@ -204,61 +86,7 @@
 
     <div class="competition-details" id="competition-details"></div>
 
-    <script>
-        const competitions = {
-            uiux: [
-                { 
-                    name: "Lomba Desain UI/UX Nasional 2024", 
-                    flyer: "../public/img/uiux1.jpg", 
-                    caption: "Buat desain UI/UX terbaik untuk aplikasi masa depan! Lomba ini bertujuan untuk mencari bakat-bakat desainer yang kreatif dan inovatif. Peserta diharapkan membuat prototipe yang berfokus pada pengalaman pengguna yang optimal dan desain antarmuka yang menarik."
-                },
-                { 
-                    name: "Kompetisi Inovasi UX untuk Aplikasi Mobile", 
-                    flyer: "../public/img/uiux2.jpg", 
-                    caption: "Tunjukkan inovasi UX dalam aplikasi mobile! Kompetisi ini menantang peserta untuk memecahkan masalah user experience dengan solusi inovatif yang dapat meningkatkan efisiensi dan kenyamanan pengguna aplikasi mobile."
-                }
-            ],
-            smartcity: [
-                { 
-                    name: "Lomba Konsep Smart City Terbaik", 
-                    flyer: "../public/img/smartcity1.jpg", 
-                    caption: "Ide terbaik untuk kota pintar masa depan! Kompetisi ini mendorong peserta untuk menciptakan konsep teknologi yang dapat meningkatkan kualitas hidup di perkotaan dengan solusi berbasis IoT dan teknologi digital."
-                },
-                { 
-                    name: "Hackathon Smart City 2024", 
-                    flyer: "../public/img/smartcity2.png",
-                    caption: "Bangun solusi inovatif untuk kota pintar! Hackathon ini mengundang tim-tim pengembang untuk membuat prototipe yang dapat menyelesaikan berbagai tantangan perkotaan dengan pendekatan teknologi."
-                }
-            ]
-        };
-
-        function showCompetitions(category) {
-            const listElement = document.getElementById("competition-items");
-            const detailsElement = document.getElementById("competition-details");
-            listElement.innerHTML = "";
-            detailsElement.innerHTML = "";
-
-            const selectedCompetitions = competitions[category];
-
-            selectedCompetitions.forEach((competition) => {
-                const listItem = document.createElement("li");
-                listItem.textContent = competition.name;
-                listItem.onclick = () => showDetails(competition);
-                listElement.appendChild(listItem);
-            });
-        }
-
-        function showDetails(competition) {
-            const detailsElement = document.getElementById("competition-details");
-            detailsElement.innerHTML = `
-                <img src="${competition.flyer}" alt="${competition.name}">
-                <div class="competition-caption">
-                    <h3>${competition.name}</h3>
-                    <p>${competition.caption}</p>
-                </div>
-            `;
-        }
-    </script>
+    <script src="./js/indexJS.js"></script>
 </body>
 </html>
 
@@ -354,7 +182,7 @@
 <body class="bg-gray-100">
 
   <!-- Navbar -->
-  <nav class="bg-blue-800 text-white">
+  <nav class="bg-yellow-400 text-white">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex justify-between items-center py-3">
         <div class="text-xl font-bold">POLINEMA</div>
@@ -373,9 +201,9 @@
     <div class="flex items-center justify-center">
       <img src="../public/img/Logo-Polinema.png" 
            alt="Logo POLINEMA" 
-           class="w-28 h-28 object-cover rounded-full border-4 border-blue-500">
+           class="w-28 h-28 object-cover rounded-full border-4 border-yellow-300">
     </div>
-    <h1 class="text-center text-3xl font-semibold text-blue-800 mt-4">Politeknik Negeri Malang</h1>
+    <h1 class="text-center text-3xl font-semibold text-black mt-4">Politeknik Negeri Malang</h1>
     <p class="text-center text-gray-600 mt-2">Teknologi, Integritas, dan Kreativitas</p>
 
     <!-- Informasi Kontak -->
@@ -392,7 +220,7 @@
         </li>
         <li class="flex items-center">
           <span class="w-6 h-6 inline-block mr-2 text-blue-500">
-            ☎️
+            ☎
           </span>
           <span>
             (0341) 404424, 404425
@@ -400,7 +228,7 @@
         </li>
         <li class="flex items-center">
           <span class="w-6 h-6 inline-block mr-2 text-blue-500">
-            ✉️
+            ✉
           </span>
           <span>
             info@polinema.ac.id

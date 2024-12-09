@@ -91,7 +91,7 @@ INSERT INTO KATEGORI_PRESTASI (kategori_id, nama_kategori) VALUES ('KAT4', 'Lain
 INSERT INTO PENGGUNA (pengguna_id, level_id, username, password, nama, email) VALUES 
 ('PGN1', 'LVL1', '1982010101', '$2y$10$LZXwVXLQG9FLF0tS.tvIeuGRvMXQZpBqKA5qVVGwddhdkxndWX1qa', 'Jokko Widodoy', 'super.admin@example.com'), --1982010101
 ('PGN2', 'LVL2', '1982010102', '$2y$10$lWQxI6YqlFPyHUCoc4h40uFgHnzqXocn6otwKSOqjgmNkIbQ69xNe', 'Prabroro Firdaus', 'admin.saintek@example.com'); --1982010102
-
+ 
 -- Data Mahasiswa dengan NIM 10 digit
 INSERT INTO PENGGUNA (pengguna_id, level_id, username, password, nama, email) VALUES 
 ('PGN3', 'LVL3', '2100010001', '$2y$10$WyG/.0khRpLefmHDUwYyWOhsppDkFUssLnyKp69Xkkkky6guK5gWK', 'Budi Santoso', 'budi.santoso@example.com'), -- 2100010001
