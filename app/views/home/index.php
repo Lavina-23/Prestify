@@ -39,10 +39,11 @@
             <div class="text-lg font-bold text-<?= $colors[$i] ?>-100 bg-<?= $colors[$i] ?>-400 text-white py-1 px-2 rounded-md">
               <?= $ranks[$i] ?>
             </div>
-            <img class="rounded-t-lg w-<?= $i % 2 == 0 ? '32' : '52' ?>" src="<?= env('BASEURL') . $imageUrls[$i] ?>" alt="" />
+            <img class="rounded-t-lg w-<?= $i == 1 ? '52' : ($i == 2 ? '20' : '32') ?>" src="<?= env('BASEURL') . $imageUrls[$i] ?>" alt="" />
             <div class="grid justify-items-center">
               <h5 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white"><?= $mapres['nama_mahasiswa'] ?></h5>
-              <h1 class="font-bold text-<?= $i % 2 == 0 ? '3xl' : '4xl' ?> text-<?= $colors[$i] ?>-400"><?= $mapres['jumlah_prestasi'] ?> Kejuaraan</h1>
+              <h1 class="font-bold text-<?= $i == 1 ? '4xl' : ($i == 2 ? '2xl' : '3xl') ?> text-<?= $colors[$i] ?>-600"><?= $mapres['jumlah_prestasi'] ?> Kejuaraan</h1>
+              <h1 class="font-bold text-<?= $i == 1 ? 'xl' : ($i == 2 ? 'lg' : 'md') ?> text-<?= $colors[$i] ?>-400"><?= $mapres['total_poin'] ?> Poin ✨</h1>
             </div>
           </div>
         <?php endforeach; ?>
