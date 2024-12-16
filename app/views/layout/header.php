@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prestify</title>
 
-  <link rel="stylesheet" href="<?= env("BASEURL") ?>/css/output.css">
+  <link rel="stylesheet" href="<?= env('BASEURL') ?>/css/output.css">
+  <link rel="stylesheet" href="<?= env('BASEURL') ?>/css/styles.css">
   <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 
   <link rel="apple-touch-icon" sizes="180x180" href="<?= env("BASEURL") ?>/img/favicon_prestify/apple-touch-icon.png">

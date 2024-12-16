@@ -60,6 +60,14 @@ $(document).ready(function () {
     const jenis = $(this).data("jenis");
     setKategori(jenis);
   });
+
+  // handle nav styles
+  const $navLinks = $(".no-underline");
+
+  $navLinks.on("click", function () {
+    $navLinks.removeClass("bg-yellow-100 text-yellow-500");
+    $(this).addClass("bg-yellow-100 text-yellow-500");
+  });
 });
 
 // handle style kategori prestasi

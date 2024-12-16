@@ -6,38 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prestify</title>
 
-  <link rel="stylesheet" href="./css/output.css">
+  <link rel="stylesheet" href="<?= env('BASEURL') ?>/css/output.css">
+  <link rel="stylesheet" href="<?= env('BASEURL') ?>/css/styles.css">
   <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
-    .nav-link {
-      text-decoration: none;
-      padding: 8px 16px;
-      font-weight: bold;
-      color: #333;
-      transition: color 0.3s, background-color 0.3s;
-    }
-
-    .nav-link:hover {
-      color: #FFA500;
-      /* Warna hover */
-    }
-
-    .active {
-      color: #FFA500;
-      /* Warna menu aktif */
-    }
-
-    .clicked {
-      background-color: #FFA500;
-      /* Warna saat diklik */
-      color: white;
-      border-radius: 4px;
-    }
-  </style>
 </head>
 
 <body>
@@ -45,18 +16,18 @@
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <!-- Logo -->
       <a href="<?= env("BASEURL") ?>" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="<?= env("BASEURL") ?>/img/logo.png" class="h-12" alt="Prestify Logo">
+        <img src="<?= env("BASEURL") ?>/img/logo.png" class="h-8 md:!h-12" alt="Prestify Logo">
       </a>
 
       <!-- Tombol Login / Dashboard -->
       <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
         <?php if ($this->isLogin()): ?>
           <a href="<?php echo env("BASEURL") ?>/mahasiswa/index">
-            <button class="text-white bg-gray-900 font-medium rounded-lg text-sm px-6 py-2 text-center border-2 border-transparent hover:bg-white hover:text-gray-900 hover:border-2 hover:border-gray-900">Dashboard</button>
+            <button class="text-white bg-gray-900 font-medium rounded-lg text-sm px-4 py-2 md:px-6 md:py-2 text-center border-2 border-transparent hover:bg-white hover:text-gray-900 hover:border-2 hover:border-gray-900">Dashboard</button>
           </a>
         <?php else: ?>
           <a href="<?php echo env("BASEURL") ?>/user/login">
-            <button class="text-white bg-gray-900 font-medium rounded-lg text-sm px-6 py-2 text-center border-2 border-transparent hover:bg-white hover:text-gray-900 hover:border-2 hover:border-gray-900">Login</button>
+            <button class="text-white bg-gray-900 font-medium rounded-lg text-sm px-4 py-2 md:px-6 md:py-2 text-center border-2 border-transparent hover:bg-white hover:text-gray-900 hover:border-2 hover:border-gray-900">Login</button>
           </a>
         <?php endif; ?>
         <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
@@ -70,16 +41,20 @@
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
         <ul class="flex flex-col font-medium md:flex-row md:space-x-8 md:mt-0">
           <li>
-            <a href="<?= env("BASEURL") ?>" class="nav-link <?= $activePage === 'home' ? 'active' : '' ?>">Home</a>
+            <a href="#hero"
+              class="no-underline rounded-lg py-2 px-4 font-bold transition-all duration-300 hover:text-yellow-500 <?= $activePage === 'home' ? 'text-yellow-500' : 'text-gray-900' ?>">Home</a>
           </li>
           <li>
-            <a href="#leaderboard" class="nav-link <?= $activePage === 'leaderboard' ? 'active' : '' ?>">Leaderboard</a>
+            <a href="#leaderboard"
+              class="no-underline rounded-lg py-2 px-4 font-bold transition-all duration-300 hover:text-yellow-500 <?= $activePage === 'leaderboard' ? 'text-yellow-500' : 'text-gray-900' ?>">Leaderboard</a>
           </li>
           <li>
-            <a href="#about" class="nav-link <?= $activePage === 'about' ? 'active' : '' ?>">About</a>
+            <a href="#lomba"
+              class="no-underline rounded-lg py-2 px-4 font-bold transition-all duration-300 hover:text-yellow-500 <?= $activePage === 'about' ? 'text-yellow-500' : 'text-gray-900' ?>">Lomba</a>
           </li>
           <li>
-            <a href="#contact" class="nav-link <?= $activePage === 'contact' ? 'active' : '' ?>">Contact</a>
+            <a href="#contact"
+              class="no-underline rounded-lg py-2 px-4 font-bold transition-all duration-300 hover:text-yellow-500 <?= $activePage === 'contact' ? 'text-yellow-500' : 'text-gray-900' ?>">Contact</a>
           </li>
         </ul>
       </div>
@@ -114,19 +89,3 @@
       </div>
     </div>
   </nav>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
-  <script>
-    // Menambahkan event listener untuk klik tombol menu
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', function() {
-        // Hapus class 'clicked' dari semua link
-        document.querySelectorAll('.nav-link').forEach(item => item.classList.remove('clicked'));
-        // Tambahkan class 'clicked' pada link yang diklik
-        this.classList.add('clicked');
-      });
-    });
-  </script>
-</body>
-
-</html>

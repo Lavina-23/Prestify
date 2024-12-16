@@ -3,7 +3,7 @@
   "module": "index.ts",
   "scripts": {
     "start": "php -S localhost:8000 -t public",
-    "build": "bunx tailwindcss -i ./public/css/styles.css -o ./public/css/output.css --watch --poll"
+    "build": "bunx tailwindcss -i ./public/css/styles.css -o ./public/css/output.css --watch"
   },
   "type": "module",
   "devDependencies": {
