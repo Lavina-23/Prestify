@@ -6,16 +6,10 @@ class Prestasi extends BaseModel
 
   public function getDataPrestasi($user)
   {
-    $query = "SELECT * FROM 
-              PRESTASI p 
-                INNER JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
-                INNER JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
-                INNER JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
-                INNER JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
-                WHERE mh.pengguna_id = :user";
+    $query = "EXECUTE sp_GetDataPrestasi @user = :user";
 
     $this->db->query($query);
-    $this->db->bind('user', $user);
+    $this->db->bind(':user', $user);
     return [
       'results' => $this->db->resultSet(),
       'rowCount' => $this->db->rowCount()
@@ -64,20 +58,47 @@ class Prestasi extends BaseModel
     $semester = $this->getTahunAkademik()['semester'];
     $isVerif = 0;
 
-    if ($data['peringkat'] == 1) {
-      $poin = 4;
-    } else if ($data['peringkat'] == 2) {
-      $poin = 3;
-    } else if ($data['peringkat'] == 3) {
-      $poin = 2;
+    if ($data['peringkat'] > 0 && $data['peringkat'] <= 6) {
+      if ($data['peringkat'] == 1) {
+        $poin = 4;
+      } else if ($data['peringkat'] == 2) {
+        $poin = 3;
+      } else if ($data['peringkat'] == 3) {
+        $poin = 2;
+      } else {
+        $poin = 1;
+      }
     } else {
-      $poin = 1;
+      $poin = 0;
     }
+
 
     $tanggalMulai = date('m/d/Y', strtotime($data['tanggal_mulai']));
     $tanggalSelesai = date('m/d/Y', strtotime($data['tanggal_selesai']));
 
-    $query = "INSERT INTO " . $this->table . "(prestasi_id, kategori_id, nama_prestasi, tingkat, peringkat, poin, penyelenggara, tempat_kompetisi, link_kompetisi, tanggal_mulai, tanggal_selesai, jumlah_peserta, no_surat_tugas, tanggal_surat, file_surat_tugas, file_sertifikat, file_foto_kegiatan, file_poster, jumlah_pt, tahun_akademik, semester, status_prestasi) VALUES (:prestasi_id, :kategori_id, :nama_prestasi, :tingkat, :peringkat, :poin, :penyelenggara, :tempat_kompetisi, :link_kompetisi, :tanggal_mulai, :tanggal_selesai, :jumlah_peserta, :no_surat_tugas, :tanggal_surat, :file_surat_tugas, :file_sertifikat, :file_foto_kegiatan, :file_poster, :jumlah_pt, :tahun_akademik, :semester, :status_prestasi)";
+    $query = "EXECUTE sp_AddDataKompetisi
+    @prestasi_id = :prestasi_id,
+    @kategori_id = :kategori_id,
+    @nama_prestasi = :nama_prestasi,
+    @tingkat = :tingkat,
+    @peringkat = :peringkat,
+    @poin = :poin,
+    @penyelenggara = :penyelenggara,
+    @tempat_kompetisi = :tempat_kompetisi,
+    @link_kompetisi = :link_kompetisi,
+    @tanggal_mulai = :tanggal_mulai,
+    @tanggal_selesai = :tanggal_selesai,
+    @jumlah_peserta = :jumlah_peserta,
+    @no_surat_tugas = :no_surat_tugas,
+    @tanggal_surat = :tanggal_surat,
+    @file_surat_tugas = :file_surat_tugas,
+    @file_sertifikat = :file_sertifikat,
+    @file_foto_kegiatan = :file_foto_kegiatan,
+    @file_poster = :file_poster,
+    @jumlah_pt = :jumlah_pt,
+    @tahun_akademik = :tahun_akademik,
+    @semester = :semester,
+    @status_prestasi = :status_prestasi;";
 
     $this->db->query($query);
     $this->db->bind(':prestasi_id', $presId);
@@ -111,7 +132,7 @@ class Prestasi extends BaseModel
 
   public function updateVerif($id, $status)
   {
-    $query = "UPDATE " . $this->table . " SET status_prestasi = :status WHERE prestasi_id = :id";
+    $query = "EXECUTE sp_UpdateVerif @id = :id, @status = :status";
 
     $this->db->query($query);
     $this->db->bind(':id', $id);

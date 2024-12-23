@@ -1,12 +1,12 @@
 <div class="grid h-full md:h-screen w-full p-10" style="max-width: 750px">
   <div class="grid md:flex items-center justify-between h-24">
     <div>
-      <h1 class="text-4xl lg:text-5xl font-bold text-gray-900">Halo <?= $data['nama'] ?> !</h1>
+      <h1 class="text-3xl md:text-5xl font-bold text-gray-900">Halo <?= $data['nama'] ?> !</h1>
       <p class="text-sm font-normal text-gray-500 mt-1">Sudahkah Anda sholat ?</p>
     </div>
   </div>
 
-  <hr class="my-5">
+  <!-- <hr class="my-5">
 
   <div class="flex flex-col lg:flex-row gap-2 w-full">
     <a href="#"
@@ -51,7 +51,7 @@
         <p class="text-sm font-medium text-gray-900 dark:text-gray-400">Volunteer</p>
       </div>
     </a>
-  </div>
+  </div> -->
 
   <hr class="my-5">
 

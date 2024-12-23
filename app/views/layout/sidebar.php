@@ -5,7 +5,7 @@
     </svg>
   </button>
 
-  <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+  <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-full transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
     <div class="flex flex-col justify-between h-full px-3 py-4 overflow-y-auto bg-white border-2 border-gray-100">
       <div>
         <a href="<?= env("BASEURL") ?>" class="flex items-center justify-center space-x-3 rtl:space-x-reverse">
@@ -13,9 +13,7 @@
         </a>
         <ul class="space-y-2 font-medium">
           <li>
-
             <a href="<?= getMenu($_SESSION['level_id'], 'menu1')['route'] ?? null ?>"
-
               class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-white hover:shadow-sm group mt-8">
               <svg class="w-5 h-5 text-gray-900 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                 <?= getMenu($_SESSION['level_id'], 'menu1')['icon'] ?>

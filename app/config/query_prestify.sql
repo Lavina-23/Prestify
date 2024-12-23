@@ -116,30 +116,7 @@ INSERT INTO DOSEN (dosen_id, nidn, nama, jurusan) VALUES
 ('DSN2', '987654321', 'Khalid Khasmiiri', 'Teknik Sipil'),
 ('DSN3', '384268394', 'Ismail Ahmad Kanabawi', 'Teknologi Informasi'),
 ('DSN4', '784392713', 'Khidir Karawita', 'Teknik Elektro');
-
-TRUNCATE TABLE DOSPEM;
-TRUNCATE TABLE MAPRES;
-
-DELETE FROM PRESTASI;
-DELETE FROM MAPRES;
-DELETE FROM DOSPEM;
-
-
-SELECT * FROM 
-PRESTASI p 
-LEFT JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
-LEFT JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
-LEFT JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
-WHERE mh.pengguna_id = 'PGN1';
-
-SELECT * FROM 
-              PRESTASI p 
-                LEFT JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
-                LEFT JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
-                LEFT JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
-                LEFT JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
-                WHERE mh.pengguna_id = 'PGN3';
-go;
+GO;
 
 CREATE TRIGGER trg_after_delete_prestasi
 ON PRESTASI
@@ -149,9 +126,7 @@ BEGIN
 	DELETE FROM MAPRES WHERE prestasi_id IN (SELECT prestasi_id FROM DELETED);
 	DELETE FROM DOSPEM WHERE prestasi_id IN (SELECT prestasi_id FROM DELETED);
 END;
-go
-
-DELETE FROM PRESTASI WHERE prestasi_id = 'PRS01';
+GO;
 
 ALTER TABLE MAPRES 
 DROP CONSTRAINT FK__MAPRES__prestasi__46E78A0C;
@@ -167,22 +142,3 @@ ALTER TABLE DOSPEM
 ADD CONSTRAINT FK__DOSPEM__prestasi__4AB81AF0 
 FOREIGN KEY (prestasi_id) REFERENCES PRESTASI(prestasi_id) ON DELETE CASCADE;
 
-SELECT * FROM MAPRES m INNER JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id INNER JOIN PENGGUNA p ON p.pengguna_id = mh.pengguna_id WHERE m.prestasi_id = 'PRS03';
-
-SELECT * FROM 
-              PRESTASI p 
-                INNER JOIN MAPRES m ON p.prestasi_id = m.prestasi_id
-                INNER JOIN MAHASISWA mh ON mh.mahasiswa_id = m.mahasiswa_id
-                INNER JOIN PENGGUNA pg ON pg.pengguna_id = mh.pengguna_id
-                INNER JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
-                WHERE mh.pengguna_id = 'PGN6';
-
-				SELECT * FROM 
-              PRESTASI p 
-                INNER JOIN KATEGORI_PRESTASI k ON k.kategori_id = p.kategori_id
-
-UPDATE MAPRES SET mahasiswa_id = 'MHS2' WHERE mapres_id = 'MPR13';
-
-SELECT * FROM PRESTASI;
-SELECT * FROM MAPRES;
-SELECT * FROM DOSPEM;

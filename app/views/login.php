@@ -9,7 +9,7 @@
       </svg>
       <span class="text-sm font-medium text-gray-900">Back</span>
     </a>
-    <h1 class="text-4xl font-bold text-gray-900">Keep your success story up to date.</h1>
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Keep your success story up to date.</h1>
     <p class="text-sm font-normal text-gray-500 mt-1 mb-5">Use Prestify ✨ and start tracking your wins effortlessly</p>
     <form method="POST" action="<?= env("BASEURL") ?>/user/login">
       <div class="mb-5">
