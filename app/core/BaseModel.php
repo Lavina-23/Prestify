@@ -56,7 +56,7 @@ abstract class BaseModel
 
     $lastId ? $newId = (int)substr($lastId[$id], 3) + 1 : $newId = 1;
 
-    return $format . str_pad($newId, 2, '0', STR_PAD_LEFT);
+    return $format . str_pad($newId, 2);
   }
 
   public function updateData($table, $data, $colId, $id)

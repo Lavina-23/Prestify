@@ -5,7 +5,8 @@ class HomeController extends Controller
   public function index()
   {
     $data['leaderboard'] = $this->model('Mapres')->getTopThreeMapres();
-
+    $data['lomba'] = $this->model('Lomba')->getAllLomba();
+    
     $this->view("layout/header");
     $this->view("layout/navbar");
 
@@ -19,7 +20,7 @@ class HomeController extends Controller
       $data['leaderboard'] = $order;
       $this->view("home/index", $data);
     } else {
-      $this->view("home/index");
+      $this->view("home/index", $data);
     }
     $this->view("layout/footer");
   }

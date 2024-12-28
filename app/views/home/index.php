@@ -92,27 +92,60 @@
     <h1 class="font-extrabold text-3xl md:!text-5xl text-gray-950">Lomba yang Akan Datang</h1>
     <p class="mt-2 text-gray-600">Ikuti perlombaan dibawah ini, dan tunjukkan ide revolusionermu !</p>
     <div class="max-w-7xl mx-auto">
-      <!-- Daftar Lomba -->
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <!-- Lomba 1 -->
-        <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-          <h3 class="text-xl font-semibold">Lomba Coding 2024</h3>
-          <p class="mt-2 text-gray-600">Lomba coding untuk pengembang pemula, hadiah utama 5 juta rupiah!</p>
-          <p class="mt-4 text-sm text-gray-500">Deadline: 30 Desember 2024</p>
+        <!-- Daftar Lomba -->
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <?php 
+                // Ambil hanya 5 lomba pertama
+                $lombaToShow = array_slice($data['lomba'], 0, 3); 
+                if (!empty($lombaToShow)): 
+            ?>
+                <?php foreach ($lombaToShow as $lomba): ?>
+                    <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold"><?= htmlspecialchars($lomba['nama_lomba']) ?></h3>
+                        <p class="mt-2 text-gray-600"><?= htmlspecialchars($lomba['deskripsi_lomba']) ?></p>
+                        <a class="text-blue-600" href=<?= $lomba['link_lomba']?>><?= htmlspecialchars($lomba['link_lomba']) ?></a>
+                        <p class="mt-4 text-sm text-gray-500">Deadline: <?= date('d F Y', strtotime($lomba['deadline_lomba'])) ?></p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="text-gray-600">Tidak ada lomba yang tersedia.</p>
+            <?php endif; ?>
         </div>
-        <!-- Lomba 2 -->
-        <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-          <h3 class="text-xl font-semibold">Lomba Desain Grafis</h3>
-          <p class="mt-2 text-gray-600">Tunjukkan kreativitas desain Anda, hadiah utama 3 juta rupiah!</p>
-          <p class="mt-4 text-sm text-gray-500">Deadline: 15 Januari 2025</p>
-        </div>
-        <!-- Lomba 3 -->
-        <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-          <h3 class="text-xl font-semibold">Lomba Fotografi</h3>
-          <p class="mt-2 text-gray-600">Lomba fotografi dengan tema alam, hadiah utama 2 juta rupiah!</p>
-          <p class="mt-4 text-sm text-gray-500">Deadline: 25 Januari 2025</p>
-        </div>
-      </div>
+
+        <!-- Tombol Lihat Lebih Banyak -->
+        <?php if (count($data['lomba']) > 3): ?>
+            <div class="text-center mt-8">
+                <button id="showMoreLomba" class="px-6 py-3 bg-blue-600 text-white rounded-lg">Lihat Lebih Banyak</button>
+            </div>
+            <!-- Menampilkan Lomba Tambahan -->
+            <div id="moreLomba" class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 hidden">
+                <?php 
+                    // Menampilkan lomba yang ke-6 dan seterusnya
+                    $moreLomba = array_slice($data['lomba'], 3);
+                    foreach ($moreLomba as $lomba): 
+                ?>
+                    <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold"><?= htmlspecialchars($lomba['nama_lomba']) ?></h3>
+                        <p class="mt-2 text-gray-600"><?= htmlspecialchars($lomba['deskripsi_lomba']) ?></p>
+                        <a class="text-blue-600" href=<?= $lomba['link_lomba']?>><?= htmlspecialchars($lomba['link_lomba']) ?></a>
+                        <p class="mt-4 text-sm text-gray-500">Deadline: <?= date('d F Y', strtotime($lomba['deadline_lomba'])) ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</section>
+
+<script>
+    // JavaScript untuk menampilkan lomba tambahan
+    document.getElementById('showMoreLomba').addEventListener('click', function() {
+        document.getElementById('moreLomba').classList.remove('hidden');
+        this.style.display = 'none'; // Sembunyikan tombol setelah diklik
+    });
+</script>
+
+
+
 
       <!-- Form Input Lomba Baru -->
       <!-- <div class="mt-16">

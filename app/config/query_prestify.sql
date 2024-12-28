@@ -58,6 +58,16 @@ CREATE TABLE PRESTASI (
     file_poster VARCHAR(100)
 );
 
+CREATE TABLE INFO_LOMBA (
+    lomba_id VARCHAR(50) PRIMARY KEY,
+    kategori_id VARCHAR(50) FOREIGN KEY REFERENCES KATEGORI_PRESTASI(kategori_id),
+    nama_lomba VARCHAR(100),
+    tingkat VARCHAR(50),
+    deskripsi_lomba VARCHAR(255),
+    link_lomba VARCHAR(100),
+    deadline_lomba DATE
+);
+
 ALTER TABLE PRESTASI ADD tahun_akademik VARCHAR(20), semester VARCHAR(50);
 ALTER TABLE PRESTASI ADD status_prestasi VARCHAR(50);
 ALTER TABLE PRESTASI ADD created_at DATETIME;
@@ -106,9 +116,13 @@ INSERT INTO MAHASISWA (mahasiswa_id, nim, jurusan, prodi, angkatan, pengguna_id)
 ('MHS3', '2100010003', 'Teknik Sipil', 'Teknik Sipil', '2021', 'PGN5'),
 ('MHS4', '2100010004', 'Sistem Informasi Bisnis', 'Teknologi Informasi', '2021', 'PGN6');
 
-SELECT * 
-FROM PENGGUNA p
-RIGHT JOIN MAHASISWA m ON p.pengguna_id = m.pengguna_id;
+-- Info Lomba
+INSERT INTO INFO_LOMBA (lomba_id, kategori_id, nama_lomba, tingkat, deskripsi_lomba, link_lomba, deadline_lomba) VALUES
+('LMB1', 'KAT1', 'Lomba Cerdas Cermat', 'Nasional', 'Kompetisi cerdas cermat tingkat nasional', 'http://lomba-cerdas-cermat.com', '2023-11-01'),
+('LMB2', 'KAT2', 'Lomba Debat', 'Regional', 'Kompetisi debat tingkat regional', 'http://lomba-debat.com', '2023-12-05'),
+('LMB3', 'KAT3', 'Lomba Karya Tulis Ilmiah', 'Nasional', 'Kompetisi karya tulis ilmiah tingkat nasional', 'http://lomba-karya-tulis-ilmiah.com', '2024-01-15'),
+('LMB4', 'KAT4', 'Lomba Robotik', 'Internasional', 'Kompetisi robotik tingkat internasional', 'http://lomba-robotik.com', '2024-02-20'),
+('LMB5', 'KAT1', 'Lomba Matematika', 'Nasional', 'Kompetisi matematika tingkat nasional', 'http://lomba-matematika.com', '2024-03-01');
 
 -- Data Dosen
 INSERT INTO DOSEN (dosen_id, nidn, nama, jurusan) VALUES

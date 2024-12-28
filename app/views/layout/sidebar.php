@@ -39,6 +39,26 @@
               </span>
             </a>
           </li>
+          <li>
+            <a href="<?= getMenu($_SESSION['level_id'], 'menu4')['route'] ?? null ?>" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-white hover:shadow-sm group">
+              <svg class="w-5 h-5 text-gray-900 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                <?= getMenu($_SESSION['level_id'], 'menu4')['icon']; ?>
+              </svg>
+              <span class="ms-3 text-sm-s">
+                <?= getMenu($_SESSION['level_id'], 'menu4')['label'] ?? null; ?>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="<?= getMenu($_SESSION['level_id'], 'menu5')['route'] ?? null ?>" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-white hover:shadow-sm group">
+              <svg class="w-5 h-5 text-gray-900 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                <?= getMenu($_SESSION['level_id'], 'menu5')['icon']; ?>
+              </svg>
+              <span class="ms-3 text-sm-s">
+                <?= getMenu($_SESSION['level_id'], menu: 'menu5')['label'] ?? null; ?>
+              </span>
+            </a>
+          </li>
         </ul>
       </div>
 
