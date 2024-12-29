@@ -5,38 +5,40 @@ class LombaController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        $dataLomba = $this->model('Lomba')->getAllLomba();
+        $data = $this->model('Lomba')->getAllLomba();
         $this->view("layout/header");
         $this->view("layout/sidebar");
-        $this->view("lomba/lomba", $dataLomba);
+        $this->view("lomba/lomba", $data);
         $this->view("layout/footer");
     }
 
-    public function showLombas(){
+    public function showLombas()
+    {
         $data['Lomba'] = $this->model('Lomba')->getAllLomba();
-            $this->view("layout/header");
-            $this->view("layout/sidebar");
-            $this->view("lomba/lomba", $data);
-        if (isset($dataLomba)) {
+        $this->view("layout/header");
+        $this->view("layout/sidebar");
+        $this->view("lomba/lomba", $data);
+        if (isset($data['Lomba'])) {
             $this->view("lomba/lomba", $data['Lomba']);
         }
         $this->view("layout/footer");
     }
+
     public function addDataLomba()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $dataKompetisi = [
-            'kategori_id' => $_POST['kategori_id'] ?? null,
-            'tingkat' => $_POST['tingkat'] ?? null,
-            'nama_lomba' => $_POST['nama_kompetisi'] ?? null,
-            'deskripsi_lomba' => $_POST['deskripsi'] ?? null,
-            'link_lomba' => $_POST['link_kompetisi'] ?? null,
-            'deadline_lomba' => $_POST['tanggal_kompetisi'] ?? null
-        ];
-        $this->model('Lomba')->addLomba($dataKompetisi);
+            $dataKompetisi = [
+                'kategori_id' => $_POST['kategori_id'] ?? null,
+                'tingkat' => $_POST['tingkat'] ?? null,
+                'nama_lomba' => $_POST['nama_kompetisi'] ?? null,
+                'deskripsi_lomba' => $_POST['deskripsi'] ?? null,
+                'link_lomba' => $_POST['link_kompetisi'] ?? null,
+                'deadline_lomba' => $_POST['tanggal_kompetisi'] ?? null
+            ];
+            $this->model('Lomba')->addLomba($dataKompetisi);
 
-        header('Location:' . getMenu($_SESSION['level_id'], 'menu4')['route']);
-        exit;
+            header('Location:' . getMenu($_SESSION['level_id'], 'menu4')['route']);
+            exit;
         }
     }
 
@@ -60,7 +62,7 @@ class LombaController extends Controller
 
         $lombaModel = new Lomba();
         $lombaModel->addLomba($data);
-        return $this->redirect('lomba/index');
+        header('Location:' . getMenu($_SESSION['level_id'], 'menu5')['route']);
     }
 
     // Display the specified resource.
@@ -94,7 +96,7 @@ class LombaController extends Controller
 
         $lombaModel = new Lomba();
         $lombaModel->updateLomba($data);
-        return $this->redirect('lomba/index');
+        header('Location:' . getMenu($_SESSION['level_id'], 'menu5')['route']);
     }
     public function showFormLomba($lombaId = null)
     {
@@ -107,7 +109,7 @@ class LombaController extends Controller
 
             // Tampilkan form dengan data lomba yang sudah ada
             $this->view("lomba/formLomba", $data);
-        } else {            
+        } else {
             // Tampilkan form kosong untuk menambahkan lomba
             $this->view("lomba/formLomba");
         }
@@ -121,6 +123,6 @@ class LombaController extends Controller
     {
         $lombaModel = new Lomba();
         $lombaModel->deleteLomba($id);
-        return $this->redirect('lomba/index');
+        header('Location:' . getMenu($_SESSION['level_id'], 'menu5')['route']);
     }
 }
