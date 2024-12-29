@@ -119,10 +119,11 @@ class LombaController extends Controller
 
 
     // Remove the specified resource from storage.
-    public function destroy($id)
+    public function deleteLomba($id)
     {
-        $lombaModel = new Lomba();
-        $lombaModel->deleteLomba($id);
-        header('Location:' . getMenu($_SESSION['level_id'], 'menu5')['route']);
+        if ($this->model('Lomba')->deleteData('lomba_id', $id) > -1) {
+            header('Location:' . env('BASEURL') . '/lomba');
+            exit;
+        }
     }
 }
